@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/register.css">
+    <script src="../static/js/jquery-2.2.3.min.js"></script>
+    <script src="../static/js/register.js"></script>
+    <title>树懒电影注册</title>
+    <script>
+
+    </script>
+</head>
+<body>
+    <div id="head">
+        <span id="logo-text">树懒电影</span>
+        <span style="font-size: 28px;color: #ece8e8dc;">&emsp;|&emsp;</span>
+        <span style="font-size: 20px;font-weight: bold;">用户注册</span>
+        <span style="float: right; margin-top: 5px;"><a href="http://192.168.43.241:5000/">已有账号登录</a></span>
+    </div>
+    <div class="line"></div>
+    <div id="body">
+        <div class="boby-step">
+            <div class="step-div">
+                <div id="step-1" class="step-checkd">01</div>
+                <div class="step-text-checkd">用户协议</div>
+                <div id="step-01-line" class="step-line"></div>
+            </div>
+            <div class="step-div">
+                <div id="step-2" class="step-uncheckd">02</div>
+                <div id="step-2-text" class="step-text-uncheckd">账户信息</div>
+                <div id="step-02-line" class="step-line"></div>
+            </div>
+            <div class="step-div">
+                <div id="step-3" class="step-uncheckd">03</div>
+                <div id="step-3-text" class="step-text-uncheckd">密码设置</div>
+                <div id="step-03-line" class="step-line"></div>
+            </div>
+            <div class="step-div">
+                <div id="step-4" class="step-uncheckd">04</div>
+                <div id="step-4-text" class="step-text-uncheckd">注册成功</div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div id="step-01">
+            <div style="margin-top: 50px;">
+                <div style="font-size: 20px;font-weight: bold;">用户协议</div>
+                <div class="line1"></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div>
+                <pre>
+<h2>《用户协议》条款与隐私协议的接受 </h2>
+请您认真阅读本协议，尤其是免除或者限制本平台责任的条款及其它限制您权利的条款，一旦您注册即表示您已经阅读并且同意与本平台达成协议，
+完全理解并接受所有的《用户协议》条款。阅读本协议过程中，如果您不同意本协议或其中任何条款约定，您应立即停止注册程序。
+<h3>用户账号名称安全 </h3>
+任何注册和使用的本平台账号名称，不得有下列情形： 
+（一）违反宪法或法律法规规定的； 
+（二）危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的； 
+（三）损害国家荣誉和利益的，损害公共利益的； 
+（四）煽动民族仇恨、民族歧视，破坏民族团结的； 
+（五）破坏国家宗教政策，宣扬邪教和封建迷信的； 
+（六）散布谣言，扰乱社会秩序，破坏社会稳定的； 
+（七）散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的； 
+（八）侮辱或者诽谤他人，侵害他人合法权益的； 
+（九）含有法律、行政法规禁止的其他内容的。 
+<h3>用户个人信息保护</h3>
+1、本平台非常重视您的个人信息保护，保证在合法、正当与必要的原则下收集、使用或者公开您的个人信息且不会收集与提供和本产品服务无关的个人信息。
+2、您在注册账号或使用本服务的过程中，为了更好地向您提供相关服务，本平台可能需要您填写或提交一些必要的基础个人信息，如法律法规、
+规章规范性文件（以下称“法律法规”）规定的需要填写的身份信息。如您提交的信息不完整或不符合法律法规的规定，则您可能无法使用本服务或在使用本服务的过程中受到限制。
+                </pre>
+            </div>
+            
+            <div>
+                <form name="userobjectform" id="userobjectform">
+                    <div style="clear: both;"></div>
+                    <div>
+                        <button type="button" onclick="next(1)" class="next-step">下一步</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="step-02" style="display: none;">
+            <div style="margin-top: 50px;">
+                <div style="font-size: 20px;font-weight: bold;">账户信息</div>
+                <div class="line1"></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div style="margin-top: 50px;">
+                <form name="userinfoform" id="userinfoform">
+                    <div class="accountinfo">
+                        <label for="username">您的昵称</label>
+                        <input type="text" name="username" id="username" placeholder="请输入您的昵称"
+                        onfocus="showTips('username','昵称为必填！')"
+                                        onblur="check('username','昵称不能为空！')"
+                                        onchange="check_name()"
+                                        />
+                                        <span id="usernamespan"></span>
+                    </div>
+                    <!-- <div class="accountinfo">
+                        <label for="IDNumber">证件号码</label>
+                        <input type="text" name="IDNumber" id="IDNumber" placeholder="请输入您的身份证号码"
+                        onfocus="showTips('IDNumber','证件号码必填！')"
+                                        onblur="check('IDNumber','证件号码不能为空！')" onchange="check_id()"/>
+                                        <span id="IDNumberspan"></span>
+                    </div> -->
+                    <div class="accountinfo">
+                        <label for="email">您的邮箱</label>
+                        <input type="text" name="email" id="email" placeholder="请输入您的邮箱"
+                        onfocus="showTips('email','邮箱为必填！')"
+                                        onblur="check('email','邮箱不能为空！')" onchange="check_email()"/>
+                                        <span id="emailspan"></span>
+                    </div>
+                    <div class="accountinfo">
+                        <label for="phoneNumber">手机号码</label>
+                        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="请输入您的手机号码"
+                        onfocus="showTips('phoneNumber','手机号码为必填！')"
+                                        onblur="check('phoneNumber','手机号码不能为空！')" onchange="check_phone()"/>
+                                        <span id="phoneNumberspan"></span>
+                    </div>
+                    <div>
+                        <button type="button" onclick="previous(2)" class="previous-step">上一步</button>
+                        <button type="button" onclick="if(check_step2()) next(2)" class="next-step">下一步</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="step-03" style="display: none;">
+            <div style="margin-top: 50px;">
+                <div style="font-size: 20px;font-weight: bold;">密码设置</div>
+                <div class="line1"></div>
+            </div>
+            <div style="clear: both;"></div>
+            <div style="margin-top: 50px;">
+                <form name="passwordform" id="passwordform">
+                    <div class="accountinfo">
+                        <label for="password">登录密码</label>
+                        <input type="password" name="password" id="password" placeholder="请设置您的登录密码"
+                        onfocus="showTips('password','登录密码为必填！')"
+                                        onblur="check('password','登录密码不能为空！')"/>
+                                        <span id="passwordspan"></span>
+                    </div>
+                    <div class="accountinfo">
+                        <label for="confirmPassword">密码确认</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="请输入您再次确认密码"
+                        onfocus="showTips_pass('confirmPassword','登录密码为必填！')"
+                                        onblur="check_pass('confirmPassword','两次密码输入不一致！') ;
+                                        "/>
+                                        <span id="confirmPasswordspan"></span>
+                    </div>
+                    <div>
+                        <button type="button" onclick="previous(3)" class="previous-step">上一步</button>
+                        <button type="button" onclick="if(check_step3()) next(3)" class="next-step">下一步</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="step-04" style="display: none;">
+            <div>
+                <div class="img">
+                    <img src="../static/img/suss.png" alt="注册成功">
+                </div>
+                <div class="img-text">恭喜您注册成功</div>
+                <div class="step-04-button">
+                    <button type="button" onclick="gologin()" class="next-step">登 录</button>
+                    <button type="button" onclick="goindex()" class="previous-step">首 页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    
+    <div id="footer">
+        <div>
+            <div id="footer-img">
+                <img src="../static/img/reg-footer.jpg" style="height: 80px ; width: 80px">
+            </div>
+            <div style="margin-left: 50px;">
+                <table>
+                    <tr>
+                        <th class="text">我们</th>
+                        <th class="text">案例</th>
+                        <th class="text">方案</th>
+                        <th class="text">发现</th>
+                        <th class="text1">联系我们</th>
+                    </tr>
+                    <tr>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                    </tr>
+                    <tr>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                    </tr>
+                    <tr>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                    </tr>
+                    <tr>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                        <td>XXXX</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

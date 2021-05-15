@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>电影详情</title>
+    <link rel="stylesheet" href="../static/css/MoviePager.css">
+    <style>
+        <!--超链接样式-->
+            /* unvisited link */
+        a:link {
+            color: red;
+        }
+
+        /* visited link */
+        a:visited {
+            color: #3399cc;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: white;
+            background-color: #0eb0d2;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
+    </style>
+</head>
+<script src="../static/js/jquery-1.7.2.min.js"></script>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="title"><h1 id="title">树懒电影</h1></div>
+        <div class="container">
+            <form action="https://www.baidu.com/?tn=62095104_19_oem_dg" class="parent">
+                <input type="text" class="search" placeholder="电影名称，主演">
+                <input type="submit" name="" id="" value="搜索" class="btn">
+            </form>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="cat"></div>
+        <div class="content">
+            <div class="mvname"><h2>{{ title }}</h2></div>
+            <p class="picture"><img src="{{ img }}" height="200px" width="140px" /></p>
+                        <p class="instroction">
+                            导演: {{ director }} <br>
+                            主演: {{ star }}<br>
+                            类型：{{ type_movie }}<br>
+                            制片国家/地区: {{ area }}<br>
+                            语言: {{ language_movie }}<br>
+                            上映日期: {{ date_time }}<br>
+                            片长: {{ timelen }}<br>
+                        </p>
+            <div id="bean" d="{{score}}" style="display:none"></div>
+            <div id="one" d="{{str_one}}" style="display:none"></div>
+            <div id="two" d="{{str_two}}" style="display:none"></div>
+            <div id="three" d="{{str_three}}" style="display:none"></div>
+            <div class="score">
+                <p class="star">豆瓣评分：<font size="5" face="arial" color="black">{{ score }}</font></p>
+                <canvas width="250" height="20" id="D_myCanvas"></canvas>
+            </div>
+            <script>
+                var one = document.getElementById('one').getAttribute('d');
+                var two = document.getElementById('two').getAttribute('d');
+                var three = document.getElementById('three').getAttribute('d');
+                var bean=document.getElementById('bean').getAttribute('d');
+                {#alert(one+two+three)#}
+                one_s=[]
+                two_s=[]
+                three_s=[]
+                appendUlBody ="";
+                if(one!="")
+                {
+                    one_s=restr_s(one);
+                    appendUlBody =appendUlBody+ "<p class='star'>腾讯视频评分：<font size='5' face='arial' color='black'>"+ one_s[1]+
+                    "</font></p>" + "<canvas width='250' height='20' id='T_myCanvas'></canvas>"
+                }
+                if( two!="")
+                {
+                    two_s=restr_s(two);
+                    appendUlBody = appendUlBody+ "<p class='star'>爱奇艺评分：<font size='5' face='arial' color='black'>"+ two_s[1]+
+                    "</font></p>" + "<canvas width='250' height='20' id='A_myCanvas'></canvas>"
+                }
+                if(three!="")
+                {
+                    three_s=restr_s(three);
+                    appendUlBody = appendUlBody+ "<p class='star'>IMDB评分：<font size='5' face='arial' color='black'>"+ three_s[1]+
+                    "</font></p>" + "<canvas width='250' height='20' id='I_myCanvas'></canvas>"
+                }
+                $(".score").append(appendUlBody);
+                function restr_s(str){
+                    if(str!=''){
+                        str_s=str.split(", ")
+                        for(i=0;i<str_s.length;i++){
+                            if(i!=0&&i!=str_s.length-1){
+                                str_s[i]=str_s[i].slice(1,str_s[i].length-1)
+                            }else{
+                                if(i==str_s.length-1){
+                                    str_s[i]=str_s[i].slice(1,str_s[i].length-2)
+                                }else{
+                                    str_s[i]=str_s[i].slice(2,str_s[i].length-1)
+                                }
+                            }
+                        }
+                    }
+                    return str_s;
+                }
+            </script>
+            <div class="collect">
+                <button class="button">想看</button>
+                <button class="button">在看</button>
+                <button class="button">看过</button>
+            </div>
+            <div class="story">
+                <div class="p1"><br>电影剧情简介  · · · · · ·</div>
+                <p class="p_story">{{summary}}
+                </p>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="origin">
+                <div class="p1"><br>在哪儿看这部电影  · · · · · ·</div>
+                <div class="p2">
+                </div>
+                <script>
+                    appendUlBody ="";
+                    if(one!="")
+                    {
+                        one_s=restr_s(one);
+                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+one_s[2]+'" style="text-decoration:none;">腾讯视频</a></div>'+
+                            '<div class="p3_1">'+one_s[3]+'</div><br><br>';
+                    }
+                    if( two!="")
+                    {
+                        two_s=restr_s(two);
+                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+two_s[2]+'" style="text-decoration:none;">爱奇艺</a></div>'+
+                            '<div class="p3_1">'+two_s[3]+'</div><br>';
+                    }
+                    $(".p2").append(appendUlBody);
+                </script>
+            </div>
+            <p class="ad_right"></p>
+        </div>
+    </div>
+<!--为每一个电影模块定义一个画布对象，实现方法一致，只需改变画布对象名称-->
+<!--豆瓣评分-->
+ <script>
+    /**
+     * showRatingStars 显示评分星级
+     * @param  {Object} myCanvas 画布对象
+     * @param  {Number} rating   评分
+     * @param  {Number} counts   star个数
+     * @param  {Number} size     star大小
+     * @param  {Object} style    star样式
+     *           Example: style = {
+         *                          borderColor:"#21DEEF",
+         *                          fillColor:"#21DEEF",
+         *                        spaceColor:"#FFFFFF"
+         *                      }
+     * @return none
+     */
+    function showRatingStars(D_myCanvas, rating, counts, size, style) {
+
+        // 检测rating与star数目是否合适
+        if (rating > 2*counts) {
+
+            alert("Please set suitable rating and counts!");
+            return;
+        }
+
+        // 检测大小设置是否合适
+        if (D_myCanvas.offsetWidth < size * counts || D_myCanvas.offsetHeight < size) {
+
+            alert("Please set suitable size and D_myCanvas' size!");
+            return;
+        }
+
+        var context = D_myCanvas.getContext('2d');
+        var xStart = rating * size;
+        var yStart = 0;
+        var xEnd = (Math.ceil(rating) + 1) * size;
+        var yEnd = 0;
+        var radius = size / 2;
+
+        // 线性渐变，由左至右
+        var linear = context.createLinearGradient(xStart, yStart, xEnd, yEnd);
+        linear.addColorStop(0, style.fillColor);
+        linear.addColorStop(0.01, style.spaceColor);
+        linear.addColorStop(1, style.spaceColor);
+        context.fillStyle = linear;
+
+        // star边框颜色设置
+        context.strokeStyle = style.borderColor;
+        context.lineWidth = 1;
+
+        // 绘制star的顶点坐标
+        var x = radius,
+            y = 0;
+
+        for (var i = 0; i < counts; i++) {
+
+            // star绘制
+            context.beginPath();
+            var x1 = size * Math.sin(Math.PI / 10);
+            var h1 = size * Math.cos(Math.PI / 10);
+            var x2 = radius;
+            var h2 = radius * Math.tan(Math.PI / 5);
+            context.lineTo(x + x1, y + h1);
+            context.lineTo(x - radius, y + h2);
+            context.lineTo(x + radius, y + h2);
+            context.lineTo(x - x1, y + h1);
+            context.lineTo(x - x1, y + h1);
+            context.lineTo(x, y);
+            context.closePath();
+            context.stroke();
+            context.fill();
+            x = (i + 1.5) * size;
+            y = 0;
+            context.moveTo(x, y);
+        }
+    }
+    var rating_bean = bean;
+    var size = 20;
+    var counts = 5;
+    var style = {
+        borderColor: "#FFFFFF",
+        fillColor: "#FFD700",
+        spaceColor: "#D5D5D5"
+    };
+    var D_myCanvas = document.getElementById("D_myCanvas");
+    showRatingStars(D_myCanvas, rating_bean/2.0, counts, size, style);
+
+<!--腾讯视频评分-->
+    if(one!=""){
+        var rating_one = one_s[1];
+        var T_myCanvas = document.getElementById("T_myCanvas");
+        showRatingStars(T_myCanvas, rating_one/2.0, counts, size, style);
+    }
+
+<!--爱奇艺评分-->
+    if(two!=""){
+        var rating_two = two_s[1];
+        var A_myCanvas = document.getElementById("A_myCanvas");
+        showRatingStars(A_myCanvas, rating_two/2.0, counts, size, style);
+    }
+ <!--IMDB评分-->
+    if(three!=''){
+        var rating_three= three_s[1];
+        var I_myCanvas = document.getElementById("I_myCanvas");
+        showRatingStars(I_myCanvas, rating_three/2.0, counts, size, style);
+    }
+
+</script>
+    <!--
+    <footer class="footer">
+        <div class="container clearfix">
+            <div class="left">
+                <p>
+                    违法和不良信息举报电话：4008353331-9
+                </p>
+                <p>
+                    <img src="img/jubao.png" alt=""> <a href="">中国互联网举报中心</a> 电话：12377 <a href="">新出发京批字第直160029号</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    -->
+</div>
+</body>
+</html>

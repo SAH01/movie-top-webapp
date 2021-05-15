@@ -1,0 +1,96 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-image: radial-gradient(circle at 10% 20%, rgb(0, 255, 176) 10%, rgb(66, 105, 242) 90%);
+    background-size: 125% 125%;
+}
+img{
+    width: 250px;
+    height: 330px;
+    margin-top: 25px;
+}
+a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #186498;
+}
+#container{
+    /* position: absolute; */
+    height: 400px;
+    margin: auto;
+    margin-top: 12%;
+    margin-left: 27%;
+}
+#container-child>div{
+    float: left;
+}
+#container-child #login-div{
+    margin: 0  auto;
+    float: left;
+    width: 390px;
+    height: 380px;
+    background-color: rgba(166, 230, 235,0);
+}
+#login-div>div{
+    width: 80%;
+    margin: auto;
+}
+.p-title{
+    color: #186498;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.input-text{
+    display: inline-block;
+    width: 96.5%;
+    height: 40px;
+    padding-left: 10px;
+    /* margin-bottom: 24px; */
+    font-size: 16px;
+    border: 0;
+}
+.input-d{
+    padding: 0;
+    width: 100%;
+    border: 1px solid #666666;
+    margin-top: 30px;
+}
+.div-input{
+    padding: 0;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 16px;
+}
+.div-input label{
+    color:#666666;
+}
+.div-input a{
+    /* float: right; */
+    margin-left: 168px; 
+}
+.div-input input{
+    width: 20px;
+    height: 20px;
+    margin-left: 0px;
+    vertical-align: middle;
+    border: 0;
+}
+.login-button{
+    width: 100%;
+    height: 46px;
+    background-color: #186498;
+    text-align: center;
+    border: 0px;
+    margin-top: 26px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+.footer{
+    float: right;
+    margin-top: 20px;
+}

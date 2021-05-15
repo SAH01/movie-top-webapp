@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="referrer" content="no-referrer">
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>树懒电影</title>
+    <link rel="stylesheet" href="../static/css/show.css">
+    <style>
+
+        body
+        {
+            background-color:#EDEDED;
+        }
+
+        <!--超链接样式-->
+            /* unvisited link */
+        a:link {
+            color: red;
+        }
+
+        /* visited link */
+        a:visited {
+            color: dodgerblue;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: red;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
+
+        /*电影分类样式*/
+        aside {
+            overflow:hidden
+        }
+
+        i {
+            font-size:14px;
+            color:#666;
+            font-style:normal;
+            float: left;
+        }
+        span {
+            display:inline-block;
+            width:80px;
+            height:24px;
+            text-decoration:none;
+            color:#039;
+            border-radius:2px;
+            font-size:14px;
+            line-height:24px;
+            text-align:center;
+        }
+        span:hover {
+            cursor:pointer;
+        }
+        .mystyle {
+            color:#f60;
+            background-color:#f3edc2;
+        }
+        .last {
+            float:left;
+            color:#666;
+            font-size:14px;
+            margin-top:20px;
+            margin-left: 200px;
+        }
+        #yi {
+            display:inline-block;
+        }
+        #yi span {
+            margin-left:10px;
+            color:#f60;
+            background-color:#f3edc2;
+        }
+    </style>
+
+</head>
+<script src="../static/js/jquery-1.7.2.min.js"></script>
+<body>
+<div id="container">
+    <div id="header">
+        <!--电影logo
+        <div class="logo">
+            <img src=".\img\logo.png" height="100px" width="100px" />
+        </div>
+        -->
+        <div class="title"><h1 id="title">树懒电影</h1></div>
+        <div class="container">
+            <form action="https://www.baidu.com/?tn=62095104_19_oem_dg" class="parent">
+                <input type="text" class="search" placeholder="电影名称，主演">
+                <input type="submit" name="" id=""  value="" class="btn">
+            </form>
+        </div>
+    </div>
+
+    <!--电影分类-->
+    <div id="classfiy">
+        <aside>
+            <div class="classfiy_1">
+            <i>类型:</i>
+            <div class="classfiy_2">
+                <span>全部</span>
+                <span>剧情</span>
+                <span>喜剧</span>
+                <span>动作</span>
+                <span>爱情</span>
+                <span>惊悚</span>
+                <span>犯罪</span>
+                <span>悬疑</span>
+                <span>战争</span>
+                <span>科幻</span>
+                <span>动画</span>
+                <span>恐怖</span>
+                <span>家庭</span>
+                <span>传记</span>
+                <span>冒险</span>
+                <span>奇幻</span>
+                <span>武侠</span>
+                <span>历史</span>
+            </div>
+            </div>
+        </aside>
+        <aside>
+            <div class="classfiy_1">
+            <i>年份:</i>
+            <div class="classfiy_2">
+                <span>全部</span>
+                <span>2021</span>
+                <span>2020</span>
+                <span>2019</span>
+                <span>2018</span>
+                <span>2017</span>
+                <span>2016</span>
+                <span>2015</span>
+                <span>2014</span>
+                <span>2013</span>
+                <span>2012</span>
+                <span>2011</span>
+                <span>2010</span>
+            </div>
+            </div>
+        </aside>
+        <aside>
+            <div class="classfiy_1">
+            <i>地区:</i>
+            <div class="classfiy_2">
+                <span>全部</span>
+                <span>中国</span>
+                <span>香港</span>
+                <span>美国</span>
+                <span>台湾</span>
+                <span>日本</span>
+                <span>韩国</span>
+                <span>印度</span>
+                <span>泰国</span>
+                <span>英国</span>
+                <span>法国</span>
+                <span>德国</span>
+                <span>加拿大</span>
+                <span>西班牙</span>
+                <span>意大利</span>
+                <span>澳大利亚</span>
+            </div>
+            </div>
+        </aside>
+        <aside>
+            <div class="classfiy_1">
+            <i>排列顺序:</i>
+            <div class="classfiy_2">
+                <span>热门(正序)</span>
+                <span>评分(正序)</span>
+                <span>热门(倒序)</span>
+                <span>评分(倒序)</span>
+                <span>时间(正序)</span>
+                <span>时间(倒序)</span>
+            </div>
+            </div>
+        </aside>
+        <div class="last">已选择:
+            <div id="yi"></div>
+        </div>
+        <script>
+        var oDivLength = [];
+        var div = document.getElementsByTagName('div');
+        var divSpan = document.getElementsByTagName('span');
+        //判断有几个列表
+        for (var i = 0; i < div.length; i++) {
+            div[i].index = i;//给所有div标序号
+        }
+        for (var i = 0; i < divSpan.length; i++) {
+            divSpan[i].onclick = function() {
+                oDivLength[this.parentElement.index] = this.innerText//标签的文本;获取对应的文本，其中下标为对应div的序号，从5开始
+                var oChild = this.parentElement.children;//获取div下的所有span标签
+                for (var j = 0; j < oChild.length; j++) {
+                    oChild[j].className = '';//将classname设为“”
+                }
+                this.className = 'mystyle'; //已选中的当前列的当前元素添加样式
+                document.getElementById('yi').innerHTML = ''//标签的html文本;
+                for (var m = 0; m < oDivLength.length; m++) { //放到已选择里面
+                    if (oDivLength[m] == '' || oDivLength[m] !== undefined) {
+                        var para = document.createElement("span");
+                        var node = document.createTextNode(oDivLength[m]);
+                        para.appendChild(node);
+                        document.getElementById('yi').appendChild(para);
+                    }
+                }
+                $.ajax({
+                    url: "/query_tag",
+                    data: {
+                        type:oDivLength[6],date:oDivLength[8],area:oDivLength[10],
+                        first:oDivLength[12],num:"0"
+                    },
+                    success: function (data) {
+                        $(".ul_show").empty()
+                        if(data.data==""){
+                            alert("暂无数据！")
+                        }else{
+                            for (var i = 0; i < data.data.length; i++) {
+                                a="/movie_page?"+"title="+data.data[i][0]+"&scorenum="+data.data[i][7];
+                                appendUlBody ="<li> <p class='picture'>"
+                                    +"<img src="+"'"+data.data[i][8]+"'"+" height='200px' width='140px' referrer='no-referrer'/></p>"
+                                    +"<p class='instroction'>"
+                                    +'<a href="'+a+'" style="text-decoration:none;" target="_blank" >'
+                                    +data.data[i][0]+"</a><br><br>导演: "+leave_out(data.data[i][2])+"<br>主演: "+leave_out(data.data[i][1])+"<br>"
+                                    +data.data[i][4]+"/"+data.data[i][5]+"<br>"+data.data[i][6]+"<br>"+data.data[i][3]+"分<br>"+data.data[i][7]+"人评价</p></li>"
+                                $(".ul_show").append(appendUlBody);
+                            }
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                    }
+                })
+            }
+        }
+        //点击完毕后有数据的为下标5,6,7,8
+        function leave_out(str){
+            if(str.length>=20)
+            {
+                str=str.substring(0,20)+"..."
+            }
+            return str
+        }
+    </script>
+    </div>
+    <!--电影分类模块结束-->
+    <div id="main">
+        <div class="cat"></div>
+        <div class="content">
+            <ul style="width: 100%;margin-left:300px; list-style: none" class="ul_show">
+            </ul>
+        </div>
+    </div>
+    <div class="btn_local">
+        <button id="json_more" class="btn_div">加载更多</button>
+    </div>
+    <script>
+        var btn=document.getElementById("json_more");
+        json_num=20;
+        btn.onclick=function(){
+            $.ajax({
+                    url: "/query_tag",
+                    data: {
+                        type:oDivLength[5],date:oDivLength[6],area:oDivLength[7],
+                        first:oDivLength[8],num:json_num
+                    },
+                    success: function (data) {
+                        if(data.data==""){
+                            alert("暂无数据！")
+                        }else{
+                            for (var i = 0; i < data.data.length; i++) {
+                                a="/movie_page?"+"title="+data.data[i][0]+"&scorenum="+data.data[i][7];
+                                appendUlBody ="<li> <p class='picture'>"
+                                    +"<img src="+"'"+data.data[i][8]+"'"+" height='200px' width='140px' referrer='no-referrer'/></p>"
+                                    +"<p class='instroction'>"
+                                    +'<a href="'+a+'" style="text-decoration:none;" target="_blank" >'
+                                    +data.data[i][0]+"</a><br><br>导演: "+leave_out(data.data[i][2])+"<br>主演: "+leave_out(data.data[i][1])+"<br>"
+                                    +data.data[i][4]+"/"+data.data[i][5]+"<br>"+data.data[i][6]+"<br>"+data.data[i][3]+"分<br>"+data.data[i][7]+"人评价</p></li>"
+                                $(".ul_show").append(appendUlBody);
+                            }
+                            json_num=json_num+20;
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                    }
+            })
+        }
+    </script>
+</div>
+</body>
+</html>

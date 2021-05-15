@@ -1,0 +1,224 @@
+body{
+    padding: 0;
+    margin: 0;
+    /* background-image: radial-gradient(933.4px  at 0.9% -2.6%, rgb(1, 220, 215) 0%, rgb(171, 196, 251) 47.6%, rgb(224, 188, 253) 72.8%, rgb(255, 182, 194) 100.3%); */
+    background-image: url(../img/regis.jpg);
+}
+a{
+    text-decoration: none;
+    color: #0C75BB;
+}
+#head{
+    width: 85%;
+    height: 80px;
+    line-height: 80px;
+    margin: auto;
+    cursor: pointer;
+}
+#logo-text{
+    color: #0C75BB;
+    font-size: 28px;
+    font-weight: bold;
+}
+.line{
+    /* display: block; */
+    width: 100%; 
+    height: 2px; 
+    background-color: #cccccc;
+    box-shadow: 0px 0px 2px 1px rgba(194, 194, 189, 0.5);
+}
+.line1{
+    width: 100%; 
+    height: 3px; 
+    background-color: rgb(34, 32, 32);
+    margin-top: 12px;
+    box-shadow: 0px 0px 2px 1px rgba(194, 194, 189, 0.5);
+}
+#body{
+    width: 85%;
+    height: 700px;
+    /* background-color: azure; */
+    margin: auto;
+    margin-top: 20px;
+}
+.boby-step{
+    width: 100%;
+}
+.boby-step div{
+    float: left;
+    cursor: pointer;
+}
+/* .step-div{
+    width: 25%;
+} */
+.step-checkd{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: #0C75BB;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+.step-uncheckd{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: #cccccc;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+.step-text-checkd{
+    height: 50px;
+    line-height: 50px;
+    color: #0C75BB;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 12px;
+}
+.step-text-uncheckd{
+    height: 50px;
+    line-height: 50px;
+    color: #cccccc;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 12px;
+}
+.step-line{
+    width: 150px;
+    margin-top: 23px;
+    height: 3px;
+    background-color: #cccccc;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.userobject{
+    margin-top: 40px;
+}
+.userobject>div{
+    float: left;
+    margin-right: 50px;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #5e5e5e;
+}
+.userobject input{
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+.userobject label{
+    vertical-align: middle;
+}
+.next-step{
+    margin-top: 50px;
+    width: 110px;
+    height: 48px;
+    background-color: #0C75BB;
+    text-align: center;
+    line-height: 50px;
+    border: 0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.previous-step{
+    margin-top: 50px;
+    width: 110px;
+    height: 48px;
+    background-color: #cccccc;
+    text-align: center;
+    line-height: 50px;
+    border: 0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 50px;
+}
+.accountinfo{
+    font-size: 16px;
+    color: #5e5e5e;
+    margin-top: 20px;
+}
+.accountinfo input{
+    vertical-align: middle;
+    width: 708px;
+    height: 50px;
+    font-size: 16px;
+    border: 1px solid #5e5e5e;
+    padding-left: 20px;
+    color: #5e5e5e;
+}
+.accountinfo label{
+    vertical-align: middle;
+    margin-right: 25px;
+}
+.img{
+    position: relative; 
+    width: 150px;
+    height: 100px;
+    line-height: 100px;
+    margin: auto;
+    margin-top: 100px;
+}
+.img img{
+    position: absolute;
+    top:50%; 
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.img-text{
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    color: #0C75BB;
+    font-size: 18px;
+    font-weight: bold;
+}
+.step-04-button{
+    width: 275px;
+    height: 120px;
+    margin: auto;
+}
+#footer{
+    /* position: fixed; f1efefda;*/
+    width: 100%;
+    height: 200px;
+    background-color: rgba(26,230,230,0.1);
+    bottom: 0;
+}
+#footer>div{
+    margin-left: 100px;
+    margin-top: 40px;
+    height: 100px;
+}
+#footer>div div{
+    float: left;
+    position: relative;
+    top: 40px;
+}
+#footer-img{
+    width: 100px;
+    height: 80px;
+}
+.text{    
+    width: 200px;
+    text-align: left;
+}
+.text1{
+    width: 300px;
+    text-align: left;
+}
+
