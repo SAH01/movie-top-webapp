@@ -78,6 +78,6 @@ def query_tag():
     return jsonify({"data": data})
 
 if __name__ == '__main__':
-    host="192.168.43.241"
+    host="127.0.0.1"
     port=5000
     app.run(host,port)
