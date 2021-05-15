@@ -108,6 +108,7 @@ def insert_data(data_beans,headers,cursor,conn):
 
                 # 获取电影详细数据的网址
                 url_details = i["url"].replace(" ", "")
+                print(url_details)
                 r = requests.get(url_details, headers=headers)
                 soup_bean = BeautifulSoup(r.text, "lxml")
                 # 获取详细数据
@@ -134,7 +135,6 @@ def insert_data(data_beans,headers,cursor,conn):
                 ex2 = '<span class="pl">语言:</span> (.*?)<br/>'
                 test = re.findall(ex2, r.text, re.S)
                 language = test[0].replace(" / ", " ")
-                print(url_details)
                 # 获取详细数据
                 sql = "insert into moviebean (title,star,director,type_movie,area,date_time,summary,score,language_movie,img,scorenum,timelen) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 cursor.execute(sql,
@@ -162,7 +162,7 @@ def get_tencent_data():
     conn = None
     conn, cursor = get_conn()
     data_beans=[]
-    num=140
+    num=1360
     b=0;
     while b<=500:
         a = 1

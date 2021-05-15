@@ -92,107 +92,107 @@ def get_souhu():
         print("-------------------------------------------")
     # print(len(dataRes))
 
-    #最新上架
-
-    templist = []
-    for i in range(1,31):
-        url_1='https://film.sohu.com/list_0_0_0_2_1_'
-        auto=str(i)
-        url_2='_60.html?channeled=1200100000'
-        url=url_1+auto+url_2
-        response = requests.get(url, headers)
-        response.encoding = 'utf-8'
-        page_text = response.text
-        # etree_ = etree.HTML(page_text)
-        # 获取所有的li
-        soup = BeautifulSoup(page_text, 'lxml')
-        # 标签层级选择
-        li_list = soup.select('.movie-list>li')
-        print(len(li_list))
-        if(len(li_list)==0):
-            print("最新上架爬取结束！")
-            if(len(dataRes)!=0):
-                return dataRes
-        for li in li_list:
-            li_text=str(li)
-            # print(li_text)
-            li_soup=BeautifulSoup(li_text,'lxml')
-            name=li_soup.find('div',class_="v_name_info").text
-            #添加名字
-            templist.append(name)
-            # print(name)
-            #添加评分
-            score=li_soup.find('span',class_='v_score').text
-            #处理评分
-            score=score[-4:-1]
-            templist.append(score)
-            # print(score)
-            #添加path
-            path=li_soup.find('a',target="_blank")['href']
-            templist.append(path)
-            # print(path)
-            #添加播放状态
-            state="VIP"
-            templist.append(state)
-            print(templist)
-            dataRes.append(templist)
-            templist=[]
-        print("-------------------------------------------")
-    # print(len(dataRes))
-    #本周热播
-    templist = []
-    for i in range(1, 31):
-        url_1 = 'https://film.sohu.com/list_0_0_0_2_0_'
-        auto = str(i)
-        url_2 = '_60.html?channeled=1200100000'
-        url = url_1 + auto + url_2
-        response = requests.get(url, headers)
-        response.encoding = 'utf-8'
-        page_text = response.text
-        # etree_ = etree.HTML(page_text)
-        # 获取所有的li
-        soup = BeautifulSoup(page_text, 'lxml')
-        # 标签层级选择
-        li_list = soup.select('.movie-list>li')
-        print(len(li_list))
-        if (len(li_list) == 0):
-            print("本周热播爬取结束！")
-            if (len(dataRes) != 0):
-                return dataRes
-        for li in li_list:
-            li_text = str(li)
-            # print(li_text)
-            li_soup = BeautifulSoup(li_text, 'lxml')
-            name = li_soup.find('div', class_="v_name_info").text
-            # 添加名字
-            templist.append(name)
-            # print(name)
-            # 添加评分
-            score = li_soup.find('span', class_='v_score').text
-            # 处理评分
-            score = score[-4:-1]
-            templist.append(score)
-            # print(score)
-            # 添加path
-            path = li_soup.find('a', target="_blank")['href']
-            templist.append(path)
-            # print(path)
-            # 添加播放状态
-            state = "VIP"
-            templist.append(state)
-            print(templist)
-            dataRes.append(templist)
-            templist = []
-        print("-------------------------------------------")
+    # #最新上架
+    #
+    # templist = []
+    # for i in range(1,31):
+    #     url_1='https://film.sohu.com/list_0_0_0_2_1_'
+    #     auto=str(i)
+    #     url_2='_60.html?channeled=1200100000'
+    #     url=url_1+auto+url_2
+    #     response = requests.get(url, headers)
+    #     response.encoding = 'utf-8'
+    #     page_text = response.text
+    #     # etree_ = etree.HTML(page_text)
+    #     # 获取所有的li
+    #     soup = BeautifulSoup(page_text, 'lxml')
+    #     # 标签层级选择
+    #     li_list = soup.select('.movie-list>li')
+    #     print(len(li_list))
+    #     if(len(li_list)==0):
+    #         print("最新上架爬取结束！")
+    #         if(len(dataRes)!=0):
+    #             return dataRes
+    #     for li in li_list:
+    #         li_text=str(li)
+    #         # print(li_text)
+    #         li_soup=BeautifulSoup(li_text,'lxml')
+    #         name=li_soup.find('div',class_="v_name_info").text
+    #         #添加名字
+    #         templist.append(name)
+    #         # print(name)
+    #         #添加评分
+    #         score=li_soup.find('span',class_='v_score').text
+    #         #处理评分
+    #         score=score[-4:-1]
+    #         templist.append(score)
+    #         # print(score)
+    #         #添加path
+    #         path=li_soup.find('a',target="_blank")['href']
+    #         templist.append(path)
+    #         # print(path)
+    #         #添加播放状态
+    #         state="VIP"
+    #         templist.append(state)
+    #         print(templist)
+    #         dataRes.append(templist)
+    #         templist=[]
+    #     print("-------------------------------------------")
+    # # print(len(dataRes))
+    # #本周热播
+    # templist = []
+    # for i in range(1, 31):
+    #     url_1 = 'https://film.sohu.com/list_0_0_0_2_0_'
+    #     auto = str(i)
+    #     url_2 = '_60.html?channeled=1200100000'
+    #     url = url_1 + auto + url_2
+    #     response = requests.get(url, headers)
+    #     response.encoding = 'utf-8'
+    #     page_text = response.text
+    #     # etree_ = etree.HTML(page_text)
+    #     # 获取所有的li
+    #     soup = BeautifulSoup(page_text, 'lxml')
+    #     # 标签层级选择
+    #     li_list = soup.select('.movie-list>li')
+    #     print(len(li_list))
+    #     if (len(li_list) == 0):
+    #         print("本周热播爬取结束！")
+    #         if (len(dataRes) != 0):
+    #             return dataRes
+    #     for li in li_list:
+    #         li_text = str(li)
+    #         # print(li_text)
+    #         li_soup = BeautifulSoup(li_text, 'lxml')
+    #         name = li_soup.find('div', class_="v_name_info").text
+    #         # 添加名字
+    #         templist.append(name)
+    #         # print(name)
+    #         # 添加评分
+    #         score = li_soup.find('span', class_='v_score').text
+    #         # 处理评分
+    #         score = score[-4:-1]
+    #         templist.append(score)
+    #         # print(score)
+    #         # 添加path
+    #         path = li_soup.find('a', target="_blank")['href']
+    #         templist.append(path)
+    #         # print(path)
+    #         # 添加播放状态
+    #         state = "VIP"
+    #         templist.append(state)
+    #         print(templist)
+    #         dataRes.append(templist)
+    #         templist = []
+    #     print("-------------------------------------------")
     # print(len(dataRes))
     #list去重
-    old_list = dataRes
-    new_list = []
-    for i in old_list:
-        if i not in new_list:
-            new_list.append(i)
-    print(new_list)  # [2, 3, 4, 5, 1]
-    return new_list
+    # old_list = dataRes
+    # new_list = []
+    # for i in old_list:
+    #     if i not in new_list:
+    #         new_list.append(i)
+    # print(new_list)  # [2, 3, 4, 5, 1]
+    return dataRes
 #插入数据库
 def insert_souhu():
     cursor = None

@@ -42,7 +42,7 @@ def get_imdb():
 
     # print(all_li)
 
-    for i in range(13,202):
+    for i in range(58,202):
             url_='https://www.imdb.cn/feature-film/1-0-0-0/?page='+str(i)
             response = requests.get(url=url_, headers=headers)
             # print(response)
