@@ -202,7 +202,7 @@ def insert_souhu():
         list = get_souhu()
         print(f"{time.asctime()}开始插入搜狐电影数据")
         conn, cursor = get_conn()
-        sql = "insert into moviesouhu (id,name,score,path,state) values(%s,%s,%s,%s,%s)"
+        sql = "insert into moviesohu (id,name,score,path,state) values(%s,%s,%s,%s,%s)"
         for item in list:
             print(item)
             count = count + 1
