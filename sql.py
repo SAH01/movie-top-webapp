@@ -162,7 +162,7 @@ def get_tencent_data():
     conn = None
     conn, cursor = get_conn()
     data_beans=[]
-    num=1360
+    num=2080#1820/1960
     b=0;
     while b<=500:
         a = 1
