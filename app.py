@@ -20,6 +20,7 @@ def hello_world_movie_page():
     scorenum=request.values.get("scorenum")
     str_s=[]
     str_s=sql.find_by_title_and_scorenum(title,scorenum)
+    #获取所有查询到的带星级电影库 腾讯、爱奇艺、IMDB、1905、搜狐
     str_three=sql.find_all_movies(title)
 
     return render_template("moviepager.html",title=str_s[0],star=str_s[1],
@@ -27,7 +28,7 @@ def hello_world_movie_page():
                            ,date_time=str_s[5],summary=str_s[6],score=str_s[7]
                            ,language_movie=str_s[8],img=str_s[9],scorenum=str_s[10]
                            ,timelen=str_s[11],str_one=str_three[0],str_two=str_three[1]
-                           ,str_three=str_three[2]);
+                           ,str_three=str_three[2],str_four=str_three[3],str_five=str_three[4])
 
 @app.route('/android_query')
 def android_query():

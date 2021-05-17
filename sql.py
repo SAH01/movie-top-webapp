@@ -247,9 +247,13 @@ def find_all_movies(title):
     sqlten=" select name,score,path,state from movieten where name='"+title+"'"
     sqliqy=" select name,score,path,state from movieiqy where name='"+title+"'"
     sqlimdb=" select name,score from movieimdb where name='"+title+"'"
+    sql1905=" select name,score,path,state from movie1905 where name='"+title+"'"
+    sqlsohu = " select name,score,path,state from moviesohu where name='" + title + "'"
     tencData=query(sqlten)
     iqyData=query(sqliqy)
     imdbData=query(sqlimdb)
+    _1905Data=query(sql1905)
+    sohuData=query(sqlsohu)
     try:
         dataRes.append(tencData[0])  # 腾讯
     except:
@@ -262,16 +266,25 @@ def find_all_movies(title):
         dataRes.append(imdbData[0])    #IMDB
     except:
         dataRes.append("")
+    try:
+        dataRes.append(_1905Data[0])  # 1905
+    except:
+        dataRes.append("")
+    try:
+        dataRes.append(sohuData[0])  # 搜狐
+    except:
+        dataRes.append("")
     print(dataRes)
     # print(tencData[0][0])
     return dataRes
 
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
-    get_tencent_data()
+    # get_tencent_data()
     # update_time_num()
     # test()
     # find_by_title_and_scorenum("洛杉矶之战","100074")
     # find_by_qury_top("大圣")
     # res=find_all_movies("肖申克的救赎")
     # print(res)
+    find_all_movies("当幸福来敲门")
