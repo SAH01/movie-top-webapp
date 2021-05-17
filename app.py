@@ -18,7 +18,6 @@ def hello_world_show():
 def hello_world_movie_page():
     title=request.values.get("title")
     scorenum=request.values.get("scorenum")
-    str_s=[]
     str_s=sql.find_by_title_and_scorenum(title,scorenum)
     #获取所有查询到的带星级电影库 腾讯、爱奇艺、IMDB、1905、搜狐
     str_three=sql.find_all_movies(title)

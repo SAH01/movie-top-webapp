@@ -103,15 +103,15 @@
                 }
                 if(four!="")
                 {
-                    three_s=restr_s(four);
-                    appendUlBody = appendUlBody+ "<p class='star'>IMDB评分：<font size='5' face='arial' color='black'>"+ three_s[1]+
-                    "</font></p>" + "<canvas width='250' height='20' id='I_myCanvas'></canvas>"
+                    four_s=restr_s(four);
+                    appendUlBody = appendUlBody+ "<p class='star'>1905视频网评分：<font size='5' face='arial' color='black'>"+ four_s[1]+
+                    "</font></p>" + "<canvas width='250' height='20' id='first_myCanvas'></canvas>"
                 }
                 if(five!="")
                 {
                     three_s=restr_s(five);
-                    appendUlBody = appendUlBody+ "<p class='star'>IMDB评分：<font size='5' face='arial' color='black'>"+ three_s[1]+
-                    "</font></p>" + "<canvas width='250' height='20' id='I_myCanvas'></canvas>"
+                    appendUlBody = appendUlBody+ "<p class='star'>搜狐评分：<font size='5' face='arial' color='black'>"+ three_s[1]+
+                    "</font></p>" + "<canvas width='250' height='20' id='S_myCanvas'></canvas>"
                 }
                 $(".score").append(appendUlBody);
                 function restr_s(str){
@@ -160,19 +160,19 @@
                     {
                         two_s=restr_s(two);
                         appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+two_s[2]+'" style="text-decoration:none;">爱奇艺</a></div>'+
-                            '<div class="p3_1">'+two_s[3]+'</div><br>';
+                            '<div class="p3_1">'+two_s[3]+'</div><br><br>';
                     }
                     if( four!="")
                     {
                         four_s=restr_s(four);
-                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+four_s[2]+'" style="text-decoration:none;">爱奇艺</a></div>'+
-                            '<div class="p3_1">'+four_s[3]+'</div><br>';
+                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+four_s[2]+'" style="text-decoration:none;">1905视频网</a></div>'+
+                            '<div class="p3_1">'+four_s[3]+'</div><br><br>';
                     }
                     if( five!="")
                     {
                         five_s=restr_s(five);
-                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+five_s[2]+'" style="text-decoration:none;">爱奇艺</a></div>'+
-                            '<div class="p3_1">'+five_s[3]+'</div><br>';
+                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+five_s[2]+'" style="text-decoration:none;">搜狐视频</a></div>'+
+                            '<div class="p3_1">'+five_s[3]+'</div><br><br>';
                     }
                     $(".p2").append(appendUlBody);
                 </script>
@@ -282,10 +282,22 @@
         showRatingStars(A_myCanvas, rating_two/2.0, counts, size, style);
     }
  <!--IMDB评分-->
-    if(three!=''){
-        var rating_three= three_s[1];
+    if(three!='') {
+        var rating_three = three_s[1];
         var I_myCanvas = document.getElementById("I_myCanvas");
-        showRatingStars(I_myCanvas, rating_three/2.0, counts, size, style);
+        showRatingStars(I_myCanvas, rating_three / 2.0, counts, size, style);
+    }
+<!--1905评分-->
+    if(four!=''){
+        var rating_four= four_s[1];
+        var first_myCanvas = document.getElementById("first_myCanvas");
+        showRatingStars(first_myCanvas, rating_four/2.0, counts, size, style);
+    }
+<!--搜狐评分-->
+    if(five!=''){
+        var rating_five= five_s[1];
+        var S_myCanvas = document.getElementById("S_myCanvas");
+        showRatingStars(S_myCanvas, rating_three/2.0, counts, size, style);
     }
 
 </script>

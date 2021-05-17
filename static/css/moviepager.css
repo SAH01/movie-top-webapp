@@ -157,7 +157,7 @@
 .score {
     float:left;
     width:25%;
-    height:280px;
+    height:310px;
     margin-left: 5px;
     /*margin-top: 5px;*/
     /*background-color: palegoldenrod;*/
@@ -170,7 +170,7 @@
     font-size: 13px;
     font-family: 微软雅黑;
     color: #666666;
-    line-height: 40px;
+    line-height: 25px;
 }
 /*电影来源*/
 .origin {
@@ -246,6 +246,7 @@
 .story {
     width: 100%;
     height: 300px;
+    margin-top: 70px;
     /*margin-top: 60px;*/
     /*background-color: blueviolet;*/
 }

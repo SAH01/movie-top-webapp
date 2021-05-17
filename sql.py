@@ -144,10 +144,9 @@ def insert_data(data_beans,headers,cursor,conn):
         print(f"{time.asctime()}插入数据完毕")
     except:
         traceback.print_exc()
-def get_tencent_data():
+def get_bean_data():
     #豆瓣的网址
     url_bean = 'https://movie.douban.com/j/new_search_subjects?sort=T&range=0,10&tags=%E7%94%B5%E5%BD%B1&start='
-
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
     }
@@ -162,7 +161,7 @@ def get_tencent_data():
     conn = None
     conn, cursor = get_conn()
     data_beans=[]
-    num=2080#1820/1960
+    num=2640#1820/1960/800/2320
     b=0;
     while b<=500:
         a = 1
@@ -222,7 +221,7 @@ def find_class_order(str):
 def find_by_title_and_scorenum(title,scorenum):
     sql = "select title,star,director,type_movie,area,date_time," \
           "summary,score,language_movie,img,scorenum,timelen from moviebean " \
-          "where title="+"'"+title+"' and scorenum="+scorenum
+          "where title=" + " '"+title+"' and scorenum= " +scorenum
     res=query(sql)
     print("详情页面")
     print(sql)
@@ -240,14 +239,30 @@ def find_by_qury_top(str):
 
 # 查询函数
 def find_all_movies(title):
+    """
+    SELECT
+      A.`title`
+    FROM
+      moviebean A,
+      movieimdb B,
+      movieiqy C,
+      moviesohu D,
+      movieten E,
+      movie1905 F
+    WHERE A.`title` = B.`name`
+      AND A.`title` = C.`name`
+      AND A.`title` = D.`name`
+      AND A.`title` = E.`name`
+      AND A.`title` = F.`name`;
+
+    :param title:
+    :return:
+    """
     dataRes=[]
-    tencData=[]     #腾讯
-    iqyData=[]      #爱奇艺
-    imdbData=[]     #imdb
     sqlten=" select name,score,path,state from movieten where name='"+title+"'"
     sqliqy=" select name,score,path,state from movieiqy where name='"+title+"'"
     sqlimdb=" select name,score from movieimdb where name='"+title+"'"
-    sql1905=" select name,score,path,state from movie1905 where name='"+title+"'"
+    sql1905 = " select name,score,path,state from movie1905 where name='"+title+"'"
     sqlsohu = " select name,score,path,state from moviesohu where name='" + title + "'"
     tencData=query(sqlten)
     iqyData=query(sqliqy)
@@ -256,6 +271,7 @@ def find_all_movies(title):
     sohuData=query(sqlsohu)
     try:
         dataRes.append(tencData[0])  # 腾讯
+        # print(tencData[0])
     except:
         dataRes.append("")
     try:
@@ -270,6 +286,7 @@ def find_all_movies(title):
         dataRes.append(_1905Data[0])  # 1905
     except:
         dataRes.append("")
+        # print(_1905Data)
     try:
         dataRes.append(sohuData[0])  # 搜狐
     except:
@@ -280,11 +297,12 @@ def find_all_movies(title):
 
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
-    # get_tencent_data()
+    get_bean_data()
     # update_time_num()
     # test()
     # find_by_title_and_scorenum("洛杉矶之战","100074")
     # find_by_qury_top("大圣")
     # res=find_all_movies("肖申克的救赎")
     # print(res)
-    find_all_movies("当幸福来敲门")
+    # find_all_movies("危险关系")
+    # find_by_title_and_scorenum("危险关系", "80248")

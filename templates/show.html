@@ -96,7 +96,7 @@
         -->
         <div class="title"><h1 id="title">树懒电影</h1></div>
         <div class="container">
-            <form action="https://www.baidu.com/?tn=62095104_19_oem_dg" class="parent">
+            <form action="#" class="parent">
                 <input type="text" class="search" placeholder="电影名称，主演">
                 <input type="submit" name="" id=""  value="" class="btn">
             </form>
@@ -270,8 +270,8 @@
             $.ajax({
                     url: "/query_tag",
                     data: {
-                        type:oDivLength[5],date:oDivLength[6],area:oDivLength[7],
-                        first:oDivLength[8],num:json_num
+                        type:oDivLength[6],date:oDivLength[8],area:oDivLength[10],
+                        first:oDivLength[12],num:json_num
                     },
                     success: function (data) {
                         if(data.data==""){
