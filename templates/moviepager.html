@@ -138,14 +138,14 @@
                 <button class="button">看过</button>
             </div>
             <div class="story">
-                <div class="p1"><br>电影剧情简介  · · · · · ·</div>
+                <div class="p1"><br>电影剧情概要  · · · · · ·</div>
                 <p class="p_story">{{summary}}
                 </p>
             </div>
         </div>
         <div class="sidebar">
             <div class="origin">
-                <div class="p1"><br>在哪儿看这部电影  · · · · · ·</div>
+                <div class="p1"><br>为您找到以下片源  · · · · · ·</div>
                 <div class="p2">
                 </div>
                 <script>
@@ -153,25 +153,25 @@
                     if(one!="")
                     {
                         one_s=restr_s(one);
-                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+one_s[2]+'" style="text-decoration:none;">腾讯视频</a></div>'+
+                        appendUlBody =appendUlBody+ '<div class="p4">  <a target="_blank" href="'+one_s[2]+'" style="text-decoration:none;">腾讯视频</a></div>'+
                             '<div class="p3_1">'+one_s[3]+'</div><br><br>';
                     }
                     if( two!="")
                     {
                         two_s=restr_s(two);
-                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+two_s[2]+'" style="text-decoration:none;">爱奇艺</a></div>'+
+                        appendUlBody =appendUlBody+ '<div class="p4">  <a target="_blank" href="'+two_s[2]+'" style="text-decoration:none;">爱奇艺</a></div>'+
                             '<div class="p3_1">'+two_s[3]+'</div><br><br>';
                     }
                     if( four!="")
                     {
                         four_s=restr_s(four);
-                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+four_s[2]+'" style="text-decoration:none;">1905视频网</a></div>'+
+                        appendUlBody =appendUlBody+ '<div class="p4"> <a target="_blank" href="'+four_s[2]+'" style="text-decoration:none;">1905视频网</a></div>'+
                             '<div class="p3_1">'+four_s[3]+'</div><br><br>';
                     }
                     if( five!="")
                     {
                         five_s=restr_s(five);
-                        appendUlBody =appendUlBody+ '<div class="p4"> <a href="'+five_s[2]+'" style="text-decoration:none;">搜狐视频</a></div>'+
+                        appendUlBody =appendUlBody+ '<div class="p4">  <a target="_blank" href="'+five_s[2]+'" style="text-decoration:none;">搜狐视频</a></div>'+
                             '<div class="p3_1">'+five_s[3]+'</div><br><br>';
                     }
                     $(".p2").append(appendUlBody);

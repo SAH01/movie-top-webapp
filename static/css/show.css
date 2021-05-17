@@ -1,3 +1,7 @@
+@font-face {
+    font-family:myfont;
+    src:url("/static/css/iconfont.ttf");
+ }
 .page_ctrl{
 
     text-align: center;
@@ -135,7 +139,7 @@
 }
 #medium_title {
     color:black;
-    font-family: 华文行楷;
+    font-family: myfont;
     font-size: 40px;
     margin-left: 300px;
     margin-top: 20px;
@@ -145,7 +149,7 @@
 /*电影名称样式*/
 #title {
     color:black;
-    font-family: 华文行楷;
+    font-family: myfont;
     text-align:right;
     margin-top: 15px;
     margin-right: 30px;
@@ -229,7 +233,7 @@
     width: 250px;
     margin-left: 30px;
     margin-top: 80px;
-    font-family: 宋体;
+    font-family: myfont;
     font-size: 15px;
 }
 
@@ -257,7 +261,7 @@
     height: 200px;
     margin-left: 15px;
     margin-top: 45px;
-    font-family: 宋体;
+    font-family: myfont;
 }
 
 /*电影排名*/

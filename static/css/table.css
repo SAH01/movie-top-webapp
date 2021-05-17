@@ -1,0 +1,96 @@
+﻿
+.lunbo_div {
+    width: 250px;
+    height: 365px;
+    background-color: #EED8AE;
+    position: fixed;
+    border-radius: 10px;
+    margin: auto;
+    margin-left: 69%;
+    margin-top: 330px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.cup {
+    width: 70px;
+    height: auto;
+    margin-top: -17px;
+    margin-left: 20px;
+}
+
+.span_bm {
+            /*display: grid;*/
+            float: right;
+        }
+
+        .today_title {
+            display: inline-block;
+            color: black;
+            font-size: 14px;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+
+.totady_pers {
+    font-size: 30px;
+    color: white;
+    font-weight: 600;
+}
+
+.bm_content {
+    width: 240px;
+    height: 295px;
+    background-color: white;
+    margin: 0px 5px 0 5px;
+    border-radius: 3px;
+    font-size: 14px;
+    overflow: hidden;
+    position: relative;
+    top: -5px;
+}
+
+table {
+    table-layout: fixed;
+    font-size: 12px;
+}
+
+thead {
+    font-size: 12px;
+}
+
+.table > thead > tr > th {
+    border-bottom: 1px solid #eeeeee;
+    text-align: center;
+}
+
+.table > tbody + tbody {
+    border-top: 0px;
+}
+
+.table img {
+    width: 15px;
+    border-radius: 50%;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table {
+    table-layout: fixed;
+}
+
+.center {
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.d_score {
+    margin-left: 11px;
+}

@@ -140,7 +140,7 @@ a{
     background: #f9fafa;
 }
 .main .right .tap input{
-    border: 1px red solid;
+    border: 1px transparent solid;
     /*border: cadetblue solid 1px;*/
     float: left;
     margin-right: 5px;
