@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改资料</title>
+    <style type="text/css">
+        body
+        {
+            background-image: url("../static/img/revise.jpg");
+        }
+        .Content-Main{
+            margin-top: 80px;
+            margin-left: 500px;
+            max-width: 500px;
+            /*margin: auto;*/
+            border: none;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 1px 1px 1px #444;
+            color: #D3D3D3;
+            background: #555;
+            opacity:0.7;
+        }
+        .Content-Main h1{
+            padding: 8px 0px 40px 10px;
+            display: block;
+            border-bottom: 1px solid #444;
+        }
+        .text1{
+            margin-left: 3px;
+        }
+        .Content-Main label{
+            margin: 0px 0px 5px;
+            display: block;
+        }
+        .fileInputContainer{
+            height: 99px;
+            width: 99px;
+            margin: 20px 20px 20px 20px ;
+            border: none;
+            background: url("img/Example.jpg");
+            overflow: hidden;
+            position: relative;
+        }
+        .fileInput{
+            height: 106px;
+            border: none;
+            font-size: 300px;
+            opacity: 0;
+            filter:alpha(opacity=0);
+            cursor: pointer;
+            position: absolute;
+        }
+        .Content-Main label>span{
+            width: 20%;
+            float: left;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .Main-sex{
+            padding-right: 13px;
+            padding-bottom: 13px;
+            font-weight: bold;
+            line-height: 4px;
+        }
+        .Main-sex input[type=checkbox]{
+            margin-top:6px;
+            vertical-align:middle;
+        }
+        .Content-Main input[type="text"],.Content-Main input[type="email"],.Content-Main textarea{
+            height: 25px;
+            width: 70%;
+            line-height: 15px;
+            padding: 5px 0px 5px 5px;
+            margin-bottom: 16px;
+            margin-right: 6px;
+            margin-top: 2px;
+            border: none;
+            border-radius:2px;
+            -webkit-border-radius:2px;
+            -moz-border-radius:2px;
+            outline: 0 none;
+            background:  #DFDFDF;
+            color: #525252;
+        }
+        .Content-Main textarea{
+            height: 100px;
+            width: 70%;
+            padding: 5px 0px 0px 5px;
+        }
+        .Content-Main .button{
+            padding: 8px 24px 8px 24px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #FFE477;
+            box-shadow: 1px 1px 1px  #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px  #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+            color: #585858;
+            margin-left: 210px;
+            background: #f6ff0a;
+        }
+        .Content-Main .button:hover{
+            color:  #333;
+            background-color:  #EBEBEB ;
+        }
+    </style>
+</head>
+<body>
+<div class="Content-Main">
+    <form  action="http://localhost:63342/MovieTop/templates/index.html?_ijt=7un76ve0cq6gedopm6vvsf6vmq" method="post" class="form-userInfo">
+        <h1>修改个人信息</h1>
+        <span class="text1">请在文本框中输入您的个人信息：</span>
+        <p>
+        <div class="fileInputContainer">
+            <input class="fileInput" id="" type="file" name="">
+        </div>
+        <label>
+            <span>昵称:</span>
+            <input type="text"  name="name" value="章英杰" placeholder="请输入昵称">
+        </label>
+        <label class="Main-sex">
+            <span>性别:</span>
+            <input name="sex" type="radio" value="man" checked>男
+            <input name="sex" type="radio" value="women">女
+        </label>
+        <label>
+            <span>用户ID:</span>
+            <input type="text" value="2931890089" name="id" readonly>
+        </label>
+        <label>
+            <span>我的签名:</span>
+            <textarea id="message" name="message" placeholder="设置您的签名(●'◡'●)"></textarea>
+        </label>
+        <label>
+            <input type="submit" class="button" value="提交">
+        </label>
+    </form>
+</div>
+</body>
+</html>
