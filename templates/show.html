@@ -104,6 +104,13 @@
                 <input type="submit" name="" id=""  value="" class="btn">
             </form>
         </div>
+        <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
+        <script>
+        var head_picture=document.getElementById("head_picture")
+         head_picture.onclick=function(){
+            window.open("/user_pager",'_blank')
+         }
+        </script>
     </div>
 
     <!--电影分类-->
@@ -220,8 +227,8 @@
                 $.ajax({
                     url: "/query_tag",
                     data: {
-                        type:oDivLength[6],date:oDivLength[8],area:oDivLength[10],
-                        first:oDivLength[12],num:"0"
+                        type:oDivLength[7],date:oDivLength[9],area:oDivLength[11],
+                        first:oDivLength[13],num:"0"
                     },
                     success: function (data) {
                         $(".ul_show").empty()
@@ -273,8 +280,8 @@
             $.ajax({
                     url: "/query_tag",
                     data: {
-                        type:oDivLength[6],date:oDivLength[8],area:oDivLength[10],
-                        first:oDivLength[12],num:json_num
+                        type:oDivLength[7],date:oDivLength[9],area:oDivLength[11],
+                        first:oDivLength[13],num:json_num
                     },
                     success: function (data) {
                         if(data.data==""){
@@ -306,7 +313,7 @@
     <div class="lunbo_div">
         <div>
             <img class="cup" src="../static/img/cup.png" />
-            <span class="today_title">电影TOP100</span><br/>
+            <span class="today_title">电影<br>热播榜</span><br/>
         </div>
         <div id="bm_content" class="bm_content">
             <table class="table table-condensed ">

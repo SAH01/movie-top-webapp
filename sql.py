@@ -2,17 +2,13 @@ import string
 import time
 import traceback
 from multiprocessing.dummy import Pool
-
 import pymysql
 import requests
 import re
-
 from lxml import etree
 import random
-
 from bs4 import BeautifulSoup
 from flask import json
-
 from functools import partial
 
 
@@ -61,15 +57,13 @@ def test():
     date="\n123456人评价"
     print(date[1:len(date)-3])
 # 测试函数
-
-
-# 连接关闭
+# 获取连接
 def get_conn():
     """
-    :return: 连接，游标192.168.1.102
+    :return: 连接，游标
     """
     # 创建连接
-    conn = pymysql.connect(host="127.0.0.1",
+    conn = pymysql.connect(host="192.168.43.241",
                     user="root",
                     password="000429",
                     db="movierankings",
@@ -82,7 +76,7 @@ def close_conn(conn, cursor):
         cursor.close()
     if conn:
         conn.close()
-# 连接关闭
+# 连接--关闭
 
 
 # 爬取函数
@@ -183,7 +177,6 @@ def get_bean_data():
     close_conn(conn, cursor)
 # 爬取函数
 
-
 # 查询函数
 def query(sql,*args):
     """
@@ -197,6 +190,7 @@ def query(sql,*args):
     res=cursor.fetchall()
     close_conn(conn,cursor)
     return res
+#分类排序查询
 def find_class_order(str):
     sql="select title,star,director,score,date_time,area,type_movie,scorenum,img from moviebean where 1=1 " \
         "and (type_movie like "+"'%"+str[0]+"%'"+") and (date_time like "+"'%"+str[1]+"%'"+") and(area like "+"'%"+str[2]+"%'"+") "
@@ -218,15 +212,17 @@ def find_class_order(str):
     print(sql)
     print(res)
     return res
+#详情页面查询
 def find_by_title_and_scorenum(title,scorenum):
     sql = "select title,star,director,type_movie,area,date_time," \
           "summary,score,language_movie,img,scorenum,timelen from moviebean " \
-          "where title=" + " '"+title+"' and scorenum= " +scorenum
+          "where title="+"'"+title+"' and scorenum="+scorenum
     res=query(sql)
     print("详情页面")
     print(sql)
     print(res[0])
     return res[0]
+#搜索查询
 def find_by_qury_top(str):
     sql = "select title,star,director,score,date_time,area," \
           "type_movie,scorenum,img from moviebean " \
@@ -236,8 +232,7 @@ def find_by_qury_top(str):
     print(sql)
     print(res)
     return res
-
-# 查询函数 第二个页面
+# 查询函数 第二个页面moviepager.html
 def find_all_movies(title):
     """
     SELECT
@@ -294,13 +289,107 @@ def find_all_movies(title):
     print(dataRes)
     # print(tencData[0])
     return dataRes
-#查询函数   top榜
+#查询函数   top榜滚动条
 def get_top():
     dataRes=[]
     sql='select * from moviebean limit 100;'
     dataRes=query(sql)
     # print(len(dataRes))
     return dataRes
+# 查询函数
+
+#用户部分
+#用户（app）注册
+def android_register(name,phone,passwrod):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    sql="insert into userdata (userphone,userpass,useremail,username) values(%s,%s,%s,%s)"
+    cursor.execute(sql,[phone,passwrod,"",name])
+    conn.commit()
+    close_conn(conn,cursor)
+    print("注册成功（APP）")
+#用户（app）查询
+def android_query(phone):
+    sql="select userphone,userpass,useremail,username from userdata where userphone="+phone
+    res = query(sql)
+    print("用户（app）查询")
+    print(sql)
+    res_2=("","","","")
+    try:
+        print(res[0])
+    except:
+        print(res_2)
+        return res_2
+    return res[0]
+#用户（app）收藏
+def android_like(userphone,usermovie,usertyppe,scorenum,url,score):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    sql="insert into userlike(userphone,usermovie,usertype,scorenum,url,score) values(%s,%s,%s,%s,%s,%s)"
+    cursor.execute(sql,[userphone,usermovie,usertyppe,scorenum,url,score])
+    conn.commit()
+    close_conn(conn,cursor)
+    print("收藏（app）成功")
+#用户（app）收藏查询
+def android_like_query(userphone,usertype):
+    sql="select userphone,usermovie,usertype,scorenum,url,score from userlike where userphone='"+userphone+"' and usertype='"+usertype+"'"
+    res = query(sql)
+    print("用户（app）收藏查询")
+    print(sql)
+    print(res)
+    return res
+#用户（app）收藏删除
+def android_delete(userphone,usertype,usermovie,scorenum):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    sql="delete from userlike where (userphone='"+userphone+"') and (usermovie='"+usermovie+\
+        "') and (usertype='"+usertype+"') and (scorenum="+scorenum+") "
+    try:
+        print("用户（app）收藏删除")
+        print(sql)
+        cursor.execute(sql)
+        conn.commit()
+        close_conn(conn,cursor)
+        return 1
+    except:
+        traceback.print_exc()
+        return 0
+#用户（app）收藏查询单个
+def android_like_query_one(userphone,usertype,usermovie,scorenum):
+    sql="select * from userlike where (userphone='"+userphone+"') and (usermovie='"+usermovie+\
+        "') and (usertype='"+usertype+"') and (scorenum="+scorenum+") "
+    res = query(sql)
+    print("用户（app）收藏查询单个")
+    print(sql)
+    try:
+        print(res[0])
+    except:
+        return 0
+    return 1
+#用户（app）收藏转移
+def android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    if(android_like_query_one(userphone,usertype_new,usermovie,scorenum)):
+        return -1
+    else:
+        sql="update userlike set usertype='"+usertype_new+"' where (userphone='"+userphone+"') and (usermovie='"+usermovie+\
+        "') and (usertype='"+usertype+"') and (scorenum="+scorenum+") "
+        try:
+            cursor.execute(sql)
+            conn.commit()
+            close_conn(conn, cursor)
+            print("用户（app）收藏转移")
+            print(sql)
+            return 1
+        except:
+            return 0
+#用户部分
+
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
     # get_bean_data()

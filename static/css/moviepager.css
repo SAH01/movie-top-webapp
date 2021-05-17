@@ -16,6 +16,24 @@
     height:1000px;
     /*border:1px #D5D5D5 solid;*/
 }
+/*个人中心*/
+.myhead {
+    width:84px;
+    height:84px;
+    margin-top: -80%;
+    margin-left: 35%;
+    background-image: url("../img/userpic.jpg");
+    background-size: 90% 90%;
+    border-radius:50%
+}
+.mycenter{
+    width:100px;
+    height:100px;
+    margin-top: 16px;
+    margin-left: 78%;
+    background-color: transparent;
+}
+
 #medium_title {
     color:black;
     font-family: 华文行楷;
