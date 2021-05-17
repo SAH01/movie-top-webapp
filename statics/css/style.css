@@ -139,14 +139,18 @@ a{
     border-bottom: 2px solid #62ab00;
     background: #f9fafa;
 }
-.main .right .tap span{
+.main .right .tap input{
+    border: 1px red solid;
+    /*border: cadetblue solid 1px;*/
+    float: left;
+    margin-right: 5px;
     display: block;
     width: 128px;
     height: 100%;
     line-height: 40px;
     color: #fff;
     text-align: center;
-    background: #62ab00;
+    background: #6abb5c;
 }
 .main .right .container{
     width: 100%;

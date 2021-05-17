@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+<script>
+    function btn_1(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn1.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+    }
+        function btn_2(){
+         var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn2.style.background="#1a682b"
+        btn1.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+    }
+        function btn_3(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn3.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn1.style.background="#6abb5c"
+    }
+</script>
 <html>
 
 	<head>
@@ -40,13 +66,13 @@
 					<li>
 						<a href="#" class="active">
 							<i class="icon iconfont icon-lingdang"></i>
-							消息
+							收藏
 						</a>
 					</li>
 					<li>
 						<a href="#">
 							<i class="icon iconfont icon-fangzidichan"></i>
-							收藏
+							消息
 						</a>
 					</li>
 					<li>
@@ -71,7 +97,9 @@
 			</div>
 			<div class="right">
 				<div class="tap">
-					<span>系统消息</span>
+                    <input id="btn1" type="button" value="在看" onclick=" btn_1()">
+                    <input id="btn2" type="button" value="想看" onclick="btn_2()">
+                    <input id="btn3" type="button" value="看过" onclick="btn_3()">
 				</div>
 				<div class="container">
 					<div class="no-doc">
