@@ -237,7 +237,7 @@ def find_by_qury_top(str):
     print(res)
     return res
 
-# 查询函数
+# 查询函数 第二个页面
 def find_all_movies(title):
     """
     SELECT
@@ -294,10 +294,17 @@ def find_all_movies(title):
     print(dataRes)
     # print(tencData[0][0])
     return dataRes
-
+#查询函数   top榜
+def get_top():
+    dataRes=[]
+    sql='select * from moviebean;'
+    dataRes=query(sql)
+    # print(dataRes[0])
+    return dataRes
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
-    get_bean_data()
+    # get_bean_data()
+    get_top()
     # update_time_num()
     # test()
     # find_by_title_and_scorenum("洛杉矶之战","100074")

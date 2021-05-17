@@ -299,6 +299,9 @@
         }
     </script>
 </div>
+
+
+
 <!--电影热播榜-->
     <div class="lunbo_div">
         <div>
@@ -321,9 +324,8 @@
                 <tbody id="tb2"></tbody>
             </table>
         </div>
-
     <script>
-    ; (function ($) {
+    ;(function ($) {
         var box = document.getElementById("bm_content");
         var l1 = document.getElementById("tb1");
         var l2 = document.getElementById("tb2");
@@ -351,6 +353,8 @@
         box.onmouseout = function () {
             scrollMove = setInterval(scrollup, 30);
         }
+        //获取数据ajax
+
         function RenderList() {
             var str = '';
             for (var i = 0; i < 20; i++) {
@@ -365,7 +369,6 @@
             }
             return str;
         }
-
     })(jQuery)
 </script>
 </div>
