@@ -292,14 +292,14 @@ def find_all_movies(title):
     except:
         dataRes.append("")
     print(dataRes)
-    # print(tencData[0][0])
+    # print(tencData[0])
     return dataRes
 #查询函数   top榜
 def get_top():
     dataRes=[]
-    sql='select * from moviebean;'
+    sql='select * from moviebean limit 100;'
     dataRes=query(sql)
-    # print(dataRes[0])
+    # print(len(dataRes))
     return dataRes
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])

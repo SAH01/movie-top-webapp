@@ -82,14 +82,10 @@ def get_top():
     toplist=[]
     temptoplist=sql.get_top()
     dataRes=[]
-    print("这里是路由get_top")
+    # print("这里是路由get_top")
     for item in temptoplist:
-        toplist.append(item[1])
-        toplist.append(item[8])
-        toplist.append(item[12])
-        dataRes.append(toplist)
-        toplist=[]
-    return jsonify({"data": dataRes})
+        dataRes.append({"topname":item[1],"topscore":item[8],"toptime":item[12]})
+    return jsonify({"data":dataRes})
 if __name__ == '__main__':
     host="127.0.0.1"
     port=5000

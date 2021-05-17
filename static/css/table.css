@@ -21,18 +21,18 @@
     margin-left: 20px;
 }
 
-.span_bm {
-            /*display: grid;*/
-            float: right;
-        }
 
-        .today_title {
-            display: inline-block;
-            color: black;
-            font-size: 14px;
-            margin-right: 20px;
-            margin-top: 10px;
-        }
+.today_title {
+    float: right;
+    height: 50px;
+    width: 60px;
+    display: inline-block;
+    color: #3e1d47;
+    font-size: 18px;
+    /*background: chartreuse;*/
+    margin-right: 50px;
+    margin-top: 10px;
+}
 
 .totady_pers {
     font-size: 30px;
@@ -86,11 +86,12 @@ thead {
 }
 
 .center {
+    text-align: left;
     vertical-align: middle;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 .d_score {
-    margin-left: 11px;
+    margin-left: 15px;
 }
