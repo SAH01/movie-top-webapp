@@ -318,9 +318,9 @@
             <table class="table table-condensed ">
                 <thead style="position: fixed; background-color: #eeeeee; ">
                     <tr>
-                        <th style=" width: 60px; text-align: right;">电影名</th>
-                        <th style="width: 100px; text-align: center;">评分</th>
-                        <th style=" width: 80px; padding-right: 30px;">排名</th>
+                        <th style=" width: 80px; text-align: center;">电影名</th>
+                        <th style="width: 80px; text-align: center;">评分</th>
+                        <th style=" width: 80px; padding-right: 10px;">排名</th>
                     </tr>
                 </thead>
                 <tbody id="tb1"></tbody>
@@ -352,7 +352,7 @@
 
                 str += '<td class="ellipsis" title="'+topscore+'"><div class="d_score">'+topscore+'</div></td>';
 
-                str += '<td class="ellipsis" title="'+toprank+'" >'+toprank+'</td>';
+                str += '<td class="ellipsis" title="'+toprank+'" id="toprank">'+toprank+'</td>';
                 str += ' </tr>';
                 }
             var box = document.getElementById("bm_content");

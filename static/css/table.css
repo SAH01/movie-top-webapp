@@ -93,5 +93,8 @@ thead {
     white-space: nowrap;
 }
 .d_score {
-    margin-left: 15px;
+    text-align: center;
+}
+#toprank{
+    text-align: center;
 }
