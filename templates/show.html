@@ -169,7 +169,6 @@
 <script>
     //加载更多js
         var btn=document.getElementById("json_more");
-        alert(btn)
         json_num=20;
         btn.onclick=function(){
             $.ajax({
@@ -200,13 +199,39 @@
             })
         }
         //分类js
-var oDivLength = [];
+        var oDivLength = [];
         var div = document.getElementsByTagName('div');
         var divSpan = document.getElementsByTagName('span');
         //判断有几个列表
         for (var i = 0; i < div.length; i++) {
             div[i].index = i;//给所有div标序号
         }
+        $.ajax({
+            url: "/query_tag",
+            data: {
+                type:"全部",date:"全部",area:"全部",
+                first:"全部",num:"0"
+            },
+            success: function (data) {
+                $(".ul_show").empty()
+                if(data.data==""){
+                    alert("暂无数据！")
+                }else{
+                    for (var i = 0; i < data.data.length; i++) {
+                        a="/movie_page?"+"title="+data.data[i][0]+"&scorenum="+data.data[i][7];
+                        appendUlBody ="<li> <p class='picture'>"
+                            +"<img src="+"'"+data.data[i][8]+"'"+" height='200px' width='140px' referrer='no-referrer'/></p>"
+                            +"<p class='instroction'>"
+                            +'<a href="'+a+'" style="text-decoration:none;" target="_blank" >'
+                            +data.data[i][0]+"</a><br><br>导演: "+leave_out(data.data[i][2])+"<br>主演: "+leave_out(data.data[i][1])+"<br>"
+                            +data.data[i][4]+"/"+data.data[i][5]+"<br>"+data.data[i][6]+"<br>"+data.data[i][3]+"分<br>"+data.data[i][7]+"人评价</p></li>"
+                        $(".ul_show").append(appendUlBody);
+                    }
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
         for (var i = 0; i < divSpan.length; i++) {
             divSpan[i].onclick = function() {
                 oDivLength[this.parentElement.index] = this.innerText//标签的文本;获取对应的文本，其中下标为对应div的序号，从5开始

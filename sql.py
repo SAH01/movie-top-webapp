@@ -155,7 +155,7 @@ def get_bean_data():
     conn = None
     conn, cursor = get_conn()
     data_beans=[]
-    num=2640#1820/1960/800/2320
+    num=2940#1820/1960/800/2320/2760
     b=0;
     while b<=500:
         a = 1
@@ -392,8 +392,8 @@ def android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new):
 
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
-    # get_bean_data()
-    get_top()
+    get_bean_data()
+    # get_top()
     # update_time_num()
     # test()
     # find_by_title_and_scorenum("洛杉矶之战","100074")
