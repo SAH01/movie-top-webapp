@@ -307,21 +307,20 @@
 
     </script>
 </div>
-
-
 <!--电影热播榜-->
-    <div class="lunbo_div">
+<div class="sidebar"></div>
+<div class="lunbo_div">
         <div>
             <img class="cup" src="../static/img/cup.png" />
-            <span class="today_title">电影<br>热播榜</span><br/>
+            <span class="today_title">电影TOP100</span><br/>
         </div>
         <div id="bm_content" class="bm_content">
             <table class="table table-condensed ">
                 <thead style="position: fixed; background-color: #eeeeee; ">
                     <tr>
                         <th style=" width: 60px; text-align: right;">电影名</th>
-                        <th style="width: 90px; text-align: center;">评分</th>
-                        <th style=" width: 88px; padding-right: 30px;">时长</th>
+                        <th style="width: 100px; text-align: center;">评分</th>
+                        <th style=" width: 80px; padding-right: 30px;">排名</th>
                     </tr>
                 </thead>
                 <tbody id="tb1"></tbody>
@@ -339,17 +338,21 @@
                 console.log(toplist[0].topname)
                 console.log(toplist[0].topscore)
                 console.log(toplist[0].toptime)
+                console.log(toplist[0].toprank)
                 var str = '';
             for (var i = 0; i < 20; i++) {
                 var topname=toplist[i].topname
                 var topscore=toplist[i].topscore
                 var toptime=toplist[i].toptime
+                var toprank=toplist[i].toprank
                 str += '<tr>';
                 str += '<td class="ellipsis">';
                 str += '<span class="center" title="'+topname+'" style="margin-left: 5px;">'+topname+'</span>';
                 str += '</td>';
+
                 str += '<td class="ellipsis" title="'+topscore+'"><div class="d_score">'+topscore+'</div></td>';
-                str += '<td class="ellipsis" title="'+toptime+'">'+toptime+'</td>';
+
+                str += '<td class="ellipsis" title="'+toprank+'" >'+toprank+'</td>';
                 str += ' </tr>';
                 }
             var box = document.getElementById("bm_content");

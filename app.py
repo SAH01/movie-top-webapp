@@ -130,7 +130,7 @@ def get_top():
     dataRes=[]
     # print("这里是路由get_top")
     for item in temptoplist:
-        dataRes.append({"topname":item[1],"topscore":item[8],"toptime":item[12]})
+        dataRes.append({"topname":item[1],"topscore":item[8],"toptime":item[12],"toprank":item[0]})
     return jsonify({"data":dataRes})
 #查询部分
 
