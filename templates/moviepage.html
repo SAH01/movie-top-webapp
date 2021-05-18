@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>电影详情</title>
+    <link rel="stylesheet" href="../static/css/MoviePager.css">
+    <style>
+    </style>
+</head>
+<script src="../static/js/jquery-1.7.2.min.js"></script>
+<script src="../static/js/moviepage.js"></script>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="title"><h1 id="title">树懒电影</h1></div>
+        <div class="container">
+            <form action="https://www.baidu.com/?tn=62095104_19_oem_dg" class="parent">
+                <input type="text" class="search" placeholder="电影名称，主演">
+                <input type="submit" name="" id="" value="搜索" class="btn">
+            </form>
+        </div>
+        <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
+        <script>
+        var head_picture=document.getElementById("head_picture")
+         head_picture.onclick=function(){
+            window.open("/user_pager",'_blank')
+         }
+        </script>
+    </div>
+    <div id="main">
+        <div class="cat"></div>
+        <div class="content">
+            <div class="mvname"><h2>{{ title }}</h2></div>
+            <p class="picture"><img src="{{ img }}" height="200px" width="140px" /></p>
+                        <p class="instroction">
+                            导演: {{ director }} <br>
+                            主演: {{ star }}<br>
+                            类型：{{ type_movie }}<br>
+                            制片国家/地区: {{ area }}<br>
+                            语言: {{ language_movie }}<br>
+                            上映日期: {{ date_time }}<br>
+                            片长: {{ timelen }}<br>
+                        </p>
+            <div id="bean" d="{{score}}" style="display:none"></div>
+            <div id="one" d="{{str_one}}" style="display:none"></div>
+            <div id="two" d="{{str_two}}" style="display:none"></div>
+            <div id="three" d="{{str_three}}" style="display:none"></div>
+            <div id="four" d="{{str_four}}" style="display:none"></div>
+            <div id="five" d="{{str_five}}" style="display:none"></div>
+            <div class="score">
+                <p class="star">豆瓣评分：<font size="5" face="arial" color="black">{{ score }}</font></p>
+                <canvas width="250" height="20" id="D_myCanvas"></canvas>
+            </div>
+            <script>
+            </script>
+            <div class="collect">
+                <button class="button">想看</button>
+                <button class="button">在看</button>
+                <button class="button">看过</button>
+            </div>
+            <div class="story">
+                <div class="p1"><br>电影剧情概要  · · · · · ·</div>
+                <p class="p_story">{{summary}}
+                </p>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="origin">
+                <div class="p1"><br>为您找到以下片源  · · · · · ·</div>
+                <div class="p2">
+                </div>
+                <script>
+                </script>
+            </div>
+            <p class="ad_right"></p>
+        </div>
+    </div>
+    <!--
+    <footer class="footer">
+        <div class="container clearfix">
+            <div class="left">
+                <p>
+                    违法和不良信息举报电话：4008353331-9
+                </p>
+                <p>
+                    <img src="img/jubao.png" alt=""> <a href="">中国互联网举报中心</a> 电话：12377 <a href="">新出发京批字第直160029号</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    -->
+</div>
+</body>
+</html>

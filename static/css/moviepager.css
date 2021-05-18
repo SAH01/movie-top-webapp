@@ -16,6 +16,27 @@
     height:1000px;
     /*border:1px #D5D5D5 solid;*/
 }
+/*超链接样式*/
+            /* unvisited link */
+        a:link {
+            color: red;
+        }
+
+        /* visited link */
+        a:visited {
+            color: #3399cc;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: white;
+            background-color: #0eb0d2;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
 /*个人中心*/
 .myhead {
     width:84px;

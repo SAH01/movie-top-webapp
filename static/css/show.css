@@ -2,6 +2,79 @@
     font-family:myfont;
     src:url("/static/css/iconfont.ttf");
  }
+/*show.html*/
+body
+        {
+            background-color:#EDEDED;
+        }
+
+        <!--超链接样式-->
+            /* unvisited link */
+        a:link {
+            color: red;
+        }
+
+        /* visited link */
+        a:visited {
+            color: dodgerblue;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: red;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
+
+        /*电影分类样式*/
+        aside {
+            overflow:hidden
+        }
+
+        i {
+            font-size:14px;
+            color:#666;
+            font-style:normal;
+            float: left;
+        }
+        span {
+            display:inline-block;
+            width:80px;
+            height:24px;
+            text-decoration:none;
+            color:#039;
+            border-radius:2px;
+            font-size:14px;
+            line-height:24px;
+            text-align:center;
+        }
+        span:hover {
+            cursor:pointer;
+        }
+        .mystyle {
+            color:#f60;
+            background-color:#f3edc2;
+        }
+        .last {
+            float:left;
+            color:#666;
+            font-size:14px;
+            margin-top:20px;
+            margin-left: 200px;
+        }
+        #yi {
+            display:inline-block;
+        }
+        #yi span {
+            margin-left:10px;
+            color:#f60;
+            background-color:#f3edc2;
+        }
+
+/* */
 /*个人中心*/
 .myhead {
     width:84px;
