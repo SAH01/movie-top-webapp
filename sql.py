@@ -319,6 +319,25 @@ def web_register(phone, password, email , name):
     conn.commit()
     close_conn(conn, cursor)
     print("注册成功（WEB）")
+
+# 用户（web）登陆验证
+def web_login(userphone, password):
+    cursor = None
+    conn = None
+    res=[]
+    conn, cursor = get_conn()
+    sql = "select userphone,userpass from userdata where '"+userphone+"'=userphone and '"+password+"'=userpass "
+    res=query(sql)
+    conn.commit()
+    if(len(res)==0):
+        print("登陆失败（WEB）")
+        close_conn(conn, cursor)
+        return False
+    else:
+        close_conn(conn, cursor)
+        print("登陆成功（WEB）")
+        return True
+
 #用户（app）查询
 def android_query(phone):
     sql="select userphone,userpass,useremail,username from userdata where userphone="+phone

@@ -258,3 +258,23 @@ function check_step2(){
         }
     }
 }
+// function login_(){
+//     var loginflag=1
+//     var userphone=document.getElementById("userphone")
+//     var password=document.getElementById("password")
+//     var loginform=document.getElementById('login-form')
+//     $.ajax({
+//             url: "/web_login",
+//             data: {
+//                 userphone:userphone,password:password
+//             },
+//             success: function (data) {
+//                 alert(loginflag)
+//                 resdata=data.data['data']
+//                 loginflag=resdata
+//                 print(loginflag)
+//             },
+//             error: function (xhr, type, errorThrown) {
+//             }
+//     })
+// }

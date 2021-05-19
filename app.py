@@ -12,7 +12,6 @@ def hello_world():
 def regis():
     return render_template("regitser.html")
 # 登录注册模块
-
 #主页面
 @app.route('/show')
 def hello_world_show():
@@ -207,10 +206,16 @@ def web_register():
     print(phoneNumber+" "+password+" "+email+" "+username)
     sql.web_register(phoneNumber,password,email,username)
     return redirect(url_for('hello_world_show'),code=302)
-@app.route('/web_login')
+@app.route('/web_login',methods=['GET', 'POST'])
 def web_login():
-
-    return 1
+    userphone = request.values.get('userphone')
+    password=request.values.get('password')
+    print("账号："+userphone+"   "+"密码："+password)
+    res=sql.web_login(userphone,password)
+    if(res==True):
+        return jsonify({"data":1})
+    else:
+        return jsonify({"data":0})
 #网页登陆注册部分
 if __name__ == '__main__':
     host="127.0.0.1"
