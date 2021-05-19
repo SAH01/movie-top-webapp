@@ -63,7 +63,7 @@ def get_conn():
     :return: 连接，游标
     """
     # 创建连接
-    conn = pymysql.connect(host="192.168.43.241",
+    conn = pymysql.connect(host="127.0.0.1",
                     user="root",
                     password="000429",
                     db="movierankings",
@@ -77,7 +77,6 @@ def close_conn(conn, cursor):
     if conn:
         conn.close()
 # 连接--关闭
-
 
 # 爬取函数
 def insert_data(data_beans,headers,cursor,conn):
@@ -300,15 +299,26 @@ def get_top():
 
 #用户部分
 #用户（app）注册
-def android_register(name,phone,passwrod):
+def android_register(name,phone,password):
     cursor = None
     conn = None
     conn, cursor = get_conn()
     sql="insert into userdata (userphone,userpass,useremail,username) values(%s,%s,%s,%s)"
-    cursor.execute(sql,[phone,passwrod,"",name])
+    cursor.execute(sql,[phone,password,"",name])
     conn.commit()
     close_conn(conn,cursor)
     print("注册成功（APP）")
+
+# 用户（web）注册
+def web_register(phone, password, email , name):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    sql = "insert into userdata (userphone,userpass,useremail,username) values(%s,%s,%s,%s)"
+    cursor.execute(sql, [phone, password, email, name])
+    conn.commit()
+    close_conn(conn, cursor)
+    print("注册成功（WEB）")
 #用户（app）查询
 def android_query(phone):
     sql="select userphone,userpass,useremail,username from userdata where userphone="+phone

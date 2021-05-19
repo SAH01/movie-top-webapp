@@ -9,19 +9,20 @@ function next(i){
         $("#step-02").css("display","none");
         $("#step-03").css("display","block");
         $("#step-3").css("backgroundColor","#0C75BB");
-        $("#step-02-line").css("backgroundColor","#0C75BB");
-        $("#step-3-text").css("color","#0C75BB");
-    }else if(i==3){
-        $("#step-03").css("display","none");
-        $("#step-04").css("display","block");
-        $("#step-4").css("backgroundColor","#0C75BB");
-        $("#step-03-line").css("backgroundColor","#0C75BB");
-        $("#step-4-text").css("color","#0C75BB");
-        console.log($("#userobjectform").serialize());
-        console.log($("#userinfoform").serialize());
-        console.log($("#passwordform").serialize());
-        //serializeObject()
-    }else{
+        // $("#step-02-line").css("backgroundColor","#0C75BB");
+        // $("#step-3-text").css("color","#0C75BB");
+    // }else if(i==3){
+    //     $("#step-03").css("display","none");
+    //     $("#step-04").css("display","block");
+    //     $("#step-4").css("backgroundColor","#0C75BB");
+    //     $("#step-03-line").css("backgroundColor","#0C75BB");
+    //     $("#step-4-text").css("color","#0C75BB");
+    //     console.log($("#userobjectform").serialize());
+    //     console.log($("#userinfoform").serialize());
+    //     console.log($("#passwordform").serialize());
+    //     //serializeObject()
+    }
+    else{
         console.log(225)
     }
 }
@@ -34,23 +35,24 @@ function previous(i){
         $("#step-01-line").css("backgroundColor","#cccccc");
         $("#step-2").css("backgroundColor","#cccccc");
         $("#step-2-text").css("color","#cccccc");
-    }else if(i==3){
-        $("#step-02").css("display","block");
-        $("#step-03").css("display","none");
-        $("#step-02-line").css("backgroundColor","#cccccc");
-        $("#step-3").css("backgroundColor","#cccccc");
-        $("#step-3-text").css("color","#cccccc");
     }
+    // else if(i==3){
+    //     $("#step-02").css("display","block");
+    //     $("#step-03").css("display","none");
+    //     $("#step-02-line").css("backgroundColor","#cccccc");
+    //     $("#step-3").css("backgroundColor","#cccccc");
+    //     $("#step-3-text").css("color","#cccccc");
+    // }
 }
 //跳转功能
 
-function gologin(){
-    window.open("http://"+host+":"+port, "_self")
-}
-function goindex(){
-    // alert("请先登录！");
-    window.open("http://"+host+":"+port+"/show", "_self")
-}
+// function gologin(){
+//     window.open("http://"+host+":"+port, "_self")
+// }
+// function goindex(){
+//     // alert("请先登录！");
+//     window.open("http://"+host+":"+port+"/show", "_self")
+// }
 //
 function showTips(id,info){
     document.getElementById(id+"span").innerHTML="<font color='gray'>"+info+"</font>";
@@ -197,32 +199,8 @@ function check_phone(){
     return true
     //检测手机号码合法性 11位 全数字
 }
-//第二步整体验证
-function check_step2(){
-    var name= document.getElementById("username").value
-    // var id= document.getElementById("IDNumber").value
-    var email= document.getElementById("email").value
-    var phoneNumber= document.getElementById("phoneNumber").value
-    if(name.length==0 || email.length==0 || phoneNumber.length==0)
-    {
-        alert("请把信息填写完整！")
-        return false
-    }
-    else{
-        flag1=check_name();
-        // flag2=check_id();
-        flag3=check_email();
-        flag4=check_phone();
-        if(flag1&&flag3&&flag4)
-            return true
-        else{
-            return false
-        }
-    }
-}
-
-//第三步两次密码验证
-function check_step3(){
+//两次密码验证
+function check_pass(){
     var first_pass=document.getElementById("password").value
     var second_pass=document.getElementById("confirmPassword").value
     var res = checkCN(first_pass)
@@ -247,4 +225,36 @@ function check_step3(){
         return false
     }
     return true
+}
+//第二步整体验证
+function check_step2(){
+    var userinfoform =document.getElementById('userinfoform')
+    var password = document.getElementById('password')
+    var confirmPassword = document.getElementById('confirmPassword')
+    var name= document.getElementById("username").value
+    // var id= document.getElementById("IDNumber").value
+    var email= document.getElementById("email").value
+    var phoneNumber= document.getElementById("phoneNumber").value
+    if(name.length==0 || email.length==0 || phoneNumber.length==0 || password.length==0 || confirmPassword.length == 0)
+    {
+        alert("请把信息填写完整！")
+        return false
+    }
+    else{
+        flag1=check_name();
+        flag2=check_pass();
+        flag3=check_email();
+        flag4=check_phone();
+        if(flag1&&flag2&&flag3&&flag4){
+            alert("注册成功！")
+        }
+        if(flag1&&flag2&&flag3&&flag4){
+            userinfoform.submit()
+            return true
+        }
+        else{
+            alert("注册失败！")
+            return false
+        }
+    }
 }

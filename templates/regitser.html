@@ -30,17 +30,17 @@
             <div class="step-div">
                 <div id="step-2" class="step-uncheckd">02</div>
                 <div id="step-2-text" class="step-text-uncheckd">账户信息</div>
-                <div id="step-02-line" class="step-line"></div>
+<!--                <div id="step-02-line" class="step-line"></div>-->
             </div>
-            <div class="step-div">
-                <div id="step-3" class="step-uncheckd">03</div>
-                <div id="step-3-text" class="step-text-uncheckd">密码设置</div>
-                <div id="step-03-line" class="step-line"></div>
-            </div>
-            <div class="step-div">
-                <div id="step-4" class="step-uncheckd">04</div>
-                <div id="step-4-text" class="step-text-uncheckd">注册成功</div>
-            </div>
+<!--            <div class="step-div">-->
+<!--                <div id="step-3" class="step-uncheckd">03</div>-->
+<!--                <div id="step-3-text" class="step-text-uncheckd">密码设置</div>-->
+<!--                <div id="step-03-line" class="step-line"></div>-->
+<!--            </div>-->
+<!--            <div class="step-div">-->
+<!--                <div id="step-4" class="step-uncheckd">04</div>-->
+<!--                <div id="step-4-text" class="step-text-uncheckd">注册成功</div>-->
+<!--            </div>-->
         </div>
         <div style="clear:both;"></div>
         <div id="step-01">
@@ -88,7 +88,7 @@
             </div>
             <div style="clear: both;"></div>
             <div style="margin-top: 50px;">
-                <form name="userinfoform" id="userinfoform">
+                <form name="userinfoform" id="userinfoform" action="http://127.0.0.1:5000/web_register" method="post">
                     <div class="accountinfo">
                         <label for="username">您的昵称</label>
                         <input type="text" name="username" id="username" placeholder="请输入您的昵称"
@@ -119,22 +119,6 @@
                                         onblur="check('phoneNumber','手机号码不能为空！')" onchange="check_phone()"/>
                                         <span id="phoneNumberspan"></span>
                     </div>
-                    <div>
-                        <button type="button" onclick="previous(2)" class="previous-step">上一步</button>
-                        <button type="button" onclick="if(check_step2()) next(2)" class="next-step">下一步</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div id="step-03" style="display: none;">
-            <div style="margin-top: 50px;">
-                <div style="font-size: 20px;font-weight: bold;">密码设置</div>
-                <div class="line1"></div>
-            </div>
-            <div style="clear: both;"></div>
-            <div style="margin-top: 50px;">
-                <form name="passwordform" id="passwordform">
                     <div class="accountinfo">
                         <label for="password">登录密码</label>
                         <input type="password" name="password" id="password" placeholder="请设置您的登录密码"
@@ -151,27 +135,14 @@
                                         <span id="confirmPasswordspan"></span>
                     </div>
                     <div>
-                        <button type="button" onclick="previous(3)" class="previous-step">上一步</button>
-                        <button type="button" onclick="if(check_step3()) next(3)" class="next-step">下一步</button>
+                        <button type="button" onclick="previous(2)" class="previous-step">上一步</button>
+                        <button type="button" onclick="if(check_step2()) next(2)" class="next-step">完成</button>
                     </div>
                 </form>
             </div>
         </div>
-        <div id="step-04" style="display: none;">
-            <div>
-                <div class="img">
-                    <img src="../static/img/suss.png" alt="注册成功">
-                </div>
-                <div class="img-text">恭喜您注册成功</div>
-                <div class="step-04-button">
-                    <button type="button" onclick="gologin()" class="next-step">登 录</button>
-                    <button type="button" onclick="goindex()" class="previous-step">首 页</button>
-                </div>
-            </div>
-        </div>
     </div>
     <div style="clear: both;"></div>
-    
     <div id="footer">
         <div>
             <div id="footer-img">

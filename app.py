@@ -2,6 +2,7 @@ from flask import request, jsonify, render_template
 from flask import redirect
 from flask import Flask, url_for
 import sql
+import pymysql
 app = Flask(__name__)
 # 登录注册模块
 @app.route('/')
@@ -195,6 +196,22 @@ def android_user_like_trans():
 def user_pager():
     return render_template("usermain.html")
 #用户部分
+#网页登陆注册部分
+@app.route('/web_register', methods=['GET', 'POST'])
+def web_register():
+    phoneNumber = request.form.get('phoneNumber')
+    password =request.form.get('password')
+    email = request.form.get('email')
+    username = request.form.get('username')
+    print("这是网页注册路由！")
+    print(phoneNumber+" "+password+" "+email+" "+username)
+    sql.web_register(phoneNumber,password,email,username)
+    return redirect(url_for('hello_world_show'),code=302)
+@app.route('/web_login')
+def web_login():
+
+    return 1
+#网页登陆注册部分
 if __name__ == '__main__':
     host="127.0.0.1"
     port=5000
