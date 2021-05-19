@@ -25,7 +25,7 @@ function next(i){
         console.log(225)
     }
 }
-var host="192.168.43.241"
+var host="127.0.0.1"
 var port=5000
 function previous(i){
     if(i==2){
