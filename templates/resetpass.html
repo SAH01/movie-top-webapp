@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>树懒电影---重置您的密码</title>
+    <style type="text/css">
+        #resetform{
+            margin-top: 350px;
+            margin-left: 750px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" id="resetform">
+        <tr>
+            <td><input type="text" id="userphone" value="" placeholder="输入您的手机号码"></td>
+        </tr><br>
+        <tr>
+            <td><input type="password" id="resetpass1" value="" placeholder="输入您的新密码"></td>
+        </tr><br>
+        <tr>
+            <td><input type="password" id="resetpass2" value="" placeholder="再次输入您的新密码"></td>
+        </tr><br>
+        <tr>
+            <td><input type="reset" value="清空"></td>
+            <td><input type="button" id="resetbtn" onclick="resetpass()" value="提交"></td>
+        </tr>
+    </form>
+</body>
+</html>
+<script src="../static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    function resetpass(){
+        var userphone=document.getElementById("userphone").value
+        var resetpass1=document.getElementById("resetpass1").value
+        var resetpass2=document.getElementById("resetpass2").value
+        alert(userphone+resetpass1+resetpass2)
+        var submit_flag=1
+        //判空
+        if((userphone.length==0)||(resetpass1.length==0)||(resetpass2.length==0)){
+            submit_flag=0
+            alert("请把信息填写完整！")
+        }
+        //判断密码一致性
+        if(resetpass2!=resetpass1){
+            submit_flag=0
+            alert("两次填写的密码不一致")
+            document.getElementById("resetpass1").focus();
+        }
+        //判断手机号
+        if(userphone.length!=11){
+            submit_flag=0
+            alert("手机号码应为11位！")
+            document.getElementById("userphone").focus();
+        }
+        var regu =  /^1[3456789]\d{9}$/
+        if(!(regu.test(userphone)) ){
+            submit_flag=0
+            alert("手机号码格式有误！")
+            document.getElementById("userphone").focus();
+        }
+        //判断密码格式
+        if(!((resetpass1.length>=6)&&resetpass1.length<=18))
+        {
+            submit_flag=0
+            alert("密码长度应该为6-16位!")
+            document.getElementById("resetpass1").focus();
+        }
+            var regex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{6,18}');
+            part_pass=resetpass1.split(" ")
+        if((!(regex.test(resetpass1))) || part_pass.length!=1)
+        {
+            submit_flag=0
+            alert("密码为数字+英文字母 且不可以包含空格！")
+            document.getElementById("resetpass1").focus();
+        }
+        //发起请求
+            if(submit_flag==1)
+        {
+            $.ajax({
+                url:'/resetpass',
+                data:{userphone:userphone,resetpass:resetpass2},
+                success: function (data) {
+                    alert("!")
+                    if (data.data==1)
+                    {
+                        alert("密码修改成功！请重新登录！")
+                        window.open("http://127.0.0.1:5000/","_self")
+                    }
+                    else
+                    {
+                        alert("修改密码失败！请重试")
+                    }
+                },
+                error: function (xhr, type, errorThrown) {
+                    // print("ajax请求失败！")
+                }
+            })
+        }
+        // alert(submit_flag)
+    }
+</script>

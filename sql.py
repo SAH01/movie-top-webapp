@@ -308,7 +308,6 @@ def android_register(name,phone,password):
     conn.commit()
     close_conn(conn,cursor)
     print("注册成功（APP）")
-
 # 用户（web）注册
 def web_register(phone, password, email , name):
     cursor = None
@@ -419,9 +418,29 @@ def android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new):
             return 0
 #用户部分
 
+#-------------------------------------------#
+#重置密码
+def reset_pass(phone,password):
+    conn,cursor=get_conn()
+    sql="update userdata set userpass='"+password+"' where userphone='"+phone+"'"
+    try:
+        print("正在修改密码...")
+        resetflag=cursor.execute(sql)
+        conn.commit()
+        close_conn(conn,cursor)
+        if(resetflag==1):
+            print("修改成功")
+            return 1
+        else:
+            print("修改失败！")
+            return 0
+    except:
+        print("系统错误...修改密码失败！")
+        return 0
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
-    get_bean_data()
+    # get_bean_data()
+    reset_pass("15284206891","success02")
     # get_top()
     # update_time_num()
     # test()

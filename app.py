@@ -1,6 +1,8 @@
 from flask import request, jsonify, render_template
 from flask import redirect
 from flask import Flask, url_for
+from scrapy.http import response
+
 import sql
 import pymysql
 app = Flask(__name__)
@@ -216,7 +218,18 @@ def web_login():
         return jsonify({"data":1})
     else:
         return jsonify({"data":0})
-#网页登陆注册部分
+#用户修改密码
+@app.route('/resetpass',methods=['GET', 'POST'])
+def respass():
+    userphone=request.values.get('userphone')
+    resetpass=request.values.get('resetpass')
+    print("路由获得手机号："+userphone+"\n")
+    print("路由获得新密码：" + resetpass + "\n")
+    flag=sql.reset_pass(userphone,resetpass)
+    if(flag==1):
+        return jsonify({"data":1})
+    else:
+        return jsonify({"data":0})
 if __name__ == '__main__':
     host="127.0.0.1"
     port=5000
