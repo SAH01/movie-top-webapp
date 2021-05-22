@@ -13,6 +13,9 @@ def hello_world():
 @app.route('/regis')
 def regis():
     return render_template("regitser.html")
+@app.route('/reset')
+def reset():
+    return render_template("resetpass.html")
 # 登录注册模块
 #主页面
 @app.route('/show')
@@ -208,7 +211,7 @@ def web_register():
     print(phoneNumber+" "+password+" "+email+" "+username)
     sql.web_register(phoneNumber,password,email,username)
     return redirect(url_for('hello_world_show'),code=302)
-@app.route('/web_login',methods=['GET', 'POST'])
+@app.route('/web_login/',methods=['GET', 'POST'])
 def web_login():
     userphone = request.values.get('userphone')
     password=request.values.get('password')
@@ -220,7 +223,7 @@ def web_login():
         return jsonify({"data":0})
 #用户修改密码
 @app.route('/resetpass',methods=['GET', 'POST'])
-def respass():
+def resetpass():
     userphone=request.values.get('userphone')
     resetpass=request.values.get('resetpass')
     print("路由获得手机号："+userphone+"\n")
