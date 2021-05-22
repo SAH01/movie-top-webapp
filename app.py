@@ -1,4 +1,8 @@
-from flask import request, jsonify, render_template
+import os
+from audioop import max
+
+import requests
+from flask import request, jsonify, render_template, session, make_response
 from flask import redirect
 from flask import Flask, url_for
 from scrapy.http import response
@@ -6,22 +10,46 @@ from scrapy.http import response
 import sql
 import pymysql
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(30)
 # 登录注册模块
-@app.route('/')
+@app.route('/',methods=['GET', 'POST', 'PUT'])
 def hello_world():
-    return render_template("login.html")
-@app.route('/regis')
+    try:
+        cookphone = request.cookies.get('cookphone')
+        cookpass = request.cookies.get('cookpass')
+        print("cookie账号密码:" + cookphone + "  " + cookpass)
+        if (len(cookpass) != 0 and len(cookphone) != 0):
+            res = sql.web_login(cookphone, cookpass)
+            print("查询结果："+str(res))
+            if (res == True):
+                session['userphone'] = cookphone
+                return redirect(url_for("hello_world_show"))
+            else:
+                return render_template("login.html")
+        else:
+            return render_template("login.html")
+    except:
+        print("cookie跳转异常！")
+        return render_template("login.html")
+@app.route('/regis',methods=['GET', 'POST', 'PUT'])
 def regis():
     return render_template("regitser.html")
-@app.route('/reset')
+@app.route('/reset',methods=['GET', 'POST', 'PUT'])
 def reset():
     return render_template("resetpass.html")
 # 登录注册模块
 #主页面
-@app.route('/show')
+@app.route('/show',methods=['GET', 'POST', 'PUT'])
 def hello_world_show():
     return render_template("show.html")
-
+#登录
+@app.route('/login',methods=['GET', 'POST', 'PUT'])
+def login():
+    return render_template("login.html")
+#修改个人资料
+@app.route('/reuserinfo',methods=['GET', 'POST', 'PUT'])
+def reuserinfo():
+    return render_template("revise.html")
 #查询部分
 #详情页面（web）查询
 @app.route('/movie_page')
@@ -137,6 +165,19 @@ def get_top():
     for item in temptoplist:
         dataRes.append({"topname":item[1],"topscore":item[8],"toptime":item[12],"toprank":item[0]})
     return jsonify({"data":dataRes})
+#顶部搜索页面跳转
+@app.route('/head_for_html')
+def head_for_html():
+    title_star=request.values.get("title_star")
+    return render_template("search_head.html",title_star=title_star)
+#顶部搜索查询
+@app.route('/query_head')
+def query_html():
+    title_star=request.values.get("title_star")
+    data=[]
+    for i in sql.find_by_qury_head(title_star):
+        data.append(i)
+    return jsonify({"data": data})
 #查询部分
 
 #用户部分
@@ -169,12 +210,33 @@ def android_like():
     print("收藏（app）成功")
     data=1
     return jsonify({"data": data})
+#用户（web）收藏添加
+@app.route('/web_like')
+def web_like():
+    usermovie=request.values.get("usermovie")
+    usertype=request.values.get("usertype")
+    scorenum=request.values.get("scorenum")
+    url=request.values.get("url")
+    score=request.values.get("score")
+    userphone=session['userphone']
+    data=sql.android_like(userphone, usermovie, usertype, scorenum, url, score);
+    print("收藏（web）")
+    print(data)
+    return jsonify({"data": data})
 #用户（app）收藏查询
 @app.route('/android_like_query')
 def android_like_query():
     userphone=request.values.get("userphone")
     usertype=request.values.get("usertype")
     data=sql.android_like_query(userphone,usertype)
+    return jsonify({"data": data})
+#用户（web）收藏查询
+@app.route('/web_like_query')
+def web_like_query():
+    # userphone=session['userphone']
+    usertype=request.values.get("usertype")
+    userphone="15722222222"
+    data = sql.android_like_query(userphone, usertype)
     return jsonify({"data": data})
 #用户（app）收藏删除
 @app.route('/android_delete')
@@ -211,11 +273,23 @@ def web_register():
     print(phoneNumber+" "+password+" "+email+" "+username)
     sql.web_register(phoneNumber,password,email,username)
     return redirect(url_for('hello_world_show'),code=302)
+#免密登录
+@app.route('/web_reme',methods=['GET', 'POST'])
+def web_reme():
+    print("这是cookie路由！")
+    userphone = request.values.get('userphone')
+    password = request.values.get('password')
+    print("存储cookie登录账号：" + userphone + "   " + "密码：" + password)
+    resp = make_response('储存cookie')
+    resp.set_cookie('cookphone', userphone, max_age=3600 * 24 * 15)
+    resp.set_cookie('cookpass', password, max_age=3600 * 24 * 15)
+    session['userphone'] = userphone
+    return resp
 @app.route('/web_login/',methods=['GET', 'POST'])
 def web_login():
     userphone = request.values.get('userphone')
     password=request.values.get('password')
-    print("账号："+userphone+"   "+"密码："+password)
+    print("登录账号："+userphone+"   "+"密码："+password)
     res=sql.web_login(userphone,password)
     if(res==True):
         return jsonify({"data":1})

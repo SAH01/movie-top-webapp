@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/show.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/table.css" type="text/css" />
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        <!--电影logo
+        <div class="logo">
+            <img src=".\img\logo.png" height="100px" width="100px" />
+        </div>
+        -->
+        <div class="title"><h1 id="title">树懒电影</h1></div>
+        <div class="container">
+            <form action="#" class="parent">
+                <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
+                <button id="search_head_btn">搜索</button>
+            </form>
+        </div>
+        <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
+        <!--头像超链接到个人信息页面-->
+        <script>
+        var head_picture=document.getElementById("head_picture")
+         head_picture.onclick=function(){
+            window.open("/user_pager",'_blank')
+         }
+        </script>
+    </div>
+    <div id="main">
+        <div class="cat"></div>
+        <div class="content">
+            <ul style="width: 100%;margin-left:300px; list-style: none" class="ul_show">
+            </ul>
+        </div>
+    </div>
+    <div id="title_star" d="{{title_star}}" style="display:none"></div>
+    <script>
+         var title_star= document.getElementById('title_star').getAttribute('d');
+         $.ajax({
+             url: "/query_head",
+             data: {
+                 title_star:title_star
+             },
+             success: function (data) {
+                 $(".ul_show").empty()
+                 if(data.data==""){
+                     alert("暂无数据！")
+                 }else{
+                     for (var i = 0; i < data.data.length; i++) {
+                         a="/movie_page?"+"title="+data.data[i][0]+"&scorenum="+data.data[i][7];
+                         appendUlBody ="<li> <p class='picture'>"
+                             +"<img src="+"'"+data.data[i][8]+"'"+" height='200px' width='140px' referrer='no-referrer'/></p>"
+                             +"<p class='instroction'>"
+                             +'<a href="'+a+'" style="text-decoration:none;" target="_blank" >'
+                             +data.data[i][0]+"</a><br><br>导演: "+leave_out(data.data[i][2])+"<br>主演: "+leave_out(data.data[i][1])+"<br>"
+                             +data.data[i][4]+"/"+data.data[i][5]+"<br>"+data.data[i][6]+"<br>"+data.data[i][3]+"分<br>"+data.data[i][7]+"人评价</p></li>"
+                         $(".ul_show").append(appendUlBody);
+                     }
+                 }
+             },
+             error: function (xhr, type, errorThrown) {
+             }
+         })
+         function leave_out(str){
+            if(str.length>=20)
+            {
+                str=str.substring(0,20)+"..."
+            }
+            return str
+        }
+    </script>
+</body>
+</html>

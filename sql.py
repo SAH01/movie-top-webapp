@@ -295,6 +295,16 @@ def get_top():
     dataRes=query(sql)
     # print(len(dataRes))
     return dataRes
+#搜索查询
+def find_by_qury_head(str):
+    sql = "select title,star,director,score,date_time,area," \
+          "type_movie,scorenum,img from moviebean " \
+          "where (title like"+" '%"+str+"%') or (star like"+" '%"+str+"%' )"
+    res = query(sql)
+    print("顶部搜索查询")
+    print(sql)
+    print(res)
+    return res
 # 查询函数
 
 #用户部分
@@ -324,6 +334,8 @@ def web_login(userphone, password):
     cursor = None
     conn = None
     res=[]
+    if(userphone==None or password==None):
+        return False
     conn, cursor = get_conn()
     sql = "select userphone,userpass from userdata where '"+userphone+"'=userphone and '"+password+"'=userpass "
     res=query(sql)

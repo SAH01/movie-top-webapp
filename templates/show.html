@@ -27,8 +27,8 @@
         <div class="title"><h1 id="title">树懒电影</h1></div>
         <div class="container">
             <form action="#" class="parent">
-                <input type="text" class="search" placeholder="电影名称，主演">
-                <input type="submit" name="" id=""  value="" class="btn">
+                <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
+                <button id="search_head_btn">搜索</button>
             </form>
         </div>
         <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
@@ -167,6 +167,11 @@
 </html>
 
 <script>
+    var head_btn=document.getElementById("search_head_btn");
+    head_btn.onclick=function (){
+        var head_input=document.getElementById("search_head").value;
+        window.open("/head_for_html"+"?title_star="+head_input,'_blank')
+    }
     //加载更多js
         var btn=document.getElementById("json_more");
         json_num=20;

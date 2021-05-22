@@ -33,13 +33,13 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
 	</head>
-
+<script src="../static/js/jquery-1.7.2.min.js"></script>
 	<body>
 		<div class="header">
 			<div class="bar">
 				<div class="w1200">
 					<span class="l">树懒电影<font>个人中心</font></span>
-					<span class="r"><a href="http://localhost:8080/MovieTop/templates/login.html?_ijt=vg63h452m3c4eakcipm91kf2jq"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
+					<span class="r"><a href="http://127.0.0.1:5000/login"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
 				</div>
 			</div>
 			<div class="user-info">
@@ -55,7 +55,7 @@
 						</p>
 					</div>
 					<div class="user-modify">
-						<a href="http://localhost:63342/MovieTop/templates/revise.html?_ijt=7un76ve0cq6gedopm6vvsf6vmq">修改资料></a>
+						<a href="http://127.0.0.1:5000/reuserinfo">修改资料></a>
 					</div>
 				</div>
 			</div>
@@ -103,11 +103,86 @@
 				</div>
 				<div class="container">
 					<div class="no-doc">
-						<img src="../static/img/no_doc.jpg"/>
-						<p>您还没有消息哦~</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 </html>
+<script>
+	function btn_1(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn1.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+        $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"在看"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".no-doc").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".no-doc").append(appendUlBody);
+                }else{
+
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    function btn_2(){
+         var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn2.style.background="#1a682b"
+        btn1.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+                $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"想看"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".no-doc").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".no-doc").append(appendUlBody);
+                }else{
+
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    function btn_3(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn3.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn1.style.background="#6abb5c"
+                $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"看过"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".no-doc").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".no-doc").append(appendUlBody);
+                }else{
+
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+</script>

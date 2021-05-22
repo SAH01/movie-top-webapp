@@ -50,6 +50,10 @@
             <div id="three" d="{{str_three}}" style="display:none"></div>
             <div id="four" d="{{str_four}}" style="display:none"></div>
             <div id="five" d="{{str_five}}" style="display:none"></div>
+            <div id="scorenum" d="{{scorenum}}" style="display:none"></div>
+            <div id="score" d="{{ score }}" style="display:none"></div>
+            <div id="usermovie" d="{{ title }}" style="display:none"></div>
+            <div id="url" d="{{ img }}" style="display:none"></div>
             <div class="score">
                 <p class="star">豆瓣评分：<font size="5" face="arial" color="black">{{ score }}</font></p>
                 <canvas width="250" height="20" id="D_myCanvas"></canvas>
@@ -96,6 +100,64 @@
 </body>
 </html>
 <script>
+     var  scorenum= document.getElementById('scorenum').getAttribute('d');
+    var  score= document.getElementById('score').getAttribute('d');
+    var  url= document.getElementById('url').getAttribute('d');
+    var  usermovie= document.getElementById('usermovie').getAttribute('d');
+    like_want.onclick=function (){
+        $.ajax({
+            url: "/web_like",
+            data: {
+                usertype:"想看",scorenum:scorenum,url:url,
+                score:score,usermovie:usermovie
+            },
+            success: function (data) {
+                if(data.data==1){
+                    alert("收藏成功")
+                }else{
+                    alert("收藏失败")
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    like_on.onclick=function (){
+        $.ajax({
+            url: "/web_like",
+            data: {
+                usertype:"在看",scorenum:scorenum,url:url,
+                score:score,usermovie:usermovie
+            },
+            success: function (data) {
+                if(data.data==1){
+                    alert("收藏成功")
+                }else{
+                    alert("收藏失败")
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    like_have.onclick=function (){
+        $.ajax({
+            url: "/web_like",
+            data: {
+                usertype:"看过",scorenum:scorenum,url:url,
+                score:score,usermovie:usermovie
+            },
+            success: function (data) {
+                if(data.data==1){
+                    alert("收藏成功")
+                }else{
+                    alert("收藏失败")
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
     <!--评分js -->
     var one = document.getElementById('one').getAttribute('d');
                 var two = document.getElementById('two').getAttribute('d');

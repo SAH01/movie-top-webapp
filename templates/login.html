@@ -27,7 +27,7 @@
                         </div>
                         <div class="div-input">
                             <div>
-                                <input type="checkbox"  name="remember" id="remember">
+                                <input type="checkbox" value=“1” class=“remeber” onclick="onClickHander(this)">
                                 <label>记住密码</label>
                             </div>
                         </div> 
@@ -41,27 +41,46 @@
 </body>
 </html>
 <script>
-    function login_(){
-    var loginflag=1
-    var userphone=document.getElementById("userphone").value
-    var password=document.getElementById("password").value
-    $.ajax({
-            url: "/web_login",
-            data: {
-                userphone:userphone,password:password
-            },
-            success: function (data) {
-                if (data.data==1)
-                    window.open("http://127.0.0.1:5000/show","_self")
-                else
-                {
-                    alert("账号或密码错误！")
+    function onClickHander(obj) {
+        if (obj.checked) {
+            var userphone=document.getElementById("userphone").value
+            var password=document.getElementById("password").value
+            $.ajax({
+                url: "/web_reme",
+                data: {
+                    userphone:userphone,password:password
+                },
+                success: function (data) {
+
+                },
+                error: function (xhr, type, errorThrown) {
+
                 }
-            },
-            error: function (xhr, type, errorThrown) {
+            })
+        }
+    }
+    function login_(){
+        var loginflag=1
+        var userphone=document.getElementById("userphone").value
+        var password=document.getElementById("password").value
+        var rem=document.getElementsByName("remeber")
+        var cb=0
+        $.ajax({
+                url: "/web_login",
+                data: {
+                    userphone:userphone,password:password
+                },
+                success: function (data) {
+                    if (data.data==1)
+                        window.open("http://127.0.0.1:5000/show","_self")
+                    else
+                    {
+                        alert("账号或密码错误！")
+                    }
+                },
+                error: function (xhr, type, errorThrown) {
 
-            }
-    })
-}
-
+                }
+        })
+    }
 </script>
