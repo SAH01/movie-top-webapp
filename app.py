@@ -286,8 +286,8 @@ def web_login():
     if(res==True):
         session['userphone'] = userphone
         if(cb=="1"):
-            print("开始存储cookie登录账号：" + userphone + "   " + "密码：" + password)
-            resp = make_response('储存cookie')
+            print("开始存储cookies登录账号：" + userphone + "   " + "密码：" + password)
+            resp = make_response('储存cookies')
             resp.set_cookie('cookphone', userphone, max_age=3600 * 24 * 15)
             resp.set_cookie('cookpass', password, max_age=3600 * 24 * 15)
             print("登录成功且用户选择记住密码，返回response")
@@ -299,11 +299,16 @@ def web_login():
         print("登录失败   返回 0 状态码")
         return jsonify({"data":0})  #登录失败   返回 0 状态码
 #用户退出清理cookie
-@app.route('/clean_cookie',methods=['GET', 'POST'])
-def clean_cookie():
-    resp = Response('cookies的删除')
-    resp.delete_cookie('username')  # cookies只有在响应返回的时候才能删除
-    return resp
+@app.route('/clean_cookies',methods=['GET', 'POST'])
+def clean_cookies():
+    try:
+        resp = Response('cookies的删除')
+        resp.delete_cookie('cookphone')  # cookies只有在响应返回的时候才能删除
+        resp.delete_cookie('cookpass')  # cookies只有在响应返回的时候才能删除
+        print("删除cookies成功！")
+        return resp                 #成功删除cookies 返回相响应
+    except:
+        return jsonify({"data":0})  #删除cookies失败   返回 0 状态码
 #用户修改密码
 @app.route('/resetpass',methods=['GET', 'POST'])
 def resetpass():

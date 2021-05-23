@@ -39,7 +39,7 @@
 			<div class="bar">
 				<div class="w1200">
 					<span class="l">树懒电影<font>个人中心</font></span>
-					<span class="r"><a href="http://127.0.0.1:5000/login"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
+					<span class="r"><a id="clean_cookies" onclick="clean_cookies()"  href="http://127.0.0.1:5000/login"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
 				</div>
 			</div>
 			<div class="user-info">
@@ -185,4 +185,16 @@
             }
         })
     }
+    //删除cookies操作
+	function clean_cookies(){
+		$.ajax({
+			url:"/clean_cookies",
+			data:{},
+			success:function (data){
+				if(data.data!=0){
+					alert("退出登录成功！")
+				}
+			}
+		})
+	}
 </script>
