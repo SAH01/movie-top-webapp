@@ -2,7 +2,7 @@ import os
 from audioop import max
 
 import requests
-from flask import request, jsonify, render_template, session, make_response
+from flask import request, jsonify, render_template, session, make_response, Response
 from flask import redirect
 from flask import Flask, url_for
 from scrapy.http import response
@@ -201,14 +201,14 @@ def android_query_user():
 @app.route('/android_like')
 def android_like():
     userphone = request.values.get("userphone")
-    usermovie=request.values.get("usermovie")
-    usertype=request.values.get("usertype")
-    scorenum=request.values.get("scorenum")
-    url=request.values.get("url")
-    score=request.values.get("score")
-    sql.android_like(userphone,usermovie,usertype,scorenum,url,score);
-    print("收藏（app）成功")
-    data=1
+    usermovie = request.values.get("usermovie")
+    usertype = request.values.get("usertype")
+    scorenum = request.values.get("scorenum")
+    url = request.values.get("url")
+    score = request.values.get("score")
+    data = sql.android_like(userphone, usermovie, usertype, scorenum, url, score);
+    print("收藏（app）")
+    print(data)
     return jsonify({"data": data})
 #用户（web）收藏添加
 @app.route('/web_like')
@@ -298,6 +298,12 @@ def web_login():
     else:
         print("登录失败   返回 0 状态码")
         return jsonify({"data":0})  #登录失败   返回 0 状态码
+#用户退出清理cookie
+@app.route('/clean_cookie',methods=['GET', 'POST'])
+def clean_cookie():
+    resp = Response('cookies的删除')
+    resp.delete_cookie('username')  # cookies只有在响应返回的时候才能删除
+    return resp
 #用户修改密码
 @app.route('/resetpass',methods=['GET', 'POST'])
 def resetpass():

@@ -61,9 +61,9 @@
             <script>
             </script>
             <div class="collect">
-                <button class="button">想看</button>
-                <button class="button">在看</button>
-                <button class="button">看过</button>
+                <button class="button" id="like_want">想看</button>
+                <button class="button" id="like_on">在看</button>
+                <button class="button" id="like_have">看过</button>
             </div>
             <div class="story">
                 <div class="p1"><br>电影剧情概要  · · · · · ·</div>
@@ -100,7 +100,10 @@
 </body>
 </html>
 <script>
-     var  scorenum= document.getElementById('scorenum').getAttribute('d');
+    var like_want=document.getElementById("like_want");
+    var like_on=document.getElementById("like_on");
+    var like_have=document.getElementById("like_have");
+    var  scorenum= document.getElementById('scorenum').getAttribute('d');
     var  score= document.getElementById('score').getAttribute('d');
     var  url= document.getElementById('url').getAttribute('d');
     var  usermovie= document.getElementById('usermovie').getAttribute('d');

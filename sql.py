@@ -367,11 +367,16 @@ def android_like(userphone,usermovie,usertyppe,scorenum,url,score):
     cursor = None
     conn = None
     conn, cursor = get_conn()
-    sql="insert into userlike(userphone,usermovie,usertype,scorenum,url,score) values(%s,%s,%s,%s,%s,%s)"
-    cursor.execute(sql,[userphone,usermovie,usertyppe,scorenum,url,score])
-    conn.commit()
-    close_conn(conn,cursor)
+    try:
+        sql = "insert into userlike(userphone,usermovie,usertype,scorenum,url,score) values(%s,%s,%s,%s,%s,%s)"
+        cursor.execute(sql, [userphone, usermovie, usertyppe, scorenum, url, score])
+        conn.commit()
+        close_conn(conn, cursor)
+    except:
+        traceback.print_exc()
+        return 0
     print("收藏（app）成功")
+    return 1
 #用户（app）收藏查询
 def android_like_query(userphone,usertype):
     sql="select userphone,usermovie,usertype,scorenum,url,score from userlike where userphone='"+userphone+"' and usertype='"+usertype+"'"
