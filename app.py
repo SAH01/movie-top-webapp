@@ -274,27 +274,30 @@ def web_register():
     sql.web_register(phoneNumber,password,email,username)
     return redirect(url_for('hello_world_show'),code=302)
 #免密登录
-@app.route('/web_reme',methods=['GET', 'POST'])
-def web_reme():
-    print("这里是存储cookie路由！")
-    userphone = request.values.get('userphone')
-    password = request.values.get('password')
-    print("开始存储cookie登录账号：" + userphone + "   " + "密码：" + password)
-    resp = make_response('储存cookie')
-    resp.set_cookie('cookphone', userphone, max_age=3600 * 24 * 15)
-    resp.set_cookie('cookpass', password, max_age=3600 * 24 * 15)
-    session['userphone'] = userphone
-    return resp
 @app.route('/web_login/',methods=['GET', 'POST'])
 def web_login():
     userphone = request.values.get('userphone')
     password=request.values.get('password')
+    cb=request.values.get('cb')
+    print("是否记住密码： "+cb)            #cb的返回值类型是 str 字符串
+    # print(type(cb))
     print("登录账号："+userphone+"   "+"密码："+password)
     res=sql.web_login(userphone,password)
     if(res==True):
-        return jsonify({"data":1})
+        session['userphone'] = userphone
+        if(cb=="1"):
+            print("开始存储cookie登录账号：" + userphone + "   " + "密码：" + password)
+            resp = make_response('储存cookie')
+            resp.set_cookie('cookphone', userphone, max_age=3600 * 24 * 15)
+            resp.set_cookie('cookpass', password, max_age=3600 * 24 * 15)
+            print("登录成功且用户选择记住密码，返回response")
+            return resp                   #登录成功且用户选择记住密码，返回response
+        else:
+            print("登录成功 返回 1 状态码")
+            return jsonify({"data": 1})  # 登录成功 返回 1 状态码
     else:
-        return jsonify({"data":0})
+        print("登录失败   返回 0 状态码")
+        return jsonify({"data":0})  #登录失败   返回 0 状态码
 #用户修改密码
 @app.route('/resetpass',methods=['GET', 'POST'])
 def resetpass():

@@ -41,45 +41,32 @@
 </body>
 </html>
 <script>
+    var cb=0
     function onClickHander(obj) {
-        var userphone=document.getElementById("userphone").value
-        var password=document.getElementById("password").value
-        if ((obj.checked)&&(userphone.length!=0)&&(password.length!=0)) {
-            $.ajax({
-                url: "/web_reme",
-                data: {
-                    userphone:userphone,password:password
-                },
-                success: function (data) {
-                    print("cookies---ajax请求成功！")
-                },
-                error: function (xhr, type, errorThrown) {
-
-                }
-            })
-        }else if((userphone.length==0)||(password.length==0)){
-            obj.checked=false
-            alert("请先将账号密码填写完整！")
+        if(obj.checked==true){
+            cb=1
+            // alert(cb)
+        }else{
+            cb=0
+            // alert(cb)
         }
     }
     function login_(){
-        var loginflag=1
         var userphone=document.getElementById("userphone").value
         var password=document.getElementById("password").value
-        var rem=document.getElementsByName("remeber")
-        var cb=0
+        // alert(cb)
         $.ajax({
                 url: "/web_login",
                 data: {
-                    userphone:userphone,password:password
+                    userphone:userphone,password:password,cb:cb
                 },
                 success: function (data) {
-                    if (data.data==1)
-                        window.open("http://127.0.0.1:5000/show","_self")
-                    else
-                    {
+                    //正常验证失败弹窗
+                    if (data.data == 0)
                         alert("账号或密码错误！")
-                    }
+                    //验证成功，返回response
+                    if (data.data != 0)
+                        window.open("http://127.0.0.1:5000/show","_self")
                 },
                 error: function (xhr, type, errorThrown) {
                     print("登录js，验证账号密码ajax请求失败！")

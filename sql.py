@@ -329,7 +329,7 @@ def web_register(phone, password, email , name):
     close_conn(conn, cursor)
     print("注册成功（WEB）")
 
-# 用户（web）登陆验证
+# 用户（web）登录验证
 def web_login(userphone, password):
     cursor = None
     conn = None
