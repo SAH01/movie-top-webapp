@@ -42,9 +42,9 @@
 </html>
 <script>
     function onClickHander(obj) {
-        if (obj.checked) {
-            var userphone=document.getElementById("userphone").value
-            var password=document.getElementById("password").value
+        var userphone=document.getElementById("userphone").value
+        var password=document.getElementById("password").value
+        if ((obj.checked)&&(userphone.length!=0)&&(password.length!=0)) {
             $.ajax({
                 url: "/web_reme",
                 data: {
@@ -57,6 +57,9 @@
 
                 }
             })
+        }else{
+            obj.checked=false
+            alert("请先将账号密码填写完整！")
         }
     }
     function login_(){
