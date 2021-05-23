@@ -17,10 +17,10 @@ def hello_world():
     try:
         cookphone = request.cookies.get('cookphone')
         cookpass = request.cookies.get('cookpass')
-        print("cookie账号密码:" + cookphone + "  " + cookpass)
+        print("获取到的cookie账号密码:" + cookphone + "  " + cookpass)
         if (len(cookpass) != 0 and len(cookphone) != 0):
             res = sql.web_login(cookphone, cookpass)
-            print("查询结果："+str(res))
+            print("验证获取到的cookie账号密码："+str(res))
             if (res == True):
                 session['userphone'] = cookphone
                 return redirect(url_for("hello_world_show"))
@@ -29,7 +29,7 @@ def hello_world():
         else:
             return render_template("login.html")
     except:
-        print("cookie跳转异常！")
+        print("cookie验证跳转异常！")
         return render_template("login.html")
 @app.route('/regis',methods=['GET', 'POST', 'PUT'])
 def regis():
@@ -269,17 +269,17 @@ def web_register():
     password =request.form.get('password')
     email = request.form.get('email')
     username = request.form.get('username')
-    print("这是网页注册路由！")
+    print("这里是网页注册路由：")
     print(phoneNumber+" "+password+" "+email+" "+username)
     sql.web_register(phoneNumber,password,email,username)
     return redirect(url_for('hello_world_show'),code=302)
 #免密登录
 @app.route('/web_reme',methods=['GET', 'POST'])
 def web_reme():
-    print("这是cookie路由！")
+    print("这里是存储cookie路由！")
     userphone = request.values.get('userphone')
     password = request.values.get('password')
-    print("存储cookie登录账号：" + userphone + "   " + "密码：" + password)
+    print("开始存储cookie登录账号：" + userphone + "   " + "密码：" + password)
     resp = make_response('储存cookie')
     resp.set_cookie('cookphone', userphone, max_age=3600 * 24 * 15)
     resp.set_cookie('cookpass', password, max_age=3600 * 24 * 15)
