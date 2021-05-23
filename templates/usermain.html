@@ -33,13 +33,13 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
 	</head>
-<script src="../static/js/jquery-1.7.2.min.js"></script>
+
 	<body>
 		<div class="header">
 			<div class="bar">
 				<div class="w1200">
 					<span class="l">树懒电影<font>个人中心</font></span>
-					<span class="r"><a id="clean_cookies" onclick="clean_cookies()"  href="http://127.0.0.1:5000/login"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
+					<span class="r"><a href="http://localhost:8080/MovieTop/templates/login.html?_ijt=vg63h452m3c4eakcipm91kf2jq"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
 				</div>
 			</div>
 			<div class="user-info">
@@ -55,7 +55,7 @@
 						</p>
 					</div>
 					<div class="user-modify">
-						<a href="http://127.0.0.1:5000/reuserinfo">修改资料></a>
+						<a href="http://localhost:63342/MovieTop/templates/revise.html?_ijt=7un76ve0cq6gedopm6vvsf6vmq">修改资料></a>
 					</div>
 				</div>
 			</div>
@@ -101,100 +101,76 @@
                     <input id="btn2" type="button" value="想看" onclick="btn_2()">
                     <input id="btn3" type="button" value="看过" onclick="btn_3()">
 				</div>
-				<div class="container">
+				<div class="container" style=" height:400px;overflow:scroll">
 					<div class="no-doc">
+						<div class="picture_left"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
+                        <p class="instroction_left">
+                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
+                            <br>
+                            导演: 弗兰克·德拉邦特  <br>
+                            主演: 蒂姆·罗宾斯 <br>
+                            1994 / 美国 <br>
+                            犯罪 剧情<br>
+                            1000000人评价
+                       </p>
+						<div class="picture_right"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
+                        <p class="instroction_right">
+                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
+                            <br>
+                            导演: 弗兰克·德拉邦特  <br>
+                            主演: 蒂姆·罗宾斯 <br>
+                            1994 / 美国 <br>
+                            犯罪 剧情<br>
+                            1000000人评价
+                       </p>
+					</div>
+                    <div class="no-doc">
+						<div class="picture_left"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
+                        <p class="instroction_left">
+                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
+                            <br>
+                            导演: 弗兰克·德拉邦特  <br>
+                            主演: 蒂姆·罗宾斯 <br>
+                            1994 / 美国 <br>
+                            犯罪 剧情<br>
+                            1000000人评价
+                       </p>
+						<div class="picture_right"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
+                        <p class="instroction_right">
+                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
+                            <br>
+                            导演: 弗兰克·德拉邦特  <br>
+                            主演: 蒂姆·罗宾斯 <br>
+                            1994 / 美国 <br>
+                            犯罪 剧情<br>
+                            1000000人评价
+                       </p>
+					</div>
+                    <div class="no-doc">
+						<div class="picture_left"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
+                        <p class="instroction_left">
+                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
+                            <br>
+                            导演: 弗兰克·德拉邦特  <br>
+                            主演: 蒂姆·罗宾斯 <br>
+                            1994 / 美国 <br>
+                            犯罪 剧情<br>
+                            1000000人评价
+                       </p>
+						<div class="picture_right"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
+                        <p class="instroction_right">
+                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
+                            <br>
+                            导演: 弗兰克·德拉邦特  <br>
+                            主演: 蒂姆·罗宾斯 <br>
+                            1994 / 美国 <br>
+                            犯罪 剧情<br>
+                            1000000人评价
+                       </p>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</body>
 </html>
-<script>
-	function btn_1(){
-        var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn1.style.background="#1a682b"
-        btn2.style.background="#6abb5c"
-        btn3.style.background="#6abb5c"
-        $.ajax({
-            url: "/web_like_query",
-            data: {
-                usertype:"在看"
-            },
-            success: function (data) {
-                if(data.data==""){
-                    $(".no-doc").empty()
-                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
-                    $(".no-doc").append(appendUlBody);
-                }else{
-
-                }
-            },
-            error: function (xhr, type, errorThrown) {
-            }
-        })
-    }
-    function btn_2(){
-         var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn2.style.background="#1a682b"
-        btn1.style.background="#6abb5c"
-        btn3.style.background="#6abb5c"
-                $.ajax({
-            url: "/web_like_query",
-            data: {
-                usertype:"想看"
-            },
-            success: function (data) {
-                if(data.data==""){
-                    $(".no-doc").empty()
-                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
-                    $(".no-doc").append(appendUlBody);
-                }else{
-
-                }
-            },
-            error: function (xhr, type, errorThrown) {
-            }
-        })
-    }
-    function btn_3(){
-        var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn3.style.background="#1a682b"
-        btn2.style.background="#6abb5c"
-        btn1.style.background="#6abb5c"
-                $.ajax({
-            url: "/web_like_query",
-            data: {
-                usertype:"看过"
-            },
-            success: function (data) {
-                if(data.data==""){
-                    $(".no-doc").empty()
-                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
-                    $(".no-doc").append(appendUlBody);
-                }else{
-
-                }
-            },
-            error: function (xhr, type, errorThrown) {
-            }
-        })
-    }
-    //删除cookies操作
-	function clean_cookies(){
-		$.ajax({
-			url:"/clean_cookies",
-			data:{},
-			success:function (data){
-				if(data.data!=0){
-					alert("退出登录成功！")
-				}
-			}
-		})
-	}
-</script>

@@ -54,6 +54,7 @@ a{
 .header .user-info{
     height: 100px;
     width: 100%;
+    background: url(../images/user_info_bg.jpg) center center no-repeat;
     background-size: cover;
 }
 .header .user-info .user-headface{
@@ -155,7 +156,7 @@ a{
     width: 100%;
     height: auto;
     overflow: hidden;
-    background: #fff;
+    background: white;
 }
 .main .right .container .no-doc{
     width: 100%;
@@ -166,4 +167,42 @@ a{
 }
 .main .right .container .no-doc img{
     padding-top: 80px;
+}
+.picture_left {
+    float:left;
+    width:15%;
+    height:300px;
+    margin-left: 20px;
+    margin-top: -30px;
+    /*background-color: pink;*/
+}
+.instroction_left {
+    float:left;
+    width: 20%;
+    height: 80px;
+    margin-left: 0px;
+    margin-top: 45px;
+    font-family: myfont;
+    text-align: left;
+    /*background-color: pink;*/
+    line-height: 27px;
+}
+.picture_right {
+    float:left;
+    width:15%;
+    height:300px;
+    margin-left: 120px;
+    margin-top: -30px;
+    /*background-color: pink;*/
+}
+.instroction_right {
+    float:left;
+    width: 20%;
+    height: 80px;
+    margin-left: 0px;
+    margin-top: 45px;
+    font-family: myfont;
+    text-align: left;
+    /*background-color: pink;*/
+    line-height: 27px;
 }
