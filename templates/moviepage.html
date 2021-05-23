@@ -17,10 +17,8 @@
     <div id="header">
         <div class="title"><h1 id="title">树懒电影</h1></div>
         <div class="container">
-            <form action="https://www.baidu.com/?tn=62095104_19_oem_dg" class="parent">
-                <input type="text" class="search" placeholder="电影名称，主演">
-                <input type="submit" name="" id="" value="搜索" class="btn">
-            </form>
+            <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
+            <button id="search_head_btn" class="btn_search"></button>
         </div>
         <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
         <script>
@@ -100,6 +98,11 @@
 </body>
 </html>
 <script>
+    var head_btn=document.getElementById("search_head_btn");
+    head_btn.onclick=function (){
+        var head_input=document.getElementById("search_head").value;
+        window.open("/head_for_html"+"?title_star="+head_input,'_blank')
+    }
     var like_want=document.getElementById("like_want");
     var like_on=document.getElementById("like_on");
     var like_have=document.getElementById("like_have");

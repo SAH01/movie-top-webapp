@@ -235,7 +235,7 @@ def android_like_query():
 def web_like_query():
     # userphone=session['userphone']
     usertype=request.values.get("usertype")
-    userphone="15722222222"
+    userphone=session['userphone']
     data = sql.android_like_query(userphone, usertype)
     return jsonify({"data": data})
 #用户（app）收藏删除
@@ -260,7 +260,9 @@ def android_user_like_trans():
 #用户部分
 @app.route('/user_pager')
 def user_pager():
-    return render_template("usermain.html")
+    str = [];
+    str = sql.android_query(session['userphone'])
+    return render_template("usermain.html", userdata=str)
 #用户部分
 #网页登陆注册部分
 @app.route('/web_register', methods=['GET', 'POST'])

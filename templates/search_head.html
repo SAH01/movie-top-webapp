@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../static/css/show.css">
+    <link rel="stylesheet" href="../static/css/search_head.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="../static/css/table.css" type="text/css" />
     <script src="../static/js/jquery.min.js"></script>
@@ -18,10 +20,8 @@
         -->
         <div class="title"><h1 id="title">树懒电影</h1></div>
         <div class="container">
-            <form action="#" class="parent">
                 <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
-                <button id="search_head_btn">搜索</button>
-            </form>
+                <button id="search_head_btn" class="btn_search"></button>
         </div>
         <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
         <!--头像超链接到个人信息页面-->
@@ -41,6 +41,11 @@
     </div>
     <div id="title_star" d="{{title_star}}" style="display:none"></div>
     <script>
+        var head_btn=document.getElementById("search_head_btn");
+        head_btn.onclick=function (){
+            var head_input=document.getElementById("search_head").value;
+            window.open("/head_for_html"+"?title_star="+head_input)
+        }
          var title_star= document.getElementById('title_star').getAttribute('d');
          $.ajax({
              url: "/query_head",

@@ -131,24 +131,25 @@
     height: 40px;
     border-radius: 18px;
     outline: none;
-    border: 1px solid #ccc;
+    border: 1px solid ;
     padding-left: 20px;
     position: absolute;
     margin-top: 33px;
 }
-.btn {
+.btn_search {
     height: 35px;
     width: 35px;
     position: absolute;
-    background: url("../img/search.png") no-repeat -2px -99px;
+    background-image: url("../img/search.png");
+    background-color: transparent;
+    background-size: 90% 90%;
     top: 6px;
     left: 285px;
     border: none;
     outline: none;
     cursor: pointer;
-    margin-top: 30px;
-    /*background-color: black;*/
-    margin-left: 240px;
+    margin-top: 40px;
+    margin-left: 40%;
 }
 /**/
 

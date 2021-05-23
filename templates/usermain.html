@@ -1,39 +1,14 @@
 <!DOCTYPE html>
-<script>
-    function btn_1(){
-        var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn1.style.background="#1a682b"
-        btn2.style.background="#6abb5c"
-        btn3.style.background="#6abb5c"
-    }
-        function btn_2(){
-         var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn2.style.background="#1a682b"
-        btn1.style.background="#6abb5c"
-        btn3.style.background="#6abb5c"
-    }
-        function btn_3(){
-        var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn3.style.background="#1a682b"
-        btn2.style.background="#6abb5c"
-        btn1.style.background="#6abb5c"
-    }
-</script>
 <html>
 
 	<head>
+		<meta name="referrer" content="no-referrer">
 		<meta charset="UTF-8">
 		<title>个人中心</title>
 		<link rel="stylesheet" type="text/css" href="../static/css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
 	</head>
-
+	<script src="../static/js/jquery-1.7.2.min.js"></script>
 	<body>
 		<div class="header">
 			<div class="bar">
@@ -48,11 +23,7 @@
 						<img src="../static/img/userpic.jpg"/>
 					</div>
 					<div class="user-account">
-						<p class="tip">你好，XXX</p>
-						<p class="account">
-							<span>昵称：章英杰</span>
-							<span>用户ID：2931890089</span>
-						</p>
+						<p class="tip">你好，{{ userdata[3]}}</p>
 					</div>
 					<div class="user-modify">
 						<a href="http://localhost:63342/MovieTop/templates/revise.html?_ijt=7un76ve0cq6gedopm6vvsf6vmq">修改资料></a>
@@ -101,72 +72,8 @@
                     <input id="btn2" type="button" value="想看" onclick="btn_2()">
                     <input id="btn3" type="button" value="看过" onclick="btn_3()">
 				</div>
-				<div class="container" style=" height:400px;overflow:scroll">
+				<div class="container" style=" height:600px;overflow:scroll">
 					<div class="no-doc">
-						<div class="picture_left"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
-                        <p class="instroction_left">
-                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
-                            <br>
-                            导演: 弗兰克·德拉邦特  <br>
-                            主演: 蒂姆·罗宾斯 <br>
-                            1994 / 美国 <br>
-                            犯罪 剧情<br>
-                            1000000人评价
-                       </p>
-						<div class="picture_right"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
-                        <p class="instroction_right">
-                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
-                            <br>
-                            导演: 弗兰克·德拉邦特  <br>
-                            主演: 蒂姆·罗宾斯 <br>
-                            1994 / 美国 <br>
-                            犯罪 剧情<br>
-                            1000000人评价
-                       </p>
-					</div>
-                    <div class="no-doc">
-						<div class="picture_left"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
-                        <p class="instroction_left">
-                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
-                            <br>
-                            导演: 弗兰克·德拉邦特  <br>
-                            主演: 蒂姆·罗宾斯 <br>
-                            1994 / 美国 <br>
-                            犯罪 剧情<br>
-                            1000000人评价
-                       </p>
-						<div class="picture_right"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
-                        <p class="instroction_right">
-                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
-                            <br>
-                            导演: 弗兰克·德拉邦特  <br>
-                            主演: 蒂姆·罗宾斯 <br>
-                            1994 / 美国 <br>
-                            犯罪 剧情<br>
-                            1000000人评价
-                       </p>
-					</div>
-                    <div class="no-doc">
-						<div class="picture_left"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
-                        <p class="instroction_left">
-                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
-                            <br>
-                            导演: 弗兰克·德拉邦特  <br>
-                            主演: 蒂姆·罗宾斯 <br>
-                            1994 / 美国 <br>
-                            犯罪 剧情<br>
-                            1000000人评价
-                       </p>
-						<div class="picture_right"><img src="../static/img/qq.png" height='230px' width='100px' /></div>
-                        <p class="instroction_right">
-                            <a href="https://movie.douban.com/subject/1292052/" style="text-decoration:none;">肖申克的救赎</a>
-                            <br>
-                            导演: 弗兰克·德拉邦特  <br>
-                            主演: 蒂姆·罗宾斯 <br>
-                            1994 / 美国 <br>
-                            犯罪 剧情<br>
-                            1000000人评价
-                       </p>
 					</div>
 				</div>
 
@@ -174,3 +81,104 @@
 		</div>
 	</body>
 </html>
+<script>
+	function btn_1(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn1.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+        $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"在看"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".no-doc").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".no-doc").append(appendUlBody);
+                }else{
+                    $(".no-doc").empty();
+                     for (var i = 0; i < data.data.length; i++) {
+                        a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
+                        appendUlBody ='<div style="float:left; clear:right; width:220px">'+
+                            '<img src="'+data.data[i][4]+'" height="260px" width="140px" />'+
+                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><h2>'+data.data[i][1]+'</h2></a>'+
+                            '<h3>'+data.data[i][5]+'分</h3> </p></div>'
+                        $(".no-doc").append(appendUlBody);
+                    }
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    function btn_2(){
+         var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn2.style.background="#1a682b"
+        btn1.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+                $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"想看"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".no-doc").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".no-doc").append(appendUlBody);
+                }else{
+                    $(".no-doc").empty();
+                     for (var i = 0; i < data.data.length; i++) {
+                        a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
+                        appendUlBody ='<div style="float:left; clear:right; width:220px">'+
+                            '<img src="'+data.data[i][4]+'" height="240px" width="140px" />'+
+                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><h2>'+data.data[i][1]+'</h2></a>'+
+                            '<h3>'+data.data[i][5]+'分</h3> </p></div>'
+                        $(".no-doc").append(appendUlBody);
+                    }
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    function btn_3(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn3.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn1.style.background="#6abb5c"
+                $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"看过"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".no-doc").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".no-doc").append(appendUlBody);
+                }else{
+                    $(".no-doc").empty();
+                     for (var i = 0; i < data.data.length; i++) {
+                        a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
+                        appendUlBody ='<div style="float:left; clear:right; width:220px">'+
+                            '<img src="'+data.data[i][4]+'" height="240px" width="140px" />'+
+                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><h2>'+data.data[i][1]+'</h2></a>'+
+                            '<h3>'+data.data[i][5]+'分</h3> </p></div>'
+                        $(".no-doc").append(appendUlBody);
+                    }
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+</script>

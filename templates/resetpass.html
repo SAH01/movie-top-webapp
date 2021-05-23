@@ -5,29 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>树懒电影---重置您的密码</title>
-    <style type="text/css">
-        #resetform{
-            margin-top: 350px;
-            margin-left: 750px;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/resetpass.css">
 </head>
 <body>
     <form method="post" id="resetform">
-        <tr>
-            <td><input type="text" id="userphone" value="" placeholder="输入您的手机号码"></td>
-        </tr><br>
-        <tr>
-            <td><input type="password" id="resetpass1" value="" placeholder="输入您的新密码"></td>
-        </tr><br>
-        <tr>
-            <td><input type="password" id="resetpass2" value="" placeholder="再次输入您的新密码"></td>
-        </tr><br>
-        <tr>
-            <td><input type="reset" value="清空"></td>
-            <td><input type="button" id="resetbtn" onclick="resetpass()" value="提交"></td>
-        </tr>
-    </form>
+    <div class="from">
+    <img class="bgc" src="../static/img/9.jpg" alt="">
+    <div class="submit">
+        <span class="form_title">重置密码</span>
+        <div class="form_input">
+            <span>手机号码：</span>
+            <input class="inputs" type="text" id="userphone" value="" placeholder="输入您的手机号码">
+        </div>
+        <div class="form_input">
+            <span>新密码:</span>
+            <input class="inputs" type="password" id="resetpass1" value="" placeholder="输入您的新密码">
+        </div>
+        <div class="form_input">
+            <span>再次输入:</span>
+            <input class="inputs" type="password" id="resetpass2" value="" placeholder="再次输入您的新密码">
+        </div>
+        <div class="btn_submit">
+            <input type="reset" class="btn" value="清空">
+            <input type="button" class="home_href" id="resetbtn" onclick="resetpass()" value="提交">
+        </div>
+    </div>
+</div>
+        </form>
 </body>
 </html>
 <script src="../static/js/jquery.min.js"></script>
