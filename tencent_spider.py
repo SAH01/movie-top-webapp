@@ -34,7 +34,6 @@ def close_conn(conn, cursor):
     if conn:
         conn.close()
     return 1
-
 #爬取腾讯视频电影数据
 def get_ten():
     conn,cursor=get_conn()
