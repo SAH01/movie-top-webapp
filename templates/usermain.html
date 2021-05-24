@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta name="referrer" content="no-referrer">
 		<meta charset="UTF-8">
@@ -14,7 +13,7 @@
 			<div class="bar">
 				<div class="w1200">
 					<span class="l">树懒电影<font>个人中心</font></span>
-					<span class="r"><a href="http://localhost:8080/MovieTop/templates/login.html?_ijt=vg63h452m3c4eakcipm91kf2jq"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
+					<span class="r"><a id="clean_cookies" onclick="clean_cookies()" href="http://127.0.0.1:5000/login"><i class="icon iconfont icon-dianyuan"></i>退出</a></span>
 				</div>
 			</div>
 			<div class="user-info">
@@ -26,7 +25,7 @@
 						<p class="tip">你好，{{ userdata[3]}}</p>
 					</div>
 					<div class="user-modify">
-						<a href="http://localhost:63342/MovieTop/templates/revise.html?_ijt=7un76ve0cq6gedopm6vvsf6vmq">修改资料></a>
+						<a href="http://127.0.0.1:5000/reuserinfo">修改资料></a>
 					</div>
 				</div>
 			</div>
@@ -181,4 +180,16 @@
             }
         })
     }
+	//用户退出发起清除cookies请求
+	function clean_cookies(){
+		$.ajax({
+			url:"/clean_cookies",
+			data:{},
+			success: function (data){
+				if(dada.data==0){
+					print("删除cookies失败！")
+				}
+			}
+		})
+	}
 </script>
