@@ -316,13 +316,13 @@ def user_img():
     #接收图片并生成保存路径
     img=request.files.get("file")
     img_name = img.filename
-    file_path = "D:\\flaskProjects\\MovieTop9\\MovieTop\\static\\userimg\\"+img_name
+    file_path = "D:\\All_Python\\MovieTop10\\MovieTop\\static\\userimg\\"+img_name
     # 删除原头像
     userphone = session['userphone']
     userdata = sql.android_query(userphone)
     if (userdata[4] != "" and userdata != "../static/userimg/0000.jpg"):
         str_s = userdata[4].split('/')
-        path = "D:\\flaskProjects\\MovieTop9\\MovieTop\\static\\userimg\\" + str_s[3]
+        path = "D:\\All_Python\\MovieTop10\\MovieTop\\static\\userimg\\" + str_s[3]
         try:
             os.remove(path)
         except:
