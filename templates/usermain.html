@@ -6,6 +6,7 @@
 		<title>个人中心</title>
 		<link rel="stylesheet" type="text/css" href="../static/css/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/movie_like.css" />
 	</head>
 	<script src="../static/js/jquery-1.7.2.min.js"></script>
 	<body>
@@ -19,11 +20,40 @@
 			<div class="user-info">
 				<div class="w1200">
 					<div class="user-headface">
-						<img src="../static/img/userpic.jpg"/>
+						<img id="userimg" src="{{ userdata[4] }}"/>
 					</div>
 					<div class="user-account">
 						<p class="tip">你好，{{ userdata[3]}}</p>
+                        <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" οnchange="imgPreview(this)" ><br>
+                        <button id="userimg_btn" onclick="userimg_btn()">上传头像</button>
 					</div>
+                    <script>
+                        function userimg_btn(){
+                            var formData = new FormData();
+                            formData.append('file', $('#input_file')[0].files[0]);  //添加图片信息的参数
+                            formData.append('sizeid',123);  //添加其他参数
+                            $.ajax({
+                                url: '/user_img',
+                                type: 'POST',
+                                cache: false, //上传文件不需要缓存
+                                data: formData,
+                                processData: false, // 告诉jQuery不要去处理发送的数据
+                                contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                                success: function (data) {
+                                    var rs = data.data
+                                    if(rs[0]==1){
+                                        alert('成功！');
+                                        window.open("/user_pager",'_self')
+                                    }else{
+                                        alert(rs);
+                                    }
+                                },
+                                error: function (data) {
+                                    tipTopShow("上传失败");
+                                }
+                            })
+                        }
+                    </script>
 					<div class="user-modify">
 						<a href="http://127.0.0.1:5000/reuserinfo">修改资料></a>
 					</div>
@@ -73,6 +103,8 @@
 				</div>
 				<div class="container" style=" height:600px;overflow:scroll">
 					<div class="no-doc">
+                        <ul style="list-style: none;margin-left: 40px;" class="movie_show" onclick="div_hidden()">
+                        </ul>
 					</div>
 				</div>
 
@@ -81,13 +113,7 @@
 	</body>
 </html>
 <script>
-	function btn_1(){
-        var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn1.style.background="#1a682b"
-        btn2.style.background="#6abb5c"
-        btn3.style.background="#6abb5c"
+    function  on_like(){
         $.ajax({
             url: "/web_like_query",
             data: {
@@ -95,18 +121,23 @@
             },
             success: function (data) {
                 if(data.data==""){
-                    $(".no-doc").empty()
+                    $(".movie_show").empty()
                     appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
-                    $(".no-doc").append(appendUlBody);
+                    $(".movie_show").append(appendUlBody);
                 }else{
-                    $(".no-doc").empty();
+                    $(".movie_show").empty();
                      for (var i = 0; i < data.data.length; i++) {
                         a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
-                        appendUlBody ='<div style="float:left; clear:right; width:220px">'+
-                            '<img src="'+data.data[i][4]+'" height="260px" width="140px" />'+
-                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><h2>'+data.data[i][1]+'</h2></a>'+
-                            '<h3>'+data.data[i][5]+'分</h3> </p></div>'
-                        $(".no-doc").append(appendUlBody);
+                        appendUlBody ='<li style="width:25%;float:left" >'+
+                            '<img src="'+data.data[i][4]+'" height="280px" width="140px" />'+
+                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><font  size="4px">'+data.data[i][1]+'</font></a></br>'+
+                            '<font  size="3px">'+data.data[i][5]+'分</font><button class="btn_more" onclick="btn_more('+i+')">移动</button></p>'+
+                            '<div  style="visibility:hidden" class="top_div" id="top_div_'+i+'">'+
+                            '<ul><li onclick="div_on_click('+"'在看','想看',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">想看</li>'+
+                            '<li onclick="div_on_click('+"'在看','看过',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">看过</li>'+
+                            '<li style="color:#cc66cc;font-size:16px; cursor:pointer;">在看</li>'+
+                            '<li onclick="div_on_click('+"'在看','删除',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">删除</li></ul></div></li>'
+                        $(".movie_show").append(appendUlBody);
                     }
                 }
             },
@@ -114,38 +145,87 @@
             }
         })
     }
-    function btn_2(){
-         var btn1 = document.getElementById("btn1")
-        var btn2 = document.getElementById("btn2")
-        var btn3 = document.getElementById("btn3")
-        btn2.style.background="#1a682b"
-        btn1.style.background="#6abb5c"
-        btn3.style.background="#6abb5c"
-                $.ajax({
+    function want_like(){
+        $.ajax({
             url: "/web_like_query",
             data: {
                 usertype:"想看"
             },
             success: function (data) {
                 if(data.data==""){
-                    $(".no-doc").empty()
+                    $(".movie_show").empty()
                     appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
-                    $(".no-doc").append(appendUlBody);
+                    $(".movie_show").append(appendUlBody);
                 }else{
-                    $(".no-doc").empty();
+                    $(".movie_show").empty();
                      for (var i = 0; i < data.data.length; i++) {
                         a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
-                        appendUlBody ='<div style="float:left; clear:right; width:220px">'+
-                            '<img src="'+data.data[i][4]+'" height="240px" width="140px" />'+
-                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><h2>'+data.data[i][1]+'</h2></a>'+
-                            '<h3>'+data.data[i][5]+'分</h3> </p></div>'
-                        $(".no-doc").append(appendUlBody);
+                        appendUlBody ='<li style="width:25%;float:left">'+
+                            '<img src="'+data.data[i][4]+'" height="280px" width="140px" />'+
+                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><font  size="4px">'+data.data[i][1]+'</font></a></br>'+
+                            '<font  size="3px">'+data.data[i][5]+'分</font><button class="btn_more" onclick="btn_more('+i+')">移动</button></p>'+
+                            '<div  style="visibility:hidden" class="top_div" id="top_div_'+i+'">'+
+                            '<ul><li style="color:#cc66cc;font-size:16px; cursor:pointer;">想看</li>'+
+                            '<li onclick="div_on_click('+"'想看','看过',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">看过</li>'+
+                            '<li onclick="div_on_click('+"'想看','在看',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">在看</li>'+
+                            '<li onclick="div_on_click('+"'想看','删除',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">删除</li></ul></div></li>'
+                        $(".movie_show").append(appendUlBody);
                     }
                 }
             },
             error: function (xhr, type, errorThrown) {
             }
         })
+    }
+    function have_like(){
+        $.ajax({
+            url: "/web_like_query",
+            data: {
+                usertype:"看过"
+            },
+            success: function (data) {
+                if(data.data==""){
+                    $(".movie_show").empty()
+                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
+                    $(".movie_show").append(appendUlBody);
+                }else{
+                    $(".movie_show").empty();
+                     for (var i = 0; i < data.data.length; i++) {
+                        a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
+                        appendUlBody ='<li style="width:25%;float:left">'+
+                            '<img src="'+data.data[i][4]+'" height="280px" width="140px" />'+
+                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><font  size="4px">'+data.data[i][1]+'</font></a></br>'+
+                            '<font  size="3px">'+data.data[i][5]+'分</font><button class="btn_more" onclick="btn_more('+i+')">移动</button></p>'+
+                            '<div style="visibility:hidden" class="top_div" id="top_div_'+i+'">'+
+                            '<ul><li onclick="div_on_click('+"'看过','想看',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">想看</li>'+
+                            '<li style="color:#cc66cc;font-size:16px; cursor:pointer;">看过</li>'+
+                            '<li onclick="div_on_click('+"'看过','在看',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">在看</li>'+
+                            '<li onclick="div_on_click('+"'看过','删除',"+"'"+data.data[i][1]+"'"+','+data.data[i][3]+')" style="font-size:16px; cursor:pointer;">删除</li></ul></div></li>'
+                        $(".movie_show").append(appendUlBody);
+                    }
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+            }
+        })
+    }
+    function btn_1(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn1.style.background="#1a682b"
+        btn2.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+        on_like()
+    }
+    function btn_2(){
+        var btn1 = document.getElementById("btn1")
+        var btn2 = document.getElementById("btn2")
+        var btn3 = document.getElementById("btn3")
+        btn2.style.background="#1a682b"
+        btn1.style.background="#6abb5c"
+        btn3.style.background="#6abb5c"
+        want_like()
     }
     function btn_3(){
         var btn1 = document.getElementById("btn1")
@@ -154,26 +234,69 @@
         btn3.style.background="#1a682b"
         btn2.style.background="#6abb5c"
         btn1.style.background="#6abb5c"
-                $.ajax({
-            url: "/web_like_query",
+        have_like()
+    }
+    function btn_more(id){
+	    str="top_div_"+id;
+        switch (document.getElementById(str).style.visibility)
+        {
+            case 'visible':
+                document.getElementById(str).style.visibility = 'hidden';
+                event.stopPropagation();
+                break;
+            case 'hidden':
+                document.getElementById(str).style.visibility = 'visible';
+                event.stopPropagation();
+                break;
+        }
+        var x=document.getElementsByClassName("top_div");
+	    var i;
+	    for(i=0;i<x.length;i++){
+	        if(i!=id){
+	            x[i].style.visibility="hidden";
+            }
+        }
+    }
+    function div_hidden(){
+	    var x=document.getElementsByClassName("top_div");
+	    var i;
+	    for(i=0;i<x.length;i++){
+	        x[i].style.visibility="hidden";
+        }
+    }
+    function div_on_click(usertype,usertype_new,usermovie,scorenum){
+	    $.ajax({
+            url: "/web_like_trans",
             data: {
-                usertype:"看过"
+                usertype:usertype,usertype_new:usertype_new,usermovie:usermovie,scorenum:scorenum
             },
             success: function (data) {
-                if(data.data==""){
-                    $(".no-doc").empty()
-                    appendUlBody='<img src="../static/img/no_doc.jpg"/> <p>空空如也~</p>';
-                    $(".no-doc").append(appendUlBody);
-                }else{
-                    $(".no-doc").empty();
-                     for (var i = 0; i < data.data.length; i++) {
-                        a="/movie_page?"+"title="+data.data[i][1]+"&scorenum="+data.data[i][3];
-                        appendUlBody ='<div style="float:left; clear:right; width:220px">'+
-                            '<img src="'+data.data[i][4]+'" height="240px" width="140px" />'+
-                            '<p> <a href="'+a+'" style="text-decoration:none;" target="_blank"><h2>'+data.data[i][1]+'</h2></a>'+
-                            '<h3>'+data.data[i][5]+'分</h3> </p></div>'
-                        $(".no-doc").append(appendUlBody);
+                if(data.data==1){
+                    var btn1 = document.getElementById("btn1")
+                    var btn2 = document.getElementById("btn2")
+                    var btn3 = document.getElementById("btn3")
+                    alert("转移成功")
+                    var btn1 = document.getElementById("btn1")
+                    var btn2 = document.getElementById("btn2")
+                    var btn3 = document.getElementById("btn3")
+                    if(btn1.style.background=="rgb(26, 104, 43)"){
+                        on_like()
                     }
+                    if(btn2.style.background=="rgb(26, 104, 43)"){
+                        want_like()
+                    }
+                    if(btn3.style.background=="rgb(26, 104, 43)"){
+                        have_like()
+                    }
+                }
+                if(data.data==0){
+                    alert("请求失败")
+                }
+                if(data.data==-1){
+                    alert("删除成功")
+                }
+                if(data.data==2){
+                    alert("已存在")
                 }
             },
             error: function (xhr, type, errorThrown) {

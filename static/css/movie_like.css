@@ -1,0 +1,22 @@
+.top_div{
+    z-index: 99999;
+    position: relative;
+    width: 80px;
+    height: 85px;
+    background:#EEFFFF;
+    left: 145px;
+    margin-top:-10px;
+    display: block;
+}
+.btn_more{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 3px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

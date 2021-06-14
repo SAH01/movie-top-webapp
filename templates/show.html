@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/css/show.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="../static/css/table.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/jquery-1.7.2.min.js"></script>
 </head>
@@ -31,10 +32,10 @@
                 <button id="search_head_btn" class="btn_search"></button>
             </form>
         </div>
-        <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
+        <div class="user-headface"><img id="userimg" src="{{ userdata[4] }}"/></div>
         <!--头像超链接到个人信息页面-->
         <script>
-        var head_picture=document.getElementById("head_picture")
+        var head_picture=document.getElementById("userimg")
          head_picture.onclick=function(){
             window.open("/user_pager",'_blank')
          }
@@ -93,10 +94,10 @@
             <i>地区:</i>
             <div class="classfiy_2">
                 <span>全部</span>
-                <span>中国</span>
-                <span>香港</span>
+                <span>内地</span>
+                <span>中国香港</span>
+                <span>中国台湾</span>
                 <span>美国</span>
-                <span>台湾</span>
                 <span>日本</span>
                 <span>韩国</span>
                 <span>印度</span>
@@ -116,8 +117,8 @@
             <i>排列顺序:</i>
             <div class="classfiy_2">
                 <span>热门(正序)</span>
-                <span>评分(正序)</span>
                 <span>热门(倒序)</span>
+                <span>评分(正序))</span>
                 <span>评分(倒序)</span>
                 <span>时间(正序)</span>
                 <span>时间(倒序)</span>
@@ -211,11 +212,15 @@
         for (var i = 0; i < div.length; i++) {
             div[i].index = i;//给所有div标序号
         }
+        oDivLength[7]="全部";
+        oDivLength[9]="全部";
+        oDivLength[11]="全部";
+        oDivLength[13]="热门(正序)";
         $.ajax({
             url: "/query_tag",
             data: {
                 type:"全部",date:"全部",area:"全部",
-                first:"全部",num:"0"
+                first:"热门(正序)",num:"0"
             },
             success: function (data) {
                 $(".ul_show").empty()

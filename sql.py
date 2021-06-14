@@ -65,7 +65,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="000429",
+                    password="123456",
                     db="movierankings",
                     charset="utf8")
     # 创建游标
@@ -313,8 +313,8 @@ def android_register(name,phone,password):
     cursor = None
     conn = None
     conn, cursor = get_conn()
-    sql="insert into userdata (userphone,userpass,useremail,username) values(%s,%s,%s,%s)"
-    cursor.execute(sql,[phone,password,"",name])
+    sql="insert into userdata (userphone,userpass,useremail,username,userimg) values(%s,%s,%s,%s)"
+    cursor.execute(sql,[phone,password,"",name,"../static/userimg/0000.jpg"])
     conn.commit()
     close_conn(conn,cursor)
     print("注册成功（APP）")
@@ -328,7 +328,6 @@ def web_register(phone, password, email , name):
     conn.commit()
     close_conn(conn, cursor)
     print("注册成功（WEB）")
-
 # 用户（web）登录验证
 def web_login(userphone, password):
     cursor = None
@@ -348,14 +347,13 @@ def web_login(userphone, password):
         close_conn(conn, cursor)
         print("登陆成功（WEB）")
         return True
-
 #用户（app）查询
 def android_query(phone):
-    sql="select userphone,userpass,useremail,username from userdata where userphone="+phone
+    sql="select userphone,userpass,useremail,username,userimg from userdata where userphone="+phone
     res = query(sql)
     print("用户（app）查询")
     print(sql)
-    res_2=("","","","")
+    res_2=("","","","","")
     try:
         print(res[0])
     except:
@@ -367,6 +365,15 @@ def android_like(userphone,usermovie,usertyppe,scorenum,url,score):
     cursor = None
     conn = None
     conn, cursor = get_conn()
+    if (android_like_query_one(userphone, "", usermovie, scorenum)):
+        try:
+            sql = "delete from userlike where (userphone='" + userphone + "') and (usermovie='" + usermovie + \
+              "')  and (scorenum=" + scorenum + ") "
+            cursor.execute(sql)
+            conn.commit()
+        except:
+            traceback.print_exc()
+            return 0
     try:
         sql = "insert into userlike(userphone,usermovie,usertype,scorenum,url,score) values(%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql, [userphone, usermovie, usertyppe, scorenum, url, score])
@@ -405,13 +412,14 @@ def android_delete(userphone,usertype,usermovie,scorenum):
 #用户（app）收藏查询单个
 def android_like_query_one(userphone,usertype,usermovie,scorenum):
     sql="select * from userlike where (userphone='"+userphone+"') and (usermovie='"+usermovie+\
-        "') and (usertype='"+usertype+"') and (scorenum="+scorenum+") "
+        "') and (usertype like '%"+usertype+"%') and (scorenum="+scorenum+") "
     res = query(sql)
     print("用户（app）收藏查询单个")
     print(sql)
     try:
         print(res[0])
     except:
+        traceback.print_exc()
         return 0
     return 1
 #用户（app）收藏转移
@@ -420,19 +428,35 @@ def android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new):
     conn = None
     conn, cursor = get_conn()
     if(android_like_query_one(userphone,usertype_new,usermovie,scorenum)):
-        return -1
-    else:
-        sql="update userlike set usertype='"+usertype_new+"' where (userphone='"+userphone+"') and (usermovie='"+usermovie+\
+        return -1;
+    sql="update userlike set usertype='"+usertype_new+"' where (userphone='"+userphone+"') and (usermovie='"+usermovie+\
         "') and (usertype='"+usertype+"') and (scorenum="+scorenum+") "
-        try:
-            cursor.execute(sql)
-            conn.commit()
-            close_conn(conn, cursor)
-            print("用户（app）收藏转移")
-            print(sql)
-            return 1
-        except:
-            return 0
+    try:
+        cursor.execute(sql)
+        conn.commit()
+        close_conn(conn, cursor)
+        print("用户（app）收藏转移")
+        print(sql)
+        return 1
+    except:
+        traceback.print_exc()
+        return 0
+#用户上传头像
+def user_img_input(userimg,userphone):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    sql = "update userdata set userimg="+"'"+userimg+"' where userphone="+userphone
+    try:
+        cursor.execute(sql)
+        conn.commit()
+        close_conn(conn, cursor)
+        print("上传成功")
+        print(userimg+""+userphone)
+        return 1
+    except:
+        traceback.print_exc()
+        return 0
 #用户部分
 
 #-------------------------------------------#
@@ -454,6 +478,7 @@ def reset_pass(phone,password):
     except:
         print("系统错误...修改密码失败！")
         return 0
+
 if __name__ == "__main__":
     # find_class_order(["喜剧","2020","中国","star_1","20"])
     # get_bean_data()

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>电影详情</title>
     <link rel="stylesheet" href="../static/css/MoviePager.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
     <style>
     </style>
 </head>
@@ -20,9 +21,9 @@
             <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
             <button id="search_head_btn" class="btn_search"></button>
         </div>
-        <div class="mycenter"><input class="myhead" type="button" value="" id="head_picture"></div>
+        <div class="user-headface"><img id="userimg" src="{{ userdata[4] }}"/></div>
         <script>
-        var head_picture=document.getElementById("head_picture")
+        var head_picture=document.getElementById("userimg")
          head_picture.onclick=function(){
             window.open("/user_pager",'_blank')
          }

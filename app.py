@@ -1,4 +1,5 @@
 import os
+import traceback
 from audioop import max
 
 import requests
@@ -38,10 +39,13 @@ def regis():
 def reset():
     return render_template("resetpass.html")
 # 登录注册模块
+
 #主页面
 @app.route('/show',methods=['GET', 'POST', 'PUT'])
 def hello_world_show():
-    return render_template("show.html")
+    userphone = session['userphone']
+    userdata = sql.android_query(userphone)
+    return render_template("show.html",userdata=userdata)
 #登录
 @app.route('/login',methods=['GET', 'POST', 'PUT'])
 def login():
@@ -50,6 +54,7 @@ def login():
 @app.route('/reuserinfo',methods=['GET', 'POST', 'PUT'])
 def reuserinfo():
     return render_template("revise.html")
+
 #查询部分
 #详情页面（web）查询
 @app.route('/movie_page')
@@ -59,13 +64,14 @@ def hello_world_movie_page():
     str_s=sql.find_by_title_and_scorenum(title,scorenum)
     #获取所有查询到的带星级电影库 腾讯、爱奇艺、IMDB、1905、搜狐
     str_three=sql.find_all_movies(title)
-
+    userphone = session['userphone']
+    userdata = sql.android_query(userphone)
     return render_template("moviepage.html", title=str_s[0], star=str_s[1],
                            director=str_s[2], type_movie=str_s[3], area=str_s[4]
                            , date_time=str_s[5], summary=str_s[6], score=str_s[7]
                            , language_movie=str_s[8], img=str_s[9], scorenum=str_s[10]
                            , timelen=str_s[11], str_one=str_three[0], str_two=str_three[1]
-                           , str_three=str_three[2], str_four=str_three[3], str_five=str_three[4])
+                           , str_three=str_three[2], str_four=str_three[3], str_five=str_three[4],userdata=userdata)
 #详情页面（app）查询
 @app.route('/android_query')
 def android_query():
@@ -119,11 +125,17 @@ def android_query():
 @app.route('/query_tag')
 def query_tag():
     str_s=[]
-    str_s.append(request.values.get("type"))
-    str_s.append(request.values.get("date"))
-    str_s.append(request.values.get("area"))
+    str_s.append(request.values.get("type").replace(" ",""))
+    str_s.append(request.values.get("date").replace(" ",""))
+    str_s.append(request.values.get("area").replace(" ",""))
     str_s.append(request.values.get("first"))
     str_s.append(request.values.get("num"))
+    if(str_s[2]=="内地"):
+        str_s[2]="中国"
+    if(str_s[2]=="中国香港"):
+        str_s[2]="香港"
+    if(str_s[2]=="中国台湾"):
+        str_s[2]="台湾"
     if (str_s[3] == "热门(正序)"):
         str_s[3]="hot_1"
     if (str_s[3] == "热门(倒序)"):
@@ -169,7 +181,9 @@ def get_top():
 @app.route('/head_for_html')
 def head_for_html():
     title_star=request.values.get("title_star")
-    return render_template("search_head.html",title_star=title_star)
+    userphone = session['userphone']
+    userdata = sql.android_query(userphone)
+    return render_template("search_head.html",title_star=title_star,userdata=userdata)
 #顶部搜索查询
 @app.route('/query_head')
 def query_html():
@@ -257,13 +271,74 @@ def android_user_like_trans():
     usertype_new = request.values.get("usertype_new")
     flag=sql.android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new)
     return jsonify({"data": flag})
-#用户部分
+#用户（web）收藏转移and删除
+@app.route('/web_like_trans')
+def web_like_trans():
+    userphone = session["userphone"]
+    usertype = request.values.get("usertype")
+    usermovie = request.values.get("usermovie")
+    scorenum = request.values.get("scorenum")
+    usertype_new = request.values.get("usertype_new")
+    flag=2;
+    if(usertype_new!="删除"):
+        flag=sql.android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new)
+        if(flag==-1):
+            flag=2;
+    if(usertype_new=="删除"):
+        flag = sql.android_delete(userphone, usertype, usermovie, scorenum)
+        if(flag==1):
+            flag==-1
+    return jsonify({"data": flag})
+#用户主页（web）
 @app.route('/user_pager')
 def user_pager():
     str = [];
     str = sql.android_query(session['userphone'])
     return render_template("usermain.html", userdata=str)
+#用户修改密码（web）
+@app.route('/resetpass',methods=['GET', 'POST'])
+def resetpass():
+    userphone=request.values.get('userphone')
+    resetpass=request.values.get('resetpass')
+    print("路由获得手机号："+userphone+"\n")
+    print("路由获得新密码：" + resetpass + "\n")
+    flag=sql.reset_pass(userphone,resetpass)
+    if(flag==1):
+        return jsonify({"data":1})
+    else:
+        return jsonify({"data":0})
 #用户部分
+
+
+#头像上传
+@app.route('/user_img',methods=['GET', 'POST'])
+def user_img():
+    #接收图片并生成保存路径
+    img=request.files.get("file")
+    img_name = img.filename
+    file_path = "D:\\flaskProjects\\MovieTop9\\MovieTop\\static\\userimg\\"+img_name
+    # 删除原头像
+    userphone = session['userphone']
+    userdata = sql.android_query(userphone)
+    if (userdata[4] != "" and userdata != "../static/userimg/0000.jpg"):
+        str_s = userdata[4].split('/')
+        path = "D:\\flaskProjects\\MovieTop9\\MovieTop\\static\\userimg\\" + str_s[3]
+        try:
+            os.remove(path)
+        except:
+            traceback.print_exc()
+            return jsonify({"data": 0})
+    #保存新头像
+    try:
+        img.save(file_path)
+    except:
+        traceback.print_exc()
+        return jsonify({"data":0})
+    #将路径存入数据库
+    userimg="../static/userimg/"+img_name
+    flag=sql.user_img_input(userimg,userphone)
+    data=[flag,img_name]
+    return jsonify({"data":data})
 #网页登陆注册部分
 @app.route('/web_register', methods=['GET', 'POST'])
 def web_register():
@@ -311,18 +386,7 @@ def clean_cookies():
         return resp                 #成功删除cookies 返回相响应
     except:
         return jsonify({"data":0})  #删除cookies失败   返回 0 状态码
-#用户修改密码
-@app.route('/resetpass',methods=['GET', 'POST'])
-def resetpass():
-    userphone=request.values.get('userphone')
-    resetpass=request.values.get('resetpass')
-    print("路由获得手机号："+userphone+"\n")
-    print("路由获得新密码：" + resetpass + "\n")
-    flag=sql.reset_pass(userphone,resetpass)
-    if(flag==1):
-        return jsonify({"data":1})
-    else:
-        return jsonify({"data":0})
+
 if __name__ == '__main__':
     host="127.0.0.1"
     port=5000
