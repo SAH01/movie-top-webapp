@@ -65,7 +65,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="123456",
+                    password="000429",
                     db="movierankings",
                     charset="utf8")
     # 创建游标
@@ -323,8 +323,8 @@ def web_register(phone, password, email , name):
     cursor = None
     conn = None
     conn, cursor = get_conn()
-    sql = "insert into userdata (userphone,userpass,useremail,username) values(%s,%s,%s,%s)"
-    cursor.execute(sql, [phone, password, email, name])
+    sql = "insert into userdata (userphone,userpass,useremail,username,userimg) values(%s,%s,%s,%s,%s)"
+    cursor.execute(sql, [phone, password, email, name, ""])
     conn.commit()
     close_conn(conn, cursor)
     print("注册成功（WEB）")
