@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>电影详情</title>
-    <link rel="stylesheet" href="../static/css/MoviePager.css">
+    <link rel="stylesheet" href="../static/css/moviepager.css">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
     <style>
     </style>
@@ -21,7 +21,9 @@
             <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
             <button id="search_head_btn" class="btn_search"></button>
         </div>
-        <div class="user-headface"><img id="userimg" src="{{ userdata[4] }}"/></div>
+        <div class="user-headface">
+            <img id="userimg" height="80px" width="80px" src="{{ userdata[4] }}"/>
+        </div>
         <script>
         var head_picture=document.getElementById("userimg")
          head_picture.onclick=function(){

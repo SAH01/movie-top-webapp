@@ -24,8 +24,8 @@
 					</div>
 					<div class="user-account">
 						<p class="tip">你好，{{ userdata[3]}}</p>
-                        <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" οnchange="imgPreview(this)" ><br>
-                        <button id="userimg_btn" onclick="userimg_btn()">上传头像</button>
+                        <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this)" ><br>
+                        <button id="userimg_btn" onclick="userimg_btn()" style="width: 70px;backgroud-color:'green'" >上传头像</button>
 					</div>
                     <script>
                         function userimg_btn(){
@@ -42,7 +42,7 @@
                                 success: function (data) {
                                     var rs = data.data
                                     if(rs[0]==1){
-                                        alert('成功！');
+                                        alert('上传成功！');
                                         window.open("/user_pager",'_self')
                                     }else{
                                         alert(rs);

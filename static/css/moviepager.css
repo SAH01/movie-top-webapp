@@ -3,6 +3,11 @@
     width:100%;
     margin:0px auto;/*主面板DIV居中*/
 }
+.user-headface{
+    position: absolute;
+    top: 25px;
+    right: 30px;
+}
 /*搜索面板样式*/
 #header {
     width:100%;
