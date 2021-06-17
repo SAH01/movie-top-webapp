@@ -7,6 +7,10 @@
     position: absolute;
     top: 25px;
     right: 30px;
+    border-radius: 50%;
+}
+.user-headface img{
+    border-radius: 50px;
 }
 /*搜索面板样式*/
 #header {

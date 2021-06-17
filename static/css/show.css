@@ -99,6 +99,10 @@ span:hover {
     position: absolute;
     top: 25px;
     right: 30px;
+    border-radius: 50px;
+}
+.user-headface img{
+    border-radius: 50px;
 }
 .page_ctrl{
 
