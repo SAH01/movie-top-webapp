@@ -12,12 +12,10 @@
     <link rel="stylesheet" href="../static/css/show.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="../static/css/table.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/jquery-1.7.2.min.js"></script>
 </head>
 <body>
-<div id="container">
     <!--主页面头部-->
     <div id="header">
         <!--电影logo
@@ -26,13 +24,13 @@
         </div>
         -->
         <div class="title"><h1 id="title">树懒电影</h1></div>
-        <div class="container">
             <form action="#" class="parent">
                 <input type="text" class="search" placeholder="电影名称，主演" id="search_head">
                 <button id="search_head_btn" class="btn_search"></button>
             </form>
+        <div class="user-headface">
+            <img id="userimg" height="80px" width="80px" src="{{ userdata[4] }}"/>
         </div>
-        <div class="user-headface"><img id="userimg" src="{{ userdata[4] }}"/></div>
         <!--头像超链接到个人信息页面-->
         <script>
         var head_picture=document.getElementById("userimg")
@@ -141,8 +139,6 @@
     <div class="btn_local">
         <button id="json_more" class="btn_div">加载更多</button>
     </div>
-
-</div>
 <!--电影热播榜-->
 <div class="sidebar"></div>
 <div class="lunbo_div">

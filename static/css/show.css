@@ -1,78 +1,81 @@
 @font-face {
     font-family:myfont;
-    src:url("/static/css/iconfont.ttf");
+    src:url("/MovieTop/font/iconfont.ttf");
  }
+*{
+    padding: 0;
+    margin: 0;
+}
 /*show.html*/
-body
-        {
-            background-color: #ededed;
-        }
+body {
+    background-color: #ededed;
+    }
 
         <!--超链接样式-->
             /* unvisited link */
-        a:link {
-            color: red;
-        }
+    a:link {
+        color: red;
+    }
 
-        /* visited link */
-        a:visited {
-            color: dodgerblue;
-        }
+    /* visited link */
+    a:visited {
+        color: dodgerblue;
+    }
 
         /* mouse over link */
-        a:hover {
-            color: red;
-        }
+    a:hover {
+        color: red;
+    }
 
-        /* selected link */
-        a:active {
-            color: blue;
-        }
+    /* selected link */
+    a:active {
+        color: blue;
+    }
 
-        /*电影分类样式*/
-        aside {
-            overflow:hidden
-        }
+    /*电影分类样式*/
+    aside {
+        overflow:hidden
+    }
 
-        i {
-            font-size:14px;
-            color:#666;
-            font-style:normal;
-            float: left;
-        }
-        span {
-            display:inline-block;
-            width:80px;
-            height:24px;
-            text-decoration:none;
-            color:#039;
-            border-radius:2px;
-            font-size:14px;
-            line-height:24px;
-            text-align:center;
-        }
-        span:hover {
-            cursor:pointer;
-        }
-        .mystyle {
-            color:#f60;
-            background-color:#f3edc2;
-        }
-        .last {
-            float:left;
-            color:#666;
-            font-size:14px;
-            margin-top:20px;
-            margin-left: 200px;
-        }
-        #yi {
-            display:inline-block;
-        }
-        #yi span {
-            margin-left:10px;
-            color:#f60;
-            background-color:#f3edc2;
-        }
+    i {
+        font-size:14px;
+        color:#666;
+        font-style:normal;
+        float: left;
+    }
+    span {
+        display:inline-block;
+        width:80px;
+        height:24px;
+        text-decoration:none;
+        color:#039;
+        border-radius:2px;
+        font-size:14px;
+        line-height:24px;
+        text-align:center;
+    }
+span:hover {
+    cursor:pointer;
+}
+.mystyle {
+    color:#f60;
+    background-color:#f3edc2;
+}
+.last {
+    float:left;
+    color:#666;
+    font-size:14px;
+    margin-top:20px;
+    margin-left: 200px;
+}
+#yi {
+    display:inline-block;
+    }
+#yi span {
+    margin-left:10px;
+    color:#f60;
+    background-color:#f3edc2;
+    }
 
 /* */
 /*个人中心*/
@@ -92,7 +95,11 @@ body
     margin-left: 78%;
     background-color: transparent;
 }
-
+.user-headface{
+    position: absolute;
+    top: 25px;
+    right: 30px;
+}
 .page_ctrl{
 
     text-align: center;
@@ -192,12 +199,13 @@ body
 
 }
 /*主面板样式*/
-#container {
-    width:100%;
-    margin:0px auto;/*主面板DIV居中*/
-}
+/*#container {*/
+/*    width:100%;*/
+/*    margin:0 auto;!*主面板DIV居中*!*/
+/*}*/
 /*搜索面板样式*/
 #header {
+    top: 0;
     width:100%;
     height:110px;
     /*border:1px #F00 solid;*/
