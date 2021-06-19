@@ -309,7 +309,6 @@ def resetpass():
         return jsonify({"data":0})
 #用户部分
 
-
 #头像上传
 @app.route('/user_img',methods=['GET', 'POST'])
 def user_img():
