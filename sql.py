@@ -324,8 +324,12 @@ def web_register(phone, password, email , name):
     conn = None
     conn, cursor = get_conn()
     sql = "insert into userdata (userphone,userpass,useremail,username,userimg) values(%s,%s,%s,%s,%s)"
-    cursor.execute(sql, [phone, password, email, name, ""])
-    conn.commit()
+    try:
+        cursor.execute(sql, [phone, password, email, name, "../static/userimg/0000.jpg"])
+        conn.commit()
+    except(pymysql.err.IntegrityError):
+        print("用户名已存在，注册失败")
+        return False
     close_conn(conn, cursor)
     print("注册成功（WEB）")
 # 用户（web）登录验证

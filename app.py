@@ -201,6 +201,7 @@ def android_register():
     phone = request.values.get("phone")
     password = request.values.get("password")
     sql.android_register(name,phone,password)
+    session['userphone'] = phone
     print("用户注册（app）成功")
     data=1
     return jsonify({"data": data})
@@ -291,7 +292,7 @@ def web_like_trans():
 #用户主页（web）
 @app.route('/user_pager')
 def user_pager():
-    str = [];
+    str = []
     str = sql.android_query(session['userphone'])
     return render_template("usermain.html", userdata=str)
 #用户修改密码（web）
@@ -299,8 +300,8 @@ def user_pager():
 def resetpass():
     userphone=request.values.get('userphone')
     resetpass=request.values.get('resetpass')
-    print("路由获得手机号："+userphone+"\n")
-    print("路由获得新密码：" + resetpass + "\n")
+    print("手机修改密码路由获得手机号："+userphone+"\n")
+    print("手机修改密码路由获得新密码：" + resetpass + "\n")
     flag=sql.reset_pass(userphone,resetpass)
     if(flag==1):
         return jsonify({"data":1})
@@ -313,15 +314,19 @@ def resetpass():
 @app.route('/user_img',methods=['GET', 'POST'])
 def user_img():
     #接收图片并生成保存路径
-    img=request.files.get("file")
-    img_name = img.filename
-    file_path = "D:\\All_Python\\MovieTop10\\MovieTop\\static\\userimg\\"+img_name
+    try:
+        img=request.files.get("file")
+        img_name = img.filename
+    except:
+        traceback.print_exc()
+        return jsonify({"data":[0,""]})
+    file_path = "D:\\All_Python\\MovieTop10\\MovieTop11\\MovieTop\\static\\userimg\\"+img_name
     # 删除原头像
     userphone = session['userphone']
     userdata = sql.android_query(userphone)
-    if (userdata[4] != "" and userdata != "../static/userimg/0000.jpg"):
+    if (userdata[4] != "" and userdata[4] != "../static/userimg/0000.jpg"):
         str_s = userdata[4].split('/')
-        path = "D:\\All_Python\\MovieTop10\\MovieTop\\static\\userimg\\" + str_s[3]
+        path = "D:\\All_Python\\MovieTop10\\MovieTop11\\MovieTop\\static\\userimg\\" + str_s[3]
         try:
             os.remove(path)
         except:
@@ -332,7 +337,7 @@ def user_img():
         img.save(file_path)
     except:
         traceback.print_exc()
-        return jsonify({"data":0})
+        return jsonify({"data":[0,""]})
     #将路径存入数据库
     userimg="../static/userimg/"+img_name
     flag=sql.user_img_input(userimg,userphone)
@@ -341,13 +346,16 @@ def user_img():
 #网页登陆注册部分
 @app.route('/web_register', methods=['GET', 'POST'])
 def web_register():
-    phoneNumber = request.form.get('phoneNumber')
-    password =request.form.get('password')
-    email = request.form.get('email')
-    username = request.form.get('username')
+    phoneNumber = request.values.get('phoneNumber')
+    password =request.values.get('password')
+    email = request.values.get('email')
+    username = request.values.get('username')
     print("这里是网页注册路由：")
     print(phoneNumber+" "+password+" "+email+" "+username)
-    sql.web_register(phoneNumber,password,email,username)
+    reg_flag=sql.web_register(phoneNumber,password,email,username)
+    if(reg_flag==False):
+        return jsonify({"data":0})  #注册失败   返回 0 状态码
+    session['userphone'] = phoneNumber
     return redirect(url_for('hello_world_show'),code=302)
 #免密登录
 @app.route('/web_login/',methods=['GET', 'POST'])

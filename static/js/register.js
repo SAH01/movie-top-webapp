@@ -5,10 +5,11 @@ function next(i){
         $("#step-01-line").css("backgroundColor","#0C75BB");
         $("#step-2").css("backgroundColor","#0C75BB");
         $("#step-2-text").css("color","#0C75BB");
-    }else if(i==2){
-        $("#step-02").css("display","none");
-        $("#step-03").css("display","block");
-        $("#step-3").css("backgroundColor","#0C75BB");
+    }
+    // else if(i==2){
+    //     $("#step-02").css("display","none");
+    //     $("#step-03").css("display","block");
+    //     $("#step-3").css("backgroundColor","#0C75BB");
         // $("#step-02-line").css("backgroundColor","#0C75BB");
         // $("#step-3-text").css("color","#0C75BB");
     // }else if(i==3){
@@ -21,7 +22,7 @@ function next(i){
     //     console.log($("#userinfoform").serialize());
     //     console.log($("#passwordform").serialize());
     //     //serializeObject()
-    }
+    // }
     else{
         console.log(225)
     }
@@ -71,10 +72,10 @@ function showTips_pass(id,info){
     document.getElementById(id+"span").innerHTML="<font color='gray'>"+info+"</font>";
 }
 
-function check_pass(id,info){
+function showTips_pass_2(id,info){
     var one_pass=document.getElementById("password").value
-    var two_pass = document.getElementById(id).value;
-    if(one_pass!=two_pass||(two_pass=="")){
+    var two_pass = document.getElementById("confirmPassword").value;
+    if((one_pass!=two_pass) || (two_pass=="")){
         document.getElementById(id+"span").innerHTML="<font color='red'>"+info+"</font>";
     }else{
         document.getElementById(id+"span").innerHTML="";
@@ -246,10 +247,6 @@ function check_step2(){
         flag3=check_email();
         flag4=check_phone();
         if(flag1&&flag2&&flag3&&flag4){
-            alert("注册成功！")
-        }
-        if(flag1&&flag2&&flag3&&flag4){
-            userinfoform.submit()
             return true
         }
         else{

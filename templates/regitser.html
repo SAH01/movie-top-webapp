@@ -88,7 +88,7 @@
             </div>
             <div style="clear: both;"></div>
             <div style="margin-top: 50px;">
-                <form name="userinfoform" id="userinfoform" action="http://127.0.0.1:5000/web_register" method="post">
+                <form name="userinfoform" id="userinfoform" action="" method="post">
                     <div class="accountinfo">
                         <label for="username">您的昵称</label>
                         <input type="text" name="username" id="username" placeholder="请输入您的昵称"
@@ -130,13 +130,13 @@
                         <label for="confirmPassword">密码确认</label>
                         <input type="password" name="confirmPassword" id="confirmPassword" placeholder="请输入您再次确认密码"
                         onfocus="showTips_pass('confirmPassword','登录密码为必填！')"
-                                        onblur="check_pass('confirmPassword','两次密码输入不一致！') ;
+                                        onblur="showTips_pass_2('confirmPassword','两次密码输入不一致！') ;
                                         "/>
                                         <span id="confirmPasswordspan"></span>
                     </div>
                     <div>
                         <button type="button" onclick="previous(2)" class="previous-step">上一步</button>
-                        <button type="button" onclick="if(check_step2()) next(2)" class="next-step">完成</button>
+                        <button type="button" onclick="if(check_step2()) register() " class="next-step">完成</button>
                     </div>
                 </form>
             </div>
@@ -188,7 +188,31 @@
                 </table>
             </div>
         </div>
-        
     </div>
 </body>
 </html>
+<script>
+    function register (){
+        phoneNumber = document.getElementById('phoneNumber').value
+        password =document.getElementById('password').value
+        email = document.getElementById('email').value
+        username = document.getElementById('username').value
+    $.ajax({
+            url: "/web_register",
+            data: {
+                phoneNumber:phoneNumber,password:password,email:email,username:username
+            },
+            success: function (data) {
+                //正常验证失败弹窗
+                if (data.data == 0)
+                    alert("该手机号已被注册！")
+                //验证成功，返回response
+                if (data.data != 0)
+                    window.open("http://127.0.0.1:5000/show","_self")
+            },
+            error: function (xhr, type, errorThrown) {
+                print("注册js：        ajax请求失败！")
+            }
+        })
+    }
+</script>
