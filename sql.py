@@ -340,7 +340,8 @@ def web_login(userphone, password):
     if(userphone==None or password==None):
         return False
     conn, cursor = get_conn()
-    sql = "select userphone,userpass from userdata where '"+userphone+"'=userphone and '"+password+"'=userpass "
+    sql = "select userphone,userpass from userdata where userphone=' "+userphone+" ' and userpass = '"+password+"'"
+    print("web登陆验证sql语句："+sql)
     res=query(sql)
     conn.commit()
     if(len(res)==0):
