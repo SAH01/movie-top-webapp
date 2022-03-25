@@ -18,44 +18,72 @@ V1.0
  
 
 目录
+
 1	概述	2
+
 1.1	系统简介	2
+
 1.2	系统访问	2
+
 1.2.1	环境要求	2
+
 1.2.2	访问入口	3
+
 2	网站功能详细操作	4
+
 2.1	用户注册	4
+
 2.2	用户登录以及忘记密码	5
+
 2.3	分类筛选电影及搜索	7
+
 2.4	查看电影详情以及电影收藏等	8
+
 2.5	个人中心及切换头像	13
+
 2.6退出登录	16
+
 3	附：MySQL数据库设计	17
+
 3.1	1905电影表（movie1905）	17
+
 3.2	豆瓣电影表（moviebean）	17
+
 3.3	IMDB（movieimdb）	18
+
 3.4	爱奇艺电影（movieiqy）	19
+
 3.5	搜狐电影表（moviesohu）	19
+
 3.6	腾讯电影表（movieten）	20
+
 3.7	用户信息表（userdata）	20
+
 3.8	用户收藏表（userlike）	21
 
+
 1	概述
+
 1.1	系统简介
+
 背景：
 现如今人们的文娱生活越来越丰富，大多数人在闲暇的时候会选择观看一部电影。但是电影的水平参差不齐，人们的喜好各有不同。所以找电影，尤其是找一部好电影或是自己满意的电影就成了一件令人头疼的事情。而且同一部电影在各大网站的播放权限状况以及每部电影的评分等各有不同，迅速地掌握这些信息将对用户快速定位自己想要的影片提供极大的方便。
 
 特点：
 网站的集成了各大知名影视网站（豆瓣电影、腾讯视频、爱奇艺视频、搜狐视频、IMDB‘ 互联网电影资料库’Internet Movie Database、1905电影网）的影片信息，在同一个网站用户可以快速找到可以看的片源，同一部电影会给用户推荐可观看的所有片源，并显示这部电影在各个网站的评分信息。综合了这部电影在不同网站的观看权限，比如同一部电影在爱奇艺是收费的，但是可能在腾讯视频就是免费的，这有助于用户快速找到可观看的片源。同时我们把同一部电影在各个影视网站的评分等信息做了加权分析，给出一个综合评分，综合评分更加客观真实，更加有助于用户选择电影进行观看。
 1.2	系统访问
+
 1.2.1	环境要求
+
 序号	版本	设备	硬件配置	支撑软件
 1	V1.0	PC端	CPU：i5-9300H 2.40GHz
 内存：8G
 硬盘：500G	Windows 10
 Google Chrome 版本 99.0.4844.74（正式版本）
 表1：	环境配置要求
+
 1.2.2	访问入口
+
 在PC浏览器，输入网址：
 http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
@@ -68,7 +96,9 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 网站首页
 
 2	网站功能详细操作
+
 2.1	用户注册
+
 1.	进入网站首页点击注册按钮
  ![image](https://user-images.githubusercontent.com/72775628/160059912-abebe030-7201-44d2-99d3-4a87fcf6b1f9.png)
 
@@ -85,6 +115,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
  
 2.2	用户登录以及忘记密码
+
 输入用户名密码后点击登录按钮进入网站首页。
  ![image](https://user-images.githubusercontent.com/72775628/160059981-0d1e0d89-85cb-45bf-85d4-8282eec80354.png)
 
@@ -96,6 +127,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
  
 2.3	分类筛选电影及搜索
+
 进入首页后，点击选择类型、年份、地区和排序顺序之后就会看到相关的电影排名展示情况。
 ![image](https://user-images.githubusercontent.com/72775628/160060029-67b5340a-053e-4a61-9455-fc91e5713fe0.png)
 
@@ -106,6 +138,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
  
 2.4	查看电影详情以及电影收藏等
+
 1、查看电影详情
 分类筛选或查找之后，点击想要查看详情的电影名称即可进入电影详情界面。
 
@@ -114,6 +147,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 	  
  
 2、观看电影
+
 在右边的片源部分，点击片源名称后即可跳转链接观看电影。
 ![image](https://user-images.githubusercontent.com/72775628/160060060-87c5d444-36a6-4563-8af5-13b4a9b7c716.png)
 ![image](https://user-images.githubusercontent.com/72775628/160060069-c3bc57b8-86da-490a-a735-1c9a1a06723e.png)
@@ -121,6 +155,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
  
  
 3.收藏电影
+
 收藏电影分为“想看”、“在看”和“看过”三类，点击对应按钮即可将电源收藏到对应分类中，可在个人中心查看。
 
  ![image](https://user-images.githubusercontent.com/72775628/160060081-feb77047-c38f-4a3d-97da-bc3f493f4114.png)
@@ -137,6 +172,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
  
 2.5	个人中心及切换头像
+
 1、进入个人中心
 在网站首页，点击用户头像进入个人中心。
  
@@ -146,6 +182,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
  
 2、查看以及修改个人收藏的电影
+
 点击电影名称即可查看对应收藏的电影的详情。
  ![image](https://user-images.githubusercontent.com/72775628/160060196-ce0c4a61-fba4-4ec1-b1f4-704382ef7af1.png)
 
@@ -165,6 +202,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
  ![image](https://user-images.githubusercontent.com/72775628/160060217-7ef3f011-1744-464d-a3a4-4e24fc9397ac.png)
 
 2.6退出登录 
+
 在个人中心界面点击右上角的“退出”即可退出登录（退出后下次登录需要验证用户的登录信息！）
 ![image](https://user-images.githubusercontent.com/72775628/160060220-adebef2d-0147-4a4c-93ec-6c8e971c9c82.png)
 
@@ -177,7 +215,9 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 
 
 3	附：MySQL数据库设计
+
 3.1	1905电影表（movie1905）
+
 1 CREATE DATABASE /*!32312 IF NOT EXISTS*/`movierankings` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
  2 
  3 USE `movierankings`;
@@ -197,6 +237,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 17 ) ENGINE=INNODB AUTO_INCREMENT=13530 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 3.2	豆瓣电影表（moviebean）
+
 1 DROP TABLE IF EXISTS `moviebean`;
  2 
  3 CREATE TABLE `moviebean` (
@@ -217,6 +258,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 18 ) ENGINE=INNODB AUTO_INCREMENT=3157 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 3.3	IMDB（movieimdb）
+
 1 DROP TABLE IF EXISTS `movieimdb`;
 2 
 3 CREATE TABLE `movieimdb` (
@@ -228,6 +270,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 9 ) ENGINE=INNODB AUTO_INCREMENT=12483 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 3.4	爱奇艺电影（movieiqy）
+
 1 DROP TABLE IF EXISTS `movieiqy`;
  2 
  3 CREATE TABLE `movieiqy` (
@@ -241,6 +284,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 11 ) ENGINE=INNODB AUTO_INCREMENT=14350 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 3.5	 搜狐电影表（moviesohu）
+
 1 DROP TABLE IF EXISTS `moviesohu`;
  2 
  3 CREATE TABLE `moviesohu` (
@@ -253,7 +297,9 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 10   KEY `id` (`id`)
 11 ) ENGINE=INNODB AUTO_INCREMENT=3654 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+
 3.6	 腾讯电影表（movieten）
+
 1 DROP TABLE IF EXISTS `movieten`;
  2 
  3 CREATE TABLE `movieten` (
@@ -267,6 +313,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 11 ) ENGINE=INNODB AUTO_INCREMENT=20037 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 3.7	用户信息表（userdata）
+
 1 DROP TABLE IF EXISTS `userdata`;
 2 
 3 CREATE TABLE `userdata` (
@@ -278,6 +325,7 @@ http://127.0.0.1:5000/（目前网站未发布，只能本机运行。）
 9 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 3.8	 用户收藏表（userlike）
+
 1 DROP TABLE IF EXISTS `userlike`;
  2 
  3 CREATE TABLE `userlike` (
