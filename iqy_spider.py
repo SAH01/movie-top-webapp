@@ -155,7 +155,7 @@ def insert_iqy():
         traceback.print_exc()
     finally:
         close_conn(conn, cursor)
-    return;
+    return
 
 if __name__ == '__main__':
     # get_iqy()

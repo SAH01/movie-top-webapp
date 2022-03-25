@@ -25,12 +25,12 @@ def hello_world():
                 session['userphone'] = cookphone
                 return redirect(url_for("hello_world_show"))
             else:
-                return render_template("login.html")
+                return render_template("index.html")
         else:
-            return render_template("login.html")
+            return render_template("index.html")
     except:
         print("cookie验证跳转异常！")
-        return render_template("login.html")
+        return render_template("index.html")
 @app.route('/regis',methods=['GET', 'POST', 'PUT'])
 def regis():
     return render_template("regitser.html")
@@ -48,7 +48,7 @@ def hello_world_show():
 #登录
 @app.route('/login',methods=['GET', 'POST', 'PUT'])
 def login():
-    return render_template("login.html")
+    return render_template("index.html")
 #修改个人资料
 @app.route('/reuserinfo',methods=['GET', 'POST', 'PUT'])
 def reuserinfo():
@@ -224,33 +224,13 @@ def android_like():
     print("收藏（app）")
     print(data)
     return jsonify({"data": data})
-#用户（web）收藏添加
-@app.route('/web_like')
-def web_like():
-    usermovie=request.values.get("usermovie")
-    usertype=request.values.get("usertype")
-    scorenum=request.values.get("scorenum")
-    url=request.values.get("url")
-    score=request.values.get("score")
-    userphone=session['userphone']
-    data=sql.android_like(userphone, usermovie, usertype, scorenum, url, score);
-    print("收藏（web）")
-    print(data)
-    return jsonify({"data": data})
+
 #用户（app）收藏查询
 @app.route('/android_like_query')
 def android_like_query():
     userphone=request.values.get("userphone")
     usertype=request.values.get("usertype")
     data=sql.android_like_query(userphone,usertype)
-    return jsonify({"data": data})
-#用户（web）收藏查询
-@app.route('/web_like_query')
-def web_like_query():
-    # userphone=session['userphone']
-    usertype=request.values.get("usertype")
-    userphone=session['userphone']
-    data = sql.android_like_query(userphone, usertype)
     return jsonify({"data": data})
 #用户（app）收藏删除
 @app.route('/android_delete')
@@ -271,6 +251,29 @@ def android_user_like_trans():
     usertype_new = request.values.get("usertype_new")
     flag=sql.android_user_like_trans(userphone,usertype,usermovie,scorenum,usertype_new)
     return jsonify({"data": flag})
+#----------------------------------- ----------------------------------------------------
+#用户（web）收藏添加
+@app.route('/web_like')
+def web_like():
+    usermovie=request.values.get("usermovie")
+    usertype=request.values.get("usertype")
+    scorenum=request.values.get("scorenum")
+    url=request.values.get("url")
+    score=request.values.get("score")
+    userphone=session['userphone']
+    data=sql.android_like(userphone, usermovie, usertype, scorenum, url, score);
+    print("收藏（web）")
+    print(data)
+    return jsonify({"data": data})
+#用户（web）收藏查询
+@app.route('/web_like_query')
+def web_like_query():
+    # userphone=session['userphone']
+    usertype=request.values.get("usertype")
+    userphone=session['userphone']
+    data = sql.android_like_query(userphone, usertype)
+    return jsonify({"data": data})
+
 #用户（web）收藏转移and删除
 @app.route('/web_like_trans')
 def web_like_trans():
@@ -307,8 +310,6 @@ def resetpass():
         return jsonify({"data":1})
     else:
         return jsonify({"data":0})
-#用户部分
-
 #头像上传
 @app.route('/user_img',methods=['GET', 'POST'])
 def user_img():
@@ -319,13 +320,13 @@ def user_img():
     except:
         traceback.print_exc()
         return jsonify({"data":[0,""]})
-    file_path = "D:\\All_Python\\MovieTop10\\MovieTop11\\MovieTop\\static\\userimg\\"+img_name
+    file_path = "D:\\All_Python\\MovieTop11\\MovieTop\\static\\userimg\\"+img_name
     # 删除原头像
     userphone = session['userphone']
     userdata = sql.android_query(userphone)
     if (userdata[4] != "" and userdata[4] != "../static/userimg/0000.jpg"):
         str_s = userdata[4].split('/')
-        path = "D:\\All_Python\\MovieTop10\\MovieTop11\\MovieTop\\static\\userimg\\" + str_s[3]
+        path = "D:\\All_Python\\MovieTop11\\MovieTop\\static\\userimg\\" + str_s[3]
         try:
             os.remove(path)
         except:
@@ -391,7 +392,7 @@ def clean_cookies():
         print("删除cookies成功！")
         return resp                 #成功删除cookies 返回相响应
     except:
-        return jsonify({"data":0})  #删除cookies失败   返回 0 状态码
+        return jsonify({"data":0})  #删除cookies失败  返回 0 状态码
 
 if __name__ == '__main__':
     host="127.0.0.1"

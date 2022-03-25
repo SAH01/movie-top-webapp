@@ -308,16 +308,6 @@ def find_by_qury_head(str):
 # 查询函数
 
 #用户部分
-#用户（app）注册
-def android_register(name,phone,password):
-    cursor = None
-    conn = None
-    conn, cursor = get_conn()
-    sql="insert into userdata (userphone,userpass,useremail,username,userimg) values(%s,%s,%s,%s)"
-    cursor.execute(sql,[phone,password,"",name,"../static/userimg/0000.jpg"])
-    conn.commit()
-    close_conn(conn,cursor)
-    print("注册成功（APP）")
 # 用户（web）注册
 def web_register(phone, password, email , name):
     cursor = None
@@ -325,7 +315,7 @@ def web_register(phone, password, email , name):
     conn, cursor = get_conn()
     sql = "insert into userdata (userphone,userpass,useremail,username,userimg) values(%s,%s,%s,%s,%s)"
     try:
-        cursor.execute(sql, [phone, password, email, name, "../static/userimg/0000.jpg"])
+        cursor.execute(sql, [phone, password, email, name, "../static/userimg/default.jpg"])
         conn.commit()
     except(pymysql.err.IntegrityError):
         print("用户名已存在，注册失败")
@@ -340,7 +330,7 @@ def web_login(userphone, password):
     if(userphone==None or password==None):
         return False
     conn, cursor = get_conn()
-    sql = "select userphone,userpass from userdata where userphone=' "+userphone+" ' and userpass = '"+password+"'"
+    sql = "select userphone,userpass from userdata where userphone='"+userphone+"' and userpass = '"+password+"'"
     print("web登陆验证sql语句："+sql)
     res=query(sql)
     conn.commit()
@@ -365,6 +355,17 @@ def android_query(phone):
         print(res_2)
         return res_2
     return res[0]
+#------------------------------------------ 下面APP部分 ---------------------------------------------------------
+#用户（app）注册
+def android_register(name,phone,password):
+    cursor = None
+    conn = None
+    conn, cursor = get_conn()
+    sql="insert into userdata (userphone,userpass,useremail,username,userimg) values(%s,%s,%s,%s)"
+    cursor.execute(sql,[phone,password,"",name,"../static/userimg/0000.jpg"])
+    conn.commit()
+    close_conn(conn,cursor)
+    print("注册成功（APP）")
 #用户（app）收藏
 def android_like(userphone,usermovie,usertyppe,scorenum,url,score):
     cursor = None

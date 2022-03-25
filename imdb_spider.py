@@ -104,7 +104,7 @@ def insert_imdb():
             print(f"{time.asctime()}插入imdb数据完毕")
     finally:
         close_conn(conn, cursor)
-    return;
+    return
 # def get_dblen():
 #     conn,cursor=
 #     num_=

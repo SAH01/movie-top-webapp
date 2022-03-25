@@ -137,7 +137,7 @@ def insert_ten():
         traceback.print_exc()
     finally:
         close_conn(conn, cursor)
-    return ;
+    return
 if __name__ == '__main__':
     # conn,cursor=get_conn()
     # list=[]
