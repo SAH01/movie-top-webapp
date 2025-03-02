@@ -1,15 +1,10 @@
-import string
 import time
 import traceback
-from multiprocessing.dummy import Pool
 import pymysql
 import requests
 import re
-from lxml import etree
-import random
 from bs4 import BeautifulSoup
 from flask import json
-from functools import partial
 
 
 # def big_loop(num,url_bean,headers):
@@ -65,7 +60,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="000429",
+                    password="reliable7",
                     db="movierankings",
                     charset="utf8")
     # 创建游标

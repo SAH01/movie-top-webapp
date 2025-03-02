@@ -1,0 +1,8 @@
+1、请选择python环境 3.9及以上。
+2、下载requirements依赖。
+3、导入movies.sql，直接执行文件就好，已包含数据库创建语句。
+4、全局替换数据库密码"reliable7" 为 "你的MySQL连接密码"。
+5、启动app.py文件即可。
+6、登录用户密码在userdata表。
+
+【谢绝白嫖，如有需要数据库文件加威信RELIABLE_YANG，包项目配置启动100RMB一份】

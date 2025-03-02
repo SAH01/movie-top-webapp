@@ -1,11 +1,7 @@
 import time
 import traceback
 import requests
-from lxml import etree
-import re
 from bs4 import BeautifulSoup
-from lxml.html.diff import end_tag
-import json
 import pymysql
 #连接数据库  获取游标
 def get_conn():
@@ -15,7 +11,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="000429",
+                    password="reliable7",
                     db="movierankings",
                     charset="utf8")
     # 创建游标

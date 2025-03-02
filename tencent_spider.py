@@ -5,7 +5,6 @@ import sys
 import re
 import urllib.request,urllib.error #制定url，获取网页数据
 import sqlite3
-import xlwt     #excel操作
 import time
 import pymysql
 import traceback
@@ -17,7 +16,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="000429",
+                    password="reliable7",
                     db="movierankings",
                     charset="utf8")
     # 创建游标

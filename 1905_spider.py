@@ -182,7 +182,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="000429",
+                    password="reliable7",
                     db="movierankings",
                     charset="utf8")
     # 创建游标

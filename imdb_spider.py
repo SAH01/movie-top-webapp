@@ -1,8 +1,8 @@
-import re
+# import re
 import time
-import traceback
+# import traceback
 
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 from lxml import etree
 import pymysql
 import requests
@@ -14,7 +14,7 @@ def get_conn():
     # 创建连接
     conn = pymysql.connect(host="127.0.0.1",
                     user="root",
-                    password="000429",
+                    password="reliable7",
                     db="movierankings",
                     charset="utf8")
     # 创建游标
